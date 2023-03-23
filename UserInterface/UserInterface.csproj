@@ -46,6 +46,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\GameDialogs\FrmGameDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GameDialogs\FrmGameDetails.Designer.cs">
+      <DependentUpon>FrmGameDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GameDialogs\FrmGetFixtures.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GameDialogs\FrmGetFixtures.Designer.cs">
+      <DependentUpon>FrmGetFixtures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GameDialogs\FrmInsertGameResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GameDialogs\FrmInsertGameResult.Designer.cs">
+      <DependentUpon>FrmInsertGameResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\GameDialogs\FrmScheduleGame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GameDialogs\FrmScheduleGame.Designer.cs">
+      <DependentUpon>FrmScheduleGame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\PlayerDialogs\FrmAddPlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PlayerDialogs\FrmAddPlayer.Designer.cs">
+      <DependentUpon>FrmAddPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TeamDialogs\FrmAddTeam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\TeamDialogs\FrmAddTeam.Designer.cs">
+      <DependentUpon>FrmAddTeam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\ServerCommunicationException.cs" />
+    <Compile Include="Exceptions\SystemOperationException.cs" />
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,19 +96,102 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\PlayerDialogs\FrmPlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\PlayerDialogs\FrmPlayer.Designer.cs">
+      <DependentUpon>FrmPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TeamDialogs\FrmTeam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\TeamDialogs\FrmTeam.Designer.cs">
+      <DependentUpon>FrmTeam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIController\AddPlayerController.cs" />
+    <Compile Include="GUIController\AddTeamController.cs" />
+    <Compile Include="GUIController\AllPlayersController.cs" />
+    <Compile Include="GUIController\AllTeamsController.cs" />
+    <Compile Include="GUIController\ChangePlayerController.cs" />
+    <Compile Include="GUIController\ChangeTeamController.cs" />
+    <Compile Include="GUIController\GameDetailsController.cs" />
+    <Compile Include="GUIController\InsertGameResultController.cs" />
+    <Compile Include="GUIController\LoginController.cs" />
+    <Compile Include="GUIController\MainController.cs" />
+    <Compile Include="GUIController\NewGameController.cs" />
+    <Compile Include="GUIController\ResultsController.cs" />
+    <Compile Include="GUIController\ScheduleGameController.cs" />
+    <Compile Include="GUIController\TablePlayersController.cs" />
+    <Compile Include="GUIController\TableTeamsController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControls\UCProduct.cs">
+    <Compile Include="ServerCommunication\Communication.cs" />
+    <Compile Include="Session\SessionData.cs" />
+    <Compile Include="UserControls\UCAllPlayers.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\UCProduct.Designer.cs">
-      <DependentUpon>UCProduct.cs</DependentUpon>
+    <Compile Include="UserControls\UCAllPlayers.Designer.cs">
+      <DependentUpon>UCAllPlayers.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCAllTeams.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCAllTeams.Designer.cs">
+      <DependentUpon>UCAllTeams.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCResults.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCResults.Designer.cs">
+      <DependentUpon>UCResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCScheduleGame.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCScheduleGame.Designer.cs">
+      <DependentUpon>UCScheduleGame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTablePlayers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCTablePlayers.Designer.cs">
+      <DependentUpon>UCTablePlayers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTableTeams.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCTableTeams.Designer.cs">
+      <DependentUpon>UCTableTeams.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Dialogs\GameDialogs\FrmGameDetails.resx">
+      <DependentUpon>FrmGameDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GameDialogs\FrmGetFixtures.resx">
+      <DependentUpon>FrmGetFixtures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GameDialogs\FrmInsertGameResult.resx">
+      <DependentUpon>FrmInsertGameResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GameDialogs\FrmScheduleGame.resx">
+      <DependentUpon>FrmScheduleGame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PlayerDialogs\FrmAddPlayer.resx">
+      <DependentUpon>FrmAddPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\TeamDialogs\FrmAddTeam.resx">
+      <DependentUpon>FrmAddTeam.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\PlayerDialogs\FrmPlayer.resx">
+      <DependentUpon>FrmPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\TeamDialogs\FrmTeam.resx">
+      <DependentUpon>FrmTeam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -81,8 +202,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControls\UCProduct.resx">
-      <DependentUpon>UCProduct.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\UCAllPlayers.resx">
+      <DependentUpon>UCAllPlayers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCAllTeams.resx">
+      <DependentUpon>UCAllTeams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCResults.resx">
+      <DependentUpon>UCResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCScheduleGame.resx">
+      <DependentUpon>UCScheduleGame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCTablePlayers.resx">
+      <DependentUpon>UCTablePlayers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCTableTeams.resx">
+      <DependentUpon>UCTableTeams.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -97,5 +233,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationLogic\ApplicationLogic.csproj">
+      <Project>{C7CB547F-3D2A-46D4-8299-DAAB846C3928}</Project>
+      <Name>ApplicationLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{9E0886BC-5405-45EF-8C7A-C98BFBE8F691}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{4F8C2E28-C7E3-4753-A8CD-5628C7FD630C}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

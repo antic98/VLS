@@ -1,39 +1,38 @@
-﻿using System;
+﻿using ApplicationLogic;
+using Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserInterface.Exceptions;
+using UserInterface.GUIController;
+using UserInterface.ServerCommunication;
 
 namespace UserInterface
 {
     public partial class FrmLogin : Form
     {
+        LoginController controller;
         public FrmLogin()
         {
             InitializeComponent();
-
-            txtUsername.Text = "antic";
-            txtPassword.Text = "antic";
+            controller = new LoginController(this);
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void btnLogin_Click_1(object sender, EventArgs e)
         {
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
+            controller.Login();
+        }
 
-            if(username == "antic" && password == "antic")
-            {
-                this.DialogResult = DialogResult.OK;
-
-            }
-            else
-            {
-                MessageBox.Show("GRESKA!");
-            }
+        private void FrmLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //Communication.Instance.Close();
         }
     }
 }

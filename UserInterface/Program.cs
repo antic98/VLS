@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UserInterface.Exceptions;
 
 namespace UserInterface
 {
@@ -18,19 +19,30 @@ namespace UserInterface
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FrmLogin());
 
-            FrmLogin frmLogin = new FrmLogin();
-            DialogResult result = frmLogin.ShowDialog();
-            frmLogin.Dispose();
 
-            if (result == DialogResult.OK)
+            while (true)
             {
-                Application.Run(new FrmMain());
+                try
+                {
+                    FrmLogin frmLogin = new FrmLogin();
+                    DialogResult result = frmLogin.ShowDialog();
+                    frmLogin.Dispose();
+
+                    if (result == DialogResult.OK)
+                    {
+                        Application.Run(new FrmMain());
+                    }
+                    if(result == DialogResult.Cancel)
+                    {
+                        break;
+                    }
+                }
+                catch(ServerCommunicationException)
+                {
+                    MessageBox.Show("Can't connect to server!");
+                }
 
             }
-
-
-
-
         }
     }
 }
