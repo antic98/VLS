@@ -119,7 +119,7 @@ namespace Server
                     case Operation.UpdateGame:
                         ApplicationLogic.Controller.Instance.UpdateGame(request.RequestObject as Game);
                         break;
-                    case Operation.SaveFixtures:
+                    case Operation.AddGames:
                         ApplicationLogic.Controller.Instance.AddGames(request.RequestObject as List<Team>);
                         break;
                     default:

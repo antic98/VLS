@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -16,6 +12,16 @@ namespace Domain
         public override string ToString()
         {
             return Name;
+        }
+
+        public Country()
+        {
+        }
+
+        public Country(int iD, string name)
+        {
+            ID = iD;
+            Name = name;
         }
 
         [Browsable(false)]

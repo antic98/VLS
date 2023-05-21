@@ -59,7 +59,6 @@ namespace ApplicationLogic
             so.ExecuteTemplate();
         }
 
-
         //GETALL
 
         public List<Player> GetAllPlayers()

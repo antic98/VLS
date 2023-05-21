@@ -171,7 +171,7 @@ namespace UserInterface.UserControls
             this.btnMakeFixtures.TabIndex = 8;
             this.btnMakeFixtures.Text = "Make fixtures";
             this.btnMakeFixtures.UseVisualStyleBackColor = false;
-            this.btnMakeFixtures.Click += new System.EventHandler(this.btnMakeFixtures_Click);
+            this.btnMakeFixtures.Click += new System.EventHandler(this.btnAddFixtures_Click);
             // 
             // UCScheduleGame
             // 

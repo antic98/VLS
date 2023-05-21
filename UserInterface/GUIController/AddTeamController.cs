@@ -25,7 +25,7 @@ namespace UserInterface.GUIController
         internal void Dispose()
         {
             frmAddTeam.Dispose();
-        }              
+        }
 
         private bool Validation()
         {

@@ -1,9 +1,6 @@
-﻿using Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain;
 
 namespace SystemOperations.AddSO
 {
@@ -18,34 +15,69 @@ namespace SystemOperations.AddSO
 
         protected override void Execute()
         {
-            var result = new List<List<Tuple<Team, Team>>>();
+            List<Tuple<string, string, DateTime>> fixtures = new List<Tuple<string, string, DateTime>>();
 
-            int teamsSize = teams.Count;
-            int numDays = (teamsSize - 1) * 2;
-            int halfSize = teamsSize / 2;
-            DateTime date = DateTime.Now;
-            var teams1 = new List<Team>();
+            int totalRounds = teams.Count - 1;
+            int matchesPerRound = teams.Count / 2;
 
-            teams1.AddRange(teams.Skip(halfSize).Take(halfSize));
-            teams1.AddRange(teams.Skip(1).Take(halfSize - 1).ToArray().Reverse());
+            List<Team> teamsCopy = new List<Team>(teams);
+            teamsCopy.RemoveAt(0);
 
-            for (int day = 0; day < numDays; day++)
+            for (int round = 0; round < totalRounds; round++)
             {
-                var round = new List<Tuple<Team, Team>>();
-                int teamIdx = day % teamsSize;
-                round.Add(new Tuple<Team, Team>(teams1[teamIdx], teams[0]));
+                int teamIdx = round % teamsCopy.Count;
 
-                for (int idx = 1; idx < halfSize; idx++)
+                Team teamA = teams[0];
+                Team teamB = teamsCopy[teamIdx];
+
+                DateTime date = DateTime.Now.AddDays(round * 7);
+
+                Game game = new Game();
+                if(round % 2 == 0)
                 {
-                    int firstTeam = (day + idx) % teamsSize;
-                    int secondTeam = (day + teamsSize - idx) % teamsSize;
-
-                    round.Add(new Tuple<Team, Team>(teams1[firstTeam], teams1[secondTeam]));
+                    game.Host = teamA;
+                    game.Guest = teamB;
                 }
-                result.Add(round);
+                else
+                {
+                    game.Host = teamB;
+                    game.Guest = teamA;
+                }
+
+                DateTime roundedDateTime = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
+                game.Date = roundedDateTime;
+
+                game.DateString = game.Date.ToString("yyyy-MM-dd HH:mm");
+                repository.Add(game);
+
+                for (int i = 1; i < matchesPerRound; i++)
+                {
+                    int firstTeam = (round + i) % teamsCopy.Count;
+                    int secondTeam = (round + teamsCopy.Count - i) % teamsCopy.Count;
+
+                    teamA = teamsCopy[firstTeam];
+                    teamB = teamsCopy[secondTeam];
+
+                    date = DateTime.Now.AddDays(round * 7);
+
+                    Game game1 = new Game();
+                    if( i % 2 == 0)
+                    {
+                        game1.Host = teamA;
+                        game1.Guest = teamB;
+                    }
+                    else
+                    {
+                        game1.Host = teamB;
+                        game1.Guest = teamA;
+                    }
+
+                    DateTime roundedDateTime1 = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
+                    game1.Date = roundedDateTime;
+                    game1.DateString = game1.Date.ToString("yyyy-MM-dd HH:mm");
+                    repository.Add(game1);
+                }
             }
-
-
         }
     }
 }

@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddSO\AddFixturesSO.cs" />
     <Compile Include="AddSO\AddGameSO.cs" />
     <Compile Include="AddSO\AddGamesSO.cs" />
     <Compile Include="AddSO\AddPlayerSO.cs" />

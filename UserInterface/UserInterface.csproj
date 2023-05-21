@@ -52,11 +52,11 @@
     <Compile Include="Dialogs\GameDialogs\FrmGameDetails.Designer.cs">
       <DependentUpon>FrmGameDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\GameDialogs\FrmGetFixtures.cs">
+    <Compile Include="Dialogs\GameDialogs\FrmAddGames.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\GameDialogs\FrmGetFixtures.Designer.cs">
-      <DependentUpon>FrmGetFixtures.cs</DependentUpon>
+    <Compile Include="Dialogs\GameDialogs\FrmAddGames.Designer.cs">
+      <DependentUpon>FrmAddGames.cs</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\GameDialogs\FrmInsertGameResult.cs">
       <SubType>Form</SubType>
@@ -115,6 +115,7 @@
     <Compile Include="GUIController\ChangePlayerController.cs" />
     <Compile Include="GUIController\ChangeTeamController.cs" />
     <Compile Include="GUIController\GameDetailsController.cs" />
+    <Compile Include="GUIController\AddGamesController.cs" />
     <Compile Include="GUIController\InsertGameResultController.cs" />
     <Compile Include="GUIController\LoginController.cs" />
     <Compile Include="GUIController\MainController.cs" />
@@ -166,8 +167,8 @@
     <EmbeddedResource Include="Dialogs\GameDialogs\FrmGameDetails.resx">
       <DependentUpon>FrmGameDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\GameDialogs\FrmGetFixtures.resx">
-      <DependentUpon>FrmGetFixtures.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\GameDialogs\FrmAddGames.resx">
+      <DependentUpon>FrmAddGames.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\GameDialogs\FrmInsertGameResult.resx">
       <DependentUpon>FrmInsertGameResult.cs</DependentUpon>

@@ -65,9 +65,9 @@ namespace UserInterface.GUIController
             }
         }
 
-        internal void MakeFixtures()
+        internal void AddFixtures()
         {
-            FrmGetFixtures frmGetFixtures = new FrmGetFixtures();
+            FrmAddGames frmGetFixtures = new FrmAddGames();
             frmGetFixtures.ShowDialog();
         }
 

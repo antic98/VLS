@@ -42,9 +42,9 @@ namespace UserInterface.UserControls
             controller.InsertResult();
         }
 
-        private void btnMakeFixtures_Click(object sender, EventArgs e)
+        private void btnAddFixtures_Click(object sender, EventArgs e)
         {
-            controller.MakeFixtures();
+            controller.AddFixtures();
         }
     }
 }

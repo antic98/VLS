@@ -18,7 +18,7 @@ namespace DatabaseBroker
         public Broker()
         {
             connection = new SqlConnection(
-                @"Data Source=(localdb)\MSSQLLocalDB;
+                @"Data Source=LAPTOP-H6KF26FM;
                 Initial Catalog=VLS;
                 Integrated Security=True;
                 Connect Timeout=30;
