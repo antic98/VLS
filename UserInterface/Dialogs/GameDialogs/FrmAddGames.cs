@@ -21,7 +21,7 @@ namespace UserInterface.Dialogs.GameDialogs
 
         private void btnAddGames_Click_1(object sender, EventArgs e)
         {
-            controller.AddGames();
+            controller.AddGamesSingle();
         }
 
         private void FrmAddGames_Load(object sender, EventArgs e)
@@ -32,6 +32,11 @@ namespace UserInterface.Dialogs.GameDialogs
         private void btnRemoveTeam_Click(object sender, EventArgs e)
         {
             controller.RemoveTeam();
+        }
+
+        private void btnAddGamesDouble_Click(object sender, EventArgs e)
+        {
+            controller.AddGamesDouble();
         }
     }
 }

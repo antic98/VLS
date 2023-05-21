@@ -119,8 +119,11 @@ namespace Server
                     case Operation.UpdateGame:
                         ApplicationLogic.Controller.Instance.UpdateGame(request.RequestObject as Game);
                         break;
-                    case Operation.AddGames:
-                        ApplicationLogic.Controller.Instance.AddGames(request.RequestObject as List<Team>);
+                    case Operation.AddGamesSingle:
+                        ApplicationLogic.Controller.Instance.AddGamesSingle(request.RequestObject as List<Team>);
+                        break;
+                    case Operation.AddGamesDouble:
+                        ApplicationLogic.Controller.Instance.AddGamesDouble(request.RequestObject as List<Team>);
                         break;
                     default:
                         break;

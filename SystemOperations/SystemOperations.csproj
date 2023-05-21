@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddSO\AddGamesDoubleSO.cs" />
     <Compile Include="AddSO\AddGameSO.cs" />
-    <Compile Include="AddSO\AddGamesSO.cs" />
+    <Compile Include="AddSO\AddGamesSingleSO.cs" />
     <Compile Include="AddSO\AddPlayerSO.cs" />
     <Compile Include="AddSO\AddTeamSO.cs" />
     <Compile Include="DeleteSO\DeleteGameSO.cs" />

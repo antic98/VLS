@@ -28,6 +28,7 @@ namespace Common
         UpdateGame,
         GetStats,
         SaveFixtures,
-        AddGames
+        AddGamesSingle,
+        AddGamesDouble,
     }
 }

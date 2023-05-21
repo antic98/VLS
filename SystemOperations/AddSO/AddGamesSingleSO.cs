@@ -4,11 +4,11 @@ using Domain;
 
 namespace SystemOperations.AddSO
 {
-    public class AddGamesSO : SystemOperationBase
+    public class AddGamesSingleSO : SystemOperationBase
     {
         private List<Team> teams = new List<Team>();
 
-        public AddGamesSO(List<Team> teams)
+        public AddGamesSingleSO(List<Team> teams)
         {
             this.teams = teams;
         }

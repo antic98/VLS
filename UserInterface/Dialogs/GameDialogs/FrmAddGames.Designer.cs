@@ -39,6 +39,7 @@ namespace UserInterface.Dialogs.GameDialogs
             this.btnAddTeam = new System.Windows.Forms.Button();
             this.btnAddGames = new System.Windows.Forms.Button();
             this.btnRemoveTeam = new System.Windows.Forms.Button();
+            this.btnAddGamesDouble = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAllTeams)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSelectedTeams)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +66,7 @@ namespace UserInterface.Dialogs.GameDialogs
             this.dgvAllTeams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvAllTeams.EnableHeadersVisualStyles = false;
             this.dgvAllTeams.GridColor = System.Drawing.Color.SteelBlue;
-            this.dgvAllTeams.Location = new System.Drawing.Point(30, 31);
+            this.dgvAllTeams.Location = new System.Drawing.Point(2, 12);
             this.dgvAllTeams.Name = "dgvAllTeams";
             this.dgvAllTeams.ReadOnly = true;
             this.dgvAllTeams.RowHeadersVisible = false;
@@ -78,7 +79,7 @@ namespace UserInterface.Dialogs.GameDialogs
             this.dgvAllTeams.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvAllTeams.RowTemplate.Height = 24;
             this.dgvAllTeams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAllTeams.Size = new System.Drawing.Size(315, 409);
+            this.dgvAllTeams.Size = new System.Drawing.Size(352, 452);
             this.dgvAllTeams.TabIndex = 14;
             // 
             // dgvSelectedTeams
@@ -102,7 +103,7 @@ namespace UserInterface.Dialogs.GameDialogs
             this.dgvSelectedTeams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvSelectedTeams.EnableHeadersVisualStyles = false;
             this.dgvSelectedTeams.GridColor = System.Drawing.Color.SteelBlue;
-            this.dgvSelectedTeams.Location = new System.Drawing.Point(563, 31);
+            this.dgvSelectedTeams.Location = new System.Drawing.Point(574, 12);
             this.dgvSelectedTeams.Name = "dgvSelectedTeams";
             this.dgvSelectedTeams.ReadOnly = true;
             this.dgvSelectedTeams.RowHeadersVisible = false;
@@ -115,7 +116,7 @@ namespace UserInterface.Dialogs.GameDialogs
             this.dgvSelectedTeams.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvSelectedTeams.RowTemplate.Height = 24;
             this.dgvSelectedTeams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSelectedTeams.Size = new System.Drawing.Size(341, 409);
+            this.dgvSelectedTeams.Size = new System.Drawing.Size(352, 452);
             this.dgvSelectedTeams.TabIndex = 15;
             // 
             // btnAddTeam
@@ -124,7 +125,7 @@ namespace UserInterface.Dialogs.GameDialogs
             this.btnAddTeam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
             this.btnAddTeam.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddTeam.ForeColor = System.Drawing.Color.White;
-            this.btnAddTeam.Location = new System.Drawing.Point(351, 101);
+            this.btnAddTeam.Location = new System.Drawing.Point(369, 83);
             this.btnAddTeam.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAddTeam.Name = "btnAddTeam";
             this.btnAddTeam.Size = new System.Drawing.Size(192, 61);
@@ -139,7 +140,7 @@ namespace UserInterface.Dialogs.GameDialogs
             this.btnAddGames.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
             this.btnAddGames.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddGames.ForeColor = System.Drawing.Color.White;
-            this.btnAddGames.Location = new System.Drawing.Point(351, 293);
+            this.btnAddGames.Location = new System.Drawing.Point(369, 262);
             this.btnAddGames.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAddGames.Name = "btnAddGames";
             this.btnAddGames.Size = new System.Drawing.Size(192, 61);
@@ -154,7 +155,7 @@ namespace UserInterface.Dialogs.GameDialogs
             this.btnRemoveTeam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
             this.btnRemoveTeam.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRemoveTeam.ForeColor = System.Drawing.Color.White;
-            this.btnRemoveTeam.Location = new System.Drawing.Point(351, 197);
+            this.btnRemoveTeam.Location = new System.Drawing.Point(369, 179);
             this.btnRemoveTeam.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRemoveTeam.Name = "btnRemoveTeam";
             this.btnRemoveTeam.Size = new System.Drawing.Size(192, 61);
@@ -163,12 +164,28 @@ namespace UserInterface.Dialogs.GameDialogs
             this.btnRemoveTeam.UseVisualStyleBackColor = false;
             this.btnRemoveTeam.Click += new System.EventHandler(this.btnRemoveTeam_Click);
             // 
+            // btnAddGamesDouble
+            // 
+            this.btnAddGamesDouble.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAddGamesDouble.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            this.btnAddGamesDouble.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddGamesDouble.ForeColor = System.Drawing.Color.White;
+            this.btnAddGamesDouble.Location = new System.Drawing.Point(369, 348);
+            this.btnAddGamesDouble.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddGamesDouble.Name = "btnAddGamesDouble";
+            this.btnAddGamesDouble.Size = new System.Drawing.Size(192, 61);
+            this.btnAddGamesDouble.TabIndex = 36;
+            this.btnAddGamesDouble.Text = "Add games double";
+            this.btnAddGamesDouble.UseVisualStyleBackColor = false;
+            this.btnAddGamesDouble.Click += new System.EventHandler(this.btnAddGamesDouble_Click);
+            // 
             // FrmAddGames
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(929, 476);
+            this.Controls.Add(this.btnAddGamesDouble);
             this.Controls.Add(this.btnRemoveTeam);
             this.Controls.Add(this.btnAddGames);
             this.Controls.Add(this.btnAddTeam);
@@ -190,6 +207,7 @@ namespace UserInterface.Dialogs.GameDialogs
         private System.Windows.Forms.Button btnAddTeam;
         private System.Windows.Forms.Button btnAddGames;
         private Button btnRemoveTeam;
+        private Button btnAddGamesDouble;
 
         public DataGridView DgvAllTeams { get => dgvAllTeams; set => dgvAllTeams = value; }
         public DataGridView DgvSelectedTeams { get => dgvSelectedTeams; set => dgvSelectedTeams = value; }

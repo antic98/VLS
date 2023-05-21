@@ -54,15 +54,32 @@ namespace UserInterface.GUIController
             frmAddGames.DgvAllTeams.Columns[12].Visible = false;
         }
 
-        internal void AddGames()
+        internal void AddGamesSingle()
         {
-            //if (selectedTeams.Count != 8)
-            //{
-            //    MessageBox.Show("The number of teams should be 8.");
-            //    return;
-            //}
+            if (selectedTeams.Count % 2 == 1)
+            {
+                MessageBox.Show("You have to select even number of teams.");
+                return;
+            }
 
-            if (Communication.Instance.SaveDeleteUpdate(Operation.AddGames, selectedTeams.ToList()))
+            if (Communication.Instance.SaveDeleteUpdate(Operation.AddGamesSingle, selectedTeams.ToList()))
+            {
+                MessageBox.Show("Games for this season are added.");
+                Dispose();
+            }
+            else
+                MessageBox.Show("Games for this season are not added.");
+        }
+
+        internal void AddGamesDouble()
+        {
+            if(selectedTeams.Count % 2 == 1)
+            {
+                MessageBox.Show("You have to select even number of teams.");
+                return;  
+            }
+
+            if (Communication.Instance.SaveDeleteUpdate(Operation.AddGamesDouble, selectedTeams.ToList()))
             {
                 MessageBox.Show("Games for this season are added.");
                 Dispose();

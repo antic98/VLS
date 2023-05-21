@@ -53,9 +53,15 @@ namespace ApplicationLogic
             SystemOperationBase so = new AddGameSO(newGame);
             so.ExecuteTemplate();
         }
-        public void AddGames(List<Team> teams)
+        public void AddGamesSingle(List<Team> teams)
         {
-            SystemOperationBase so = new AddGamesSO(teams);
+            SystemOperationBase so = new AddGamesSingleSO(teams);
+            so.ExecuteTemplate();
+        }
+
+        public void AddGamesDouble(List<Team> teams)
+        {
+            SystemOperationBase so = new AddGamesDoubleSO(teams);
             so.ExecuteTemplate();
         }
 
