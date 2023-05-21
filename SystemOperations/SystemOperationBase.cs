@@ -1,19 +1,40 @@
-﻿using DatabaseBroker;
-using Domain;
+﻿using Domain;
 using Repository.DatabaseRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SystemOperations
 {
     public abstract class SystemOperationBase
     {
-        protected IRepository<IDomainObject> repository = new GenericDbRepository();
+        protected IRepository<IDomainObject> repository;
+
+        public void ExecuteTemplate(IRepository<IDomainObject> repository)
+        {
+            this.repository = repository;
+
+            try
+            {
+                repository.OpenConnection();
+                repository.BeginTransaction();
+
+                Execute();
+
+                repository.Commit();
+            }
+            catch
+            {
+                repository.Rollback();
+                throw;
+            }
+            finally
+            {
+                repository.CloseConnection();
+            }
+        }
+
         public void ExecuteTemplate()
         {
+            this.repository = new GenericDbRepository();
+
             try
             {
                 repository.OpenConnection();
@@ -35,6 +56,5 @@ namespace SystemOperations
         }
 
         protected abstract void Execute();
-
     }
 }

@@ -5,6 +5,7 @@ namespace SystemOperations
     public class AddPlayerSO : SystemOperationBase
     {
         private readonly Player player;
+        public bool Result { get; private set; }
 
         public AddPlayerSO(Player p)
         {
@@ -13,7 +14,9 @@ namespace SystemOperations
 
         protected override void Execute()
         {
-            repository.Add(player);
+            if (player.Name == null || player.Position == null) Result = false;
+
+            Result = repository.Add(player);
         }
     }
 }
