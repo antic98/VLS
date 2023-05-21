@@ -52,6 +52,7 @@
     <Compile Include="GetSO\GetAllCountriesSO.cs" />
     <Compile Include="GetSO\GetAllGamesSO.cs" />
     <Compile Include="GetSO\GetAllPlayersSO.cs" />
+    <Compile Include="GetSO\GetAllPositionsSO.cs" />
     <Compile Include="GetSO\GetAllStatsSO.cs" />
     <Compile Include="GetSO\GetAllTeamsSO.cs" />
     <Compile Include="GetSO\GetAllUsersSO.cs" />

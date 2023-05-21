@@ -1,15 +1,5 @@
-﻿using ApplicationLogic;
-using Domain;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
-using UserInterface.Dialogs.TeamDialogs;
 using UserInterface.GUIController;
 
 namespace UserInterface.UserControls
@@ -27,12 +17,12 @@ namespace UserInterface.UserControls
 
         private void btnShowTeam_Click(object sender, EventArgs e)
         {
-            controller.ShowTeam();            
+            controller.ShowTeam();
         }
 
         private void btnAddTeam_Click(object sender, EventArgs e)
         {
-            controller.AddTeam();            
+            controller.AddTeam();
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

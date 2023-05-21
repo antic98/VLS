@@ -63,7 +63,12 @@ namespace Domain
                 ID = reader.GetInt32(9),
                 Name = reader.GetString(10),
                 Surname = reader.GetString(11),
-                Position = (Position)reader.GetInt32(12),
+
+                Position = new Position
+                {
+                    ID = reader.GetInt32(12),
+                },
+
                 Team = new Team
                 {
                     ID = reader.GetInt32(13)

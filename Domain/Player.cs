@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -26,19 +23,19 @@ namespace Domain
         [Browsable(false)]
         public string TableName => "Player";
         [Browsable(false)]
-        public string InsertValues => $"'{Name}','{Surname}',{(int)Position},{Team.ID},{Country.ID},{Goals}";
+        public string InsertValues => $"'{Name}','{Surname}',{Position.ID},{Team.ID},{Country.ID},{Goals}";
         [Browsable(false)]
         public string TableID => "ID";
         [Browsable(false)]
-        public string Join => " p join Country c on (p.Country = c.ID) join Team t on (p.Team = t.ID)";
+        public string Join => " p join Country c on (p.Country = c.ID) join Team t on (p.Team = t.ID) join Position pos on (p.Position = pos.ID)";
         [Browsable(false)]
-        public string UpdateValues => $"Name = '{Name}', Surname = '{Surname}', Position = {(int)Position}, Country = {Country.ID}, Team = {Team.ID}, Goals = {Goals}";
+        public string UpdateValues => $"Name = '{Name}', Surname = '{Surname}', Position = {Position.ID}, Country = {Country.ID}, Team = {Team.ID}, Goals = {Goals}";
         [Browsable(false)]
         public string Condition => $"ID = {ID}";
         [Browsable(false)]
         public string OrderBy => "ORDER BY Goals DESC";
         [Browsable(false)]
-        public string ConditionGetList => $"where lower(concat(p.name,p.surname,t.Name,c.Name)) like '%{Name}%' or lower(concat(p.surname,p.name,t.Name,c.Name)) like '%{Name}%'";
+        public string ConditionGetList => $"where lower(concat(p.Name,p.Surname,t.Name,c.Name,pos.Name)) like '%{Name}%'";
         [Browsable(false)]
         public int IDValue => ID;
         [Browsable(false)]
@@ -52,7 +49,6 @@ namespace Domain
             p.ID = reader.GetInt32(0);
             p.Name = reader.GetString(1);
             p.Surname = reader.GetString(2);
-            p.Position = (Position)reader.GetInt32(3);
             p.Goals = reader.GetInt32(6);
 
             p.Country = new Country
@@ -68,7 +64,13 @@ namespace Domain
                 City = reader.GetString(11),
                 Color = reader.GetString(12),                
             };
-            
+
+            p.Position = new Position
+            {
+                ID = reader.GetInt32(19),
+                Name = reader.GetString(20)
+            };
+
             return p;
         }
     }

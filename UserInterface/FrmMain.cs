@@ -1,19 +1,6 @@
-﻿using ApplicationLogic;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 using UserInterface.GUIController;
-using UserInterface.ServerCommunication;
-using UserInterface.UserControls;
 
 namespace UserInterface
 {

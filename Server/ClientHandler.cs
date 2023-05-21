@@ -1,15 +1,10 @@
-﻿using ApplicationLogic;
-using Common;
+﻿using Common;
 using Domain;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Server
 {
@@ -70,6 +65,9 @@ namespace Server
                         break;
                     case Operation.GetCountries:
                         response.Result = ApplicationLogic.Controller.Instance.GetAllCountries();
+                        break;
+                    case Operation.GetPositions:
+                        response.Result = ApplicationLogic.Controller.Instance.GetAllPositions();
                         break;
                     case Operation.GetPlayers:
                         response.Result = ApplicationLogic.Controller.Instance.GetAllPlayers();

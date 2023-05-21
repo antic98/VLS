@@ -7,7 +7,6 @@ using System;
 using UserInterface.Dialogs.GameDialogs;
 using UserInterface.Exceptions;
 using UserInterface.ServerCommunication;
-using UserInterface.UserControls;
 using System.Linq;
 
 namespace UserInterface.GUIController

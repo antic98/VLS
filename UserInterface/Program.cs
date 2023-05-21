@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserInterface.Exceptions;
 
@@ -17,8 +14,6 @@ namespace UserInterface
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new FrmLogin());
-
 
             while (true)
             {
@@ -41,7 +36,6 @@ namespace UserInterface
                 {
                     MessageBox.Show("Can't connect to server!");
                 }
-
             }
         }
     }

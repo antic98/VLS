@@ -111,6 +111,24 @@ namespace UserInterface.GUIController
             }
         }
 
+        private void GetPositions()
+        {
+            try
+            {
+                List<Position> positions = Communication.Instance.GetList(Operation.GetPositions) as List<Position>;
+
+                frmPlayer.CbPosition.DataSource = positions;
+            }
+            catch (ServerCommunicationException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void GetTeams()
         {
             try
@@ -131,8 +149,8 @@ namespace UserInterface.GUIController
 
         internal void Init()
         {            
-            frmPlayer.CbPosition.DataSource = Enum.GetValues(typeof(Position));
             GetCountries();
+            GetPositions();
             GetTeams();
 
             frmPlayer.Text = $"{player.Name} {player.Surname}";
@@ -161,7 +179,7 @@ namespace UserInterface.GUIController
             updatedPlayer.ID = int.Parse(frmPlayer.TxtID.Text);
             updatedPlayer.Name = frmPlayer.TxtName.Text;
             updatedPlayer.Surname = frmPlayer.TxtSurname.Text;
-            updatedPlayer.Position = (Position)frmPlayer.CbPosition.SelectedItem;
+            GetCountries();
             updatedPlayer.Team = (Team)frmPlayer.CbTeam.SelectedItem;
             updatedPlayer.Country = (Country)frmPlayer.CbCountry.SelectedItem;
             updatedPlayer.Stats = Communication.Instance.GetList(Operation.GetStats) as List<Stats>;

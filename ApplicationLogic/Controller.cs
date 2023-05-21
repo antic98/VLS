@@ -1,10 +1,5 @@
 ﻿using Domain;
-using Repository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SystemOperations;
 using SystemOperations.AddSO;
 using SystemOperations.DeleteSO;
@@ -91,11 +86,12 @@ namespace ApplicationLogic
             so.ExecuteTemplate();
             return ((GetAllGamesSO)so).Result;
         }
-        public Array GetAllPositions()
+        public List<Position> GetAllPositions()
         {
-            return Enum.GetValues(typeof(Position));
+            SystemOperationBase so = new GetAllPositionsSO();
+            so.ExecuteTemplate();
+            return ((GetAllPositionsSO)so).Result;
         }
-
         public List<Stats> GetAllStats()
         {
             SystemOperationBase so = new GetAllStatsSO();

@@ -1,11 +1,7 @@
 ﻿using Common;
 using Domain;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserInterface.Dialogs.PlayerDialogs;
 using UserInterface.ServerCommunication;
@@ -93,7 +89,7 @@ namespace UserInterface.GUIController
         internal void Init()
         {
             frmAddPlayer.CbCountry.DataSource = Communication.Instance.GetList(Operation.GetCountries);
-            frmAddPlayer.CbPosition.DataSource = Enum.GetValues(typeof(Position));
+            frmAddPlayer.CbPosition.DataSource = Communication.Instance.GetList(Operation.GetPositions);
             frmAddPlayer.CbTeam.DataSource = Communication.Instance.GetList(Operation.GetTeams);
         }
 
