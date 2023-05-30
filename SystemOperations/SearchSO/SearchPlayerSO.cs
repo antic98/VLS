@@ -16,6 +16,12 @@ namespace SystemOperations.SearchSO
 
         protected override void Execute()
         {
+            if (player?.Name == null)
+            {
+                Result = null;
+                return;
+            }
+            
             Result = repository.Search(player).OfType<Player>().ToList();
         }
     }

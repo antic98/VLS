@@ -10,6 +10,38 @@ namespace Domain
     {
         int brojac;
 
+        public Player()
+        {
+        }
+        
+        public Player(string name,
+            string surname,
+            Position position,
+            Country country,
+            Team team)
+        {
+            Name = name;
+            Surname = surname;
+            Position = position;
+            Country = country;
+            Team = team;
+        }
+        
+        public Player(int id,
+            string name,
+            string surname,
+            Position position,
+            Country country,
+            Team team)
+        {
+            ID = id;
+            Name = name;
+            Surname = surname;
+            Position = position;
+            Country = country;
+            Team = team;
+        }
+        
         public int Rank { get; set; }
         public int ID { get; set; }
         public string Name { get; set; }

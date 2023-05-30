@@ -13,11 +13,19 @@ namespace SystemOperations.DeleteSO
 
         protected override void Execute()
         {
-            foreach(Stats st in deletePlayer.Stats)
+            if (deletePlayer == null)
             {
-                if(st.Player.ID == deletePlayer.ID)
+                return;
+            }
+
+            if (deletePlayer.Stats != null)
+            {
+                foreach(Stats st in deletePlayer.Stats)
                 {
-                    repository.Delete(st);
+                    if(st.Player.ID == deletePlayer.ID)
+                    {
+                        repository.Delete(st);
+                    }
                 }
             }
 

@@ -15,8 +15,13 @@ namespace SystemOperations.AddSO
 
         protected override void Execute()
         {
-            List<Tuple<string, string, DateTime>> fixtures = new List<Tuple<string, string, DateTime>>();
+            //if (teams?.Count % 2 == 1 || teams?.Count < 2) 
+            
+            MakeFixtures();
+        }
 
+        private void MakeFixtures()
+        {
             int totalRounds = teams.Count - 1;
             int matchesPerRound = teams.Count / 2;
 
@@ -33,6 +38,7 @@ namespace SystemOperations.AddSO
                 DateTime date = DateTime.Now.AddDays(round * 7);
 
                 Game game = new Game();
+                game.Round = round + 1;
                 if(round % 2 == 0)
                 {
                     game.Host = teamA;
@@ -61,6 +67,8 @@ namespace SystemOperations.AddSO
                     date = DateTime.Now.AddDays(round * 7);
 
                     Game game1 = new Game();
+                    game1.Round = round + 1;
+
                     if( i % 2 == 0)
                     {
                         game1.Host = teamA;
@@ -73,7 +81,7 @@ namespace SystemOperations.AddSO
                     }
 
                     DateTime roundedDateTime1 = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
-                    game1.Date = roundedDateTime;
+                    game1.Date = roundedDateTime1;
                     game1.DateString = game1.Date.ToString("yyyy-MM-dd HH:mm");
                     repository.Add(game1);
                 }

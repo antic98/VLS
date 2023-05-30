@@ -14,7 +14,8 @@ namespace SystemOperations
 
         protected override void Execute()
         {
-            if (player.Name == null || player.Position == null) Result = false;
+            if (player.Name == null || player.Surname == null || player.Position == null || player.Country == null || player.Team == null ) 
+                Result = false;
 
             Result = repository.Add(player);
         }

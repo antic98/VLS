@@ -2,28 +2,41 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
     [Serializable]
     public class Game : IDomainObject
     {
+        private string dateString;
+        //
+        // public Game(DateTime date, Team host, Team guest, int goalsHost, int goalsGuest, int round)
+        // {
+        //     Date = date;
+        //     Host = host;
+        //     Guest = guest;
+        //     GoalsHost = goalsHost;
+        //     GoalsGuest = goalsGuest;
+        //     Round = round;
+        // }
+
         public int ID { get; set; }
         public DateTime Date { get; set; }
         public Team Host { get; set; }
         public int GoalsHost { get; set; }
         public int GoalsGuest { get; set; }
         public Team Guest { get; set; }
-        //public int Round { get; set; }
+        public int Round { get; set; }
 
         [Browsable(false)]
         public List<Stats> Stats { get; set; }
 
         [Browsable(false)]
-        public string DateString { get; set; }
+        public string DateString
+        {
+            get => dateString;
+            set => dateString = Date.ToString("yyyy-MM-dd HH:mm");
+        }
 
         [Browsable(false)]
         public string Search { get; set; }
@@ -31,7 +44,7 @@ namespace Domain
         [Browsable(false)]
         public string TableName => "Game";
         [Browsable(false)] 
-        public string InsertValues => $"'{DateString}',-1,-1,{Host.ID},{Guest.ID}";
+        public string InsertValues => $"'{DateString}',-1,-1,{Host.ID},{Guest.ID},{Round}";
         [Browsable(false)]
         public string TableID => "ID";
         [Browsable(false)]
@@ -57,29 +70,30 @@ namespace Domain
             g.Date = reader.GetDateTime(1);
             g.GoalsHost = reader.GetInt32(2);
             g.GoalsGuest = reader.GetInt32(3);
+            g.Round = reader.GetInt32(6);
             g.Host = new Team {
-                ID = reader.GetInt32(6),
-                Name = reader.GetString(7),
-                City = reader.GetString(8),
-                Color = reader.GetString(9),
-                Wins = reader.GetInt32(10),
-                Draws = reader.GetInt32(11),
-                Loses = reader.GetInt32(12),
-                GoalsScored = reader.GetInt32(13),
-                GoalsConceded = reader.GetInt32(14),
-                Points = reader.GetInt32(15)
+                ID = reader.GetInt32(7),
+                Name = reader.GetString(8),
+                City = reader.GetString(9),
+                Color = reader.GetString(10),
+                Wins = reader.GetInt32(11),
+                Draws = reader.GetInt32(12),
+                Loses = reader.GetInt32(13),
+                GoalsScored = reader.GetInt32(14),
+                GoalsConceded = reader.GetInt32(15),
+                Points = reader.GetInt32(16)
             };
             g.Guest = new Team {
-                ID = reader.GetInt32(16),
-                Name = reader.GetString(17),
-                City = reader.GetString(18),
-                Color = reader.GetString(19),
-                Wins = reader.GetInt32(20),
-                Draws = reader.GetInt32(21),
-                Loses = reader.GetInt32(22),
-                GoalsScored = reader.GetInt32(23),
-                GoalsConceded = reader.GetInt32(24),
-                Points = reader.GetInt32(25)
+                ID = reader.GetInt32(17),
+                Name = reader.GetString(18),
+                City = reader.GetString(19),
+                Color = reader.GetString(20),
+                Wins = reader.GetInt32(21),
+                Draws = reader.GetInt32(22),
+                Loses = reader.GetInt32(23),
+                GoalsScored = reader.GetInt32(24),
+                GoalsConceded = reader.GetInt32(25),
+                Points = reader.GetInt32(26)
             };
 
             return g;

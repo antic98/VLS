@@ -68,8 +68,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddSOTests\AddGamesDoubleTests.cs" />
     <Compile Include="AddSOTests\AddPlayerTests.cs" />
+    <Compile Include="DeleteSOTests\DeletePlayerTests.cs" />
+    <Compile Include="GetSOTests\GetPlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchSOTests\SearchPlayerTests.cs" />
+    <Compile Include="UpdateSOTests\UpdatePlayerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -29,6 +29,7 @@ namespace UserInterface.GUIController
             uCResults.DgvGames.Columns[0].Visible = false;
             uCResults.DgvGames.Columns["GoalsHost"].HeaderText = "Goals";
             uCResults.DgvGames.Columns["GoalsGuest"].HeaderText = "Goals";
+            uCResults.DgvGames.Columns[6].Width = 60;
         }
 
         internal void DeleteGame()

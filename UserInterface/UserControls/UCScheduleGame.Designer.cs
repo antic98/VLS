@@ -24,14 +24,14 @@ namespace UserInterface.UserControls
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.btnScheduleGame = new System.Windows.Forms.Button();
@@ -40,7 +40,10 @@ namespace UserInterface.UserControls
             this.lblCaption = new System.Windows.Forms.Label();
             this.dgvGames = new System.Windows.Forms.DataGridView();
             this.btnMakeFixtures = new System.Windows.Forms.Button();
+            this.numericRound = new System.Windows.Forms.NumericUpDown();
+            this.lblRound = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGames)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericRound)).BeginInit();
             this.SuspendLayout();
             // 
             // txtSearch
@@ -61,9 +64,9 @@ namespace UserInterface.UserControls
             this.lblSearch.AutoSize = true;
             this.lblSearch.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSearch.ForeColor = System.Drawing.Color.White;
-            this.lblSearch.Location = new System.Drawing.Point(19, 114);
+            this.lblSearch.Location = new System.Drawing.Point(19, 113);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(76, 21);
+            this.lblSearch.Size = new System.Drawing.Size(79, 22);
             this.lblSearch.TabIndex = 1;
             this.lblSearch.Text = "Search:";
             // 
@@ -131,14 +134,14 @@ namespace UserInterface.UserControls
             this.dgvGames.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvGames.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvGames.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(46)))), ((int)(((byte)(91)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvGames.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(46)))), ((int)(((byte)(91)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvGames.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvGames.ColumnHeadersHeight = 30;
             this.dgvGames.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvGames.EnableHeadersVisualStyles = false;
@@ -148,12 +151,12 @@ namespace UserInterface.UserControls
             this.dgvGames.ReadOnly = true;
             this.dgvGames.RowHeadersVisible = false;
             this.dgvGames.RowHeadersWidth = 51;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            this.dgvGames.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            this.dgvGames.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvGames.RowTemplate.Height = 24;
             this.dgvGames.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvGames.Size = new System.Drawing.Size(780, 296);
@@ -173,11 +176,36 @@ namespace UserInterface.UserControls
             this.btnMakeFixtures.UseVisualStyleBackColor = false;
             this.btnMakeFixtures.Click += new System.EventHandler(this.btnAddFixtures_Click);
             // 
+            // numericRound
+            // 
+            this.numericRound.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.numericRound.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            this.numericRound.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericRound.ForeColor = System.Drawing.Color.White;
+            this.numericRound.Location = new System.Drawing.Point(721, 112);
+            this.numericRound.Name = "numericRound";
+            this.numericRound.Size = new System.Drawing.Size(43, 32);
+            this.numericRound.TabIndex = 9;
+            // 
+            // lblRound
+            // 
+            this.lblRound.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblRound.AutoSize = true;
+            this.lblRound.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRound.ForeColor = System.Drawing.Color.White;
+            this.lblRound.Location = new System.Drawing.Point(636, 113);
+            this.lblRound.Name = "lblRound";
+            this.lblRound.Size = new System.Drawing.Size(76, 22);
+            this.lblRound.TabIndex = 10;
+            this.lblRound.Text = "Round:";
+            // 
             // UCScheduleGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
+            this.Controls.Add(this.lblRound);
+            this.Controls.Add(this.numericRound);
             this.Controls.Add(this.btnMakeFixtures);
             this.Controls.Add(this.dgvGames);
             this.Controls.Add(this.lblCaption);
@@ -190,10 +218,13 @@ namespace UserInterface.UserControls
             this.Name = "UCScheduleGame";
             this.Size = new System.Drawing.Size(931, 464);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGames)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericRound)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.NumericUpDown numericRound;
+        private System.Windows.Forms.Label lblRound;
 
         #endregion
 

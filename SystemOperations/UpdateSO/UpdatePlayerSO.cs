@@ -13,17 +13,18 @@ namespace SystemOperations.UpdateSO
 
         protected override void Execute()
         {
-            Player upd = repository.GetObject(updatedPlayer) as Player;
-
-            updatedPlayer.Goals = upd.Goals;
-            
-            if(updatedPlayer.Team.ID != upd.Team.ID)
+            if (repository.GetObject(updatedPlayer) is Player upd)
             {
-                foreach(Stats st in updatedPlayer.Stats)
+                updatedPlayer.Goals = upd.Goals;
+            
+                if(updatedPlayer.Team.ID != upd.Team.ID)
                 {
-                    if(st.Player.ID == updatedPlayer.ID)
+                    foreach(Stats st in updatedPlayer.Stats)
                     {
-                        repository.Delete(st);
+                        if(st.Player.ID == updatedPlayer.ID)
+                        {
+                            repository.Delete(st);
+                        }
                     }
                 }
             }

@@ -126,6 +126,7 @@ namespace UserInterface.GUIController
             uCScheduleGame.DgvGames.Columns[0].Visible = false;
             uCScheduleGame.DgvGames.Columns[3].Visible = false;
             uCScheduleGame.DgvGames.Columns[4].Visible = false;
+            uCScheduleGame.DgvGames.Columns[6].Width = 60;
         }
 
         internal void DeleteGame()
