@@ -1,8 +1,8 @@
-﻿using Domain;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Domain;
 
-namespace SystemOperations
+namespace SystemOperations.GetSO
 {
     public class GetAllPositionsSO : SystemOperationBase
     {

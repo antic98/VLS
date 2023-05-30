@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Repository.DatabaseRepository;
 using SystemOperations;
+using SystemOperations.GetSO;
 
 namespace UnitTests.GetSOTests
 {
