@@ -6,7 +6,7 @@ namespace UserInterface.Dialogs.GameDialogs
 {
     public partial class FrmScheduleGame : Form
     {
-        NewGameController controller;
+        private readonly NewGameController controller;
         public FrmScheduleGame()
         {
             InitializeComponent();

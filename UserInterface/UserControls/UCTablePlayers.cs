@@ -5,12 +5,10 @@ namespace UserInterface.UserControls
 {
     public partial class UCTablePlayers : UserControl
     {
-        TablePlayersController controller;
-
         public UCTablePlayers()
         {
             InitializeComponent();
-            controller = new TablePlayersController(this);
+            var controller = new TablePlayersController(this);
             controller.Init();
         }
 

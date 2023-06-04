@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using UserInterface.ServerCommunication;
 
@@ -22,7 +23,7 @@ namespace UserInterface.GUIController
 
         private bool Validation()
         {
-            bool succ = true;
+            var succ = true;
 
             frmTeam.TxtName.BackColor = Color.FromArgb(45, 66, 91);
             frmTeam.TxtCity.BackColor = Color.FromArgb(45, 66, 91);
@@ -44,7 +45,7 @@ namespace UserInterface.GUIController
                 succ = false;
             }
 
-            bool pom = true;
+            var pom = true;
 
             if (frmTeam.TxtName.Text.Length < 3)
             {
@@ -53,26 +54,18 @@ namespace UserInterface.GUIController
                 pom = false;
             }
 
-            foreach (Char c in frmTeam.TxtCity.Text)
+            if (frmTeam.TxtCity.Text.Any(char.IsDigit))
             {
-                if (Char.IsDigit(c))
-                {
-                    frmTeam.TxtCity.BackColor = Color.YellowGreen;
-                    succ = false;
-                    pom = false;
-                    break;
-                }
+                frmTeam.TxtCity.BackColor = Color.YellowGreen;
+                succ = false;
+                pom = false;
             }
 
-            foreach (Char c in frmTeam.TxtColor.Text)
+            if (frmTeam.TxtColor.Text.Any(char.IsDigit))
             {
-                if (Char.IsDigit(c))
-                {
-                    frmTeam.TxtColor.BackColor = Color.YellowGreen;
-                    succ = false;
-                    pom = false;
-                    break;
-                }
+                frmTeam.TxtColor.BackColor = Color.YellowGreen;
+                succ = false;
+                pom = false;
             }
 
             if (!pom)
@@ -92,7 +85,7 @@ namespace UserInterface.GUIController
             frmTeam.TxtCity.Text = team.City;
             frmTeam.TxtColor.Text = team.Color;
 
-            frmTeam.LblPlayed.Text = (team.Wins + team.Draws + team.Loses).ToString() + " games (" + team.Wins + "W, " + team.Draws + "D, " + team.Loses + "L)";
+            frmTeam.LblPlayed.Text = (team.Wins + team.Draws + team.Loses) + " games (" + team.Wins + "W, " + team.Draws + "D, " + team.Loses + "L)";
 
             players = new BindingList<Player>(team.Players);
             frmTeam.DgvPlayers.DataSource = players;
@@ -105,8 +98,10 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            Team updatedTeam = new Team(frmTeam.TxtName.Text, frmTeam.TxtCity.Text, frmTeam.TxtColor.Text);
-            updatedTeam.ID = int.Parse(frmTeam.TxtID.Text);
+            var updatedTeam = new Team(int.Parse(frmTeam.TxtID.Text),
+                frmTeam.TxtName.Text,
+                frmTeam.TxtCity.Text,
+                frmTeam.TxtColor.Text);
 
             if(Communication.Instance.SaveDeleteUpdate(Operation.UpdateTeam, updatedTeam))
             {
@@ -117,7 +112,7 @@ namespace UserInterface.GUIController
                 MessageBox.Show($"Team {updatedTeam.Name} is not updated.");
         }
 
-        internal void Dispose()
+        private void Dispose()
         {
             frmTeam.Dispose();
         }
@@ -132,15 +127,14 @@ namespace UserInterface.GUIController
                 return;
             }
 
-            Team deleteTeam = new Team();
-            deleteTeam.ID = int.Parse(frmTeam.TxtID.Text);
-
-            if (Communication.Instance.SaveDeleteUpdate(Operation.DeleteTeam, deleteTeam))
-                MessageBox.Show($"Team {frmTeam.TxtName.Text} is deleted succesfully.");
-            else
+            var deleteTeam = new Team
             {
-                MessageBox.Show($"Team {frmTeam.TxtName.Text} is not deleted.");
-            }
+                ID = int.Parse(frmTeam.TxtID.Text)
+            };
+
+            MessageBox.Show(Communication.Instance.SaveDeleteUpdate(Operation.DeleteTeam, deleteTeam)
+                ? $"Team {frmTeam.TxtName.Text} is deleted succesfully."
+                : $"Team {frmTeam.TxtName.Text} is not deleted.");
 
             Dispose();
         }

@@ -3,6 +3,7 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using UserInterface.Dialogs.TeamDialogs;
 using UserInterface.Exceptions;
@@ -42,9 +43,9 @@ namespace UserInterface.GUIController
             {
                 teams = new BindingList<Team>();
 
-                object lista = Communication.Instance.GetList(Operation.GetTeams);
+                var listTeams = Communication.Instance.GetList(Operation.GetTeams);
 
-                foreach (Team obj in lista as List<Team>) teams.Add(obj as Team);
+                foreach (var obj in (List<Team>)listTeams) teams.Add(obj);
             }
             catch (ServerCommunicationException)
             {
@@ -63,12 +64,14 @@ namespace UserInterface.GUIController
             {
                 teams = new BindingList<Team>();
 
-                Team team = new Team();
-                team.Search = uCAllTeams.TxtSearch.Text.ToLower();
+                var team = new Team
+                {
+                    Search = uCAllTeams.TxtSearch.Text.ToLower()
+                };
 
-                object lista = Communication.Instance.Search(Operation.SearchTeams, team);
+                var listTeams = Communication.Instance.Search(Operation.SearchTeams, team);
 
-                foreach (Team obj in (List<Team>)lista) teams.Add(obj);
+                foreach (var obj in (List<Team>)listTeams) teams.Add(obj);
 
                 if (teams.Count == 0) MessageBox.Show("Can't find any teams with that value.");
 
@@ -92,16 +95,16 @@ namespace UserInterface.GUIController
             }
             else
             {
-                Team t = (Team)uCAllTeams.DgvTeams.SelectedRows[0].DataBoundItem;
+                var t = (Team)uCAllTeams.DgvTeams.SelectedRows[0].DataBoundItem;
                 t.Players = new List<Player>();
-                List<Player> players = Communication.Instance.GetList(Operation.GetPlayers) as List<Player>;
 
-                foreach(Player p in players)
-                {
-                    if (p.Team.ID == t.ID) t.Players.Add(p);
-                }
+                if (Communication.Instance.GetList(Operation.GetPlayers) is List<Player> players)
+                    foreach (var p in players.Where(p => p.Team.ID == t.ID))
+                    {
+                        t.Players.Add(p);
+                    }
 
-                FrmTeam frmTeam = new FrmTeam(t);
+                var frmTeam = new FrmTeam(t);
                 frmTeam.ShowDialog();
 
                 GetTeams();
@@ -111,7 +114,7 @@ namespace UserInterface.GUIController
 
         internal void AddTeam()
         {
-            FrmAddTeam frmAddTeam = new FrmAddTeam();
+            var frmAddTeam = new FrmAddTeam();
             frmAddTeam.ShowDialog();
             GetTeams();
             uCAllTeams.DgvTeams.DataSource = teams;

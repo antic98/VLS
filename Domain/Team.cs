@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
     [Serializable]
     public class Team : IDomainObject
     {
+        public Team()
+        {
+        }
+        
         public Team(string name, string city, string color)
         {
             Name = name;
@@ -18,11 +19,15 @@ namespace Domain
             Color = color;
         }
 
-        public Team()
+        public Team(int id, string name, string city, string color)
         {
+            ID = id;
+            Name = name;
+            City = city;
+            Color = color;
         }
 
-        int brojac;
+        private int brojac;
         public int Rank { get; set; }
         public int ID { get; set; }
         public string Name { get; set; }
@@ -44,19 +49,12 @@ namespace Domain
             return Name;
         }
         [Browsable(false)]
-        public List<Stats> Stats { get; set; }
-        [Browsable(false)]
-        public List<Game> Games { get; set; }
-        [Browsable(false)]
         public List<Player> Players { get; set; }
-        [Browsable(false)]
-        public Team Self { get { return this; } }
+
         [Browsable(false)]
         public string TableName => "Team";
         [Browsable(false)]
         public string InsertValues => $"'{Name}','{City}','{Color}',0,0,0,0,0,0";
-        [Browsable(false)]
-        public string TableID => "ID";
         [Browsable(false)]
         public string Join => "";
         [Browsable(false)]
@@ -74,21 +72,22 @@ namespace Domain
 
         public IDomainObject ReadObjectRow(SqlDataReader reader)
         {
-            Team t = new Team();
-
-            t.Rank = ++brojac;
-            t.ID = (int)reader["ID"];
-            t.Name = (string)reader["Name"];
-            t.City = (string)reader["City"];
-            t.Color = (string)reader["Color"];
-            t.Wins = (int)reader["Wins"];            
-            t.Draws = (int)reader["Draws"];
-            t.Loses = (int)reader["Loses"];
-            t.MP = t.Wins + t.Draws + t.Loses;
-            t.GoalsScored = (int)reader["GoalsScored"];
-            t.GoalsConceded = (int)reader["GoalsConceded"];
-            t.GD = t.GoalsScored - t.GoalsConceded;
-            t.Points = (int)reader["Points"];
+            var t = new Team
+            {
+                Rank = ++brojac,
+                ID = (int)reader["ID"],
+                Name = (string)reader["Name"],
+                City = (string)reader["City"],
+                Color = (string)reader["Color"],
+                Wins = (int)reader["Wins"],
+                Draws = (int)reader["Draws"],
+                Loses = (int)reader["Loses"],
+                MP = Wins + Draws + Loses,
+                GoalsScored = (int)reader["GoalsScored"],
+                GoalsConceded = (int)reader["GoalsConceded"],
+                GD = GoalsScored - GoalsConceded,
+                Points = (int)reader["Points"]
+            };
 
             return t;
         }

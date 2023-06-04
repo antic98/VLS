@@ -2,11 +2,11 @@
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Server.Controller
+namespace Server.SController
 {
     public class ServerController
     {
-        private FrmServer frmServer;
+        private readonly FrmServer frmServer;
         private Server server;
 
         public ServerController(FrmServer frmServer)

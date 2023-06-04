@@ -26,7 +26,7 @@ namespace UserInterface.GUIController
 
         private bool Validation()
         {
-            bool succ = true;
+            var succ = true;
 
             frmPlayer.TxtName.BackColor = Color.FromArgb(45, 66, 91);
             frmPlayer.TxtSurname.BackColor = Color.FromArgb(45, 66, 91);
@@ -64,25 +64,19 @@ namespace UserInterface.GUIController
                 succ = false;
             }
 
-            bool pom = true;
+            var pom = true;
 
-            foreach (Char c in frmPlayer.TxtName.Text)
+            if (frmPlayer.TxtName.Text.Any(char.IsDigit))
             {
-                if (Char.IsDigit(c))
-                {
-                    frmPlayer.TxtName.BackColor = Color.YellowGreen;
-                    succ = false;
-                    pom = false;
-                }
+                frmPlayer.TxtName.BackColor = Color.YellowGreen;
+                succ = false;
+                pom = false;
             }
-            foreach (Char c in frmPlayer.TxtSurname.Text)
+            if (frmPlayer.TxtSurname.Text.Any(char.IsDigit))
             {
-                if (Char.IsDigit(c))
-                {
-                    frmPlayer.TxtSurname.BackColor = Color.YellowGreen;
-                    succ = false;
-                    pom = false;
-                }
+                frmPlayer.TxtSurname.BackColor = Color.YellowGreen;
+                succ = false;
+                pom = false;
             }
 
             if (!pom)
@@ -97,7 +91,7 @@ namespace UserInterface.GUIController
         {
             try
             {
-                List<Country> countries = Communication.Instance.GetList(Operation.GetCountries) as List<Country>;
+                var countries = Communication.Instance.GetList(Operation.GetCountries) as List<Country>;
 
                 frmPlayer.CbCountry.DataSource = countries;
             }
@@ -115,7 +109,7 @@ namespace UserInterface.GUIController
         {
             try
             {
-                List<Position> positions = Communication.Instance.GetList(Operation.GetPositions) as List<Position>;
+                var positions = Communication.Instance.GetList(Operation.GetPositions) as List<Position>;
 
                 frmPlayer.CbPosition.DataSource = positions;
             }
@@ -133,7 +127,7 @@ namespace UserInterface.GUIController
         {
             try
             {
-                List<Team> teams = Communication.Instance.GetList(Operation.GetTeams) as List<Team>;
+                var teams = Communication.Instance.GetList(Operation.GetTeams) as List<Team>;
 
                 frmPlayer.CbTeam.DataSource = teams;
             }
@@ -174,16 +168,13 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            Player updatedPlayer = new Player(frmPlayer.TxtName.Text,
+            var updatedPlayer = new Player(int.Parse(frmPlayer.TxtID.Text),
+                frmPlayer.TxtName.Text,
                 frmPlayer.TxtSurname.Text,
                 (Position)frmPlayer.CbPosition.SelectedItem,
                 (Country)frmPlayer.CbCountry.SelectedItem,
                 (Team)frmPlayer.CbTeam.SelectedItem);
-
-            updatedPlayer.ID = int.Parse(frmPlayer.TxtID.Text);
             
-            updatedPlayer.Stats = Communication.Instance.GetList(Operation.GetStats) as List<Stats>;
-
             if(updatedPlayer.Team.ID != player.Team.ID)
             {
                 var result = MessageBox.Show("Are you sure you want to change this player's club? If you change it, all stats made by this player will be deleted.", "Update " + updatedPlayer.Name + " " + updatedPlayer.Surname, MessageBoxButtons.YesNo);
@@ -212,8 +203,10 @@ namespace UserInterface.GUIController
                 return;
             }
 
-            Player deletePlayer = new Player();
-            deletePlayer.ID = int.Parse(frmPlayer.TxtID.Text);
+            var deletePlayer = new Player
+            {
+                ID = int.Parse(frmPlayer.TxtID.Text)
+            };
 
             if (Communication.Instance.SaveDeleteUpdate(Operation.DeletePlayer, deletePlayer))
             {

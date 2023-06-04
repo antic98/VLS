@@ -3,6 +3,7 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using UserInterface.Dialogs.GameDialogs;
 using UserInterface.Exceptions;
@@ -23,8 +24,8 @@ namespace UserInterface.GUIController
 
         internal void ScheduleNewGame()
         {
-            List<Team> tt = Communication.Instance.GetList(Operation.GetTeams) as List<Team>;
-            if(tt.Count < 2)
+            var tt = Communication.Instance.GetList(Operation.GetTeams) as List<Team>;
+            if(tt != null && tt.Count < 2)
             {
                 MessageBox.Show("There have to be at least 2 teams to schedule a game. You have to add team first.");
                 return;
@@ -43,13 +44,11 @@ namespace UserInterface.GUIController
             {
                 games = new BindingList<Game>();
 
-                object lista = Communication.Instance.GetList(Operation.GetGames);
+                var listGames = Communication.Instance.GetList(Operation.GetGames);
 
-                foreach (Game obj in lista as List<Game>)
+                foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost == -1 && obj.GoalsGuest == -1))
                 {
-                    Game g = obj as Game;
-                    if(g.GoalsHost == -1 && g.GoalsGuest == -1)
-                        games.Add(g);
+                    games.Add(obj);
                 }
             }
             catch (ServerCommunicationException)
@@ -64,7 +63,7 @@ namespace UserInterface.GUIController
 
         internal void AddFixtures()
         {
-            FrmAddGames frmGetFixtures = new FrmAddGames();
+            var frmGetFixtures = new FrmAddGames();
             frmGetFixtures.ShowDialog();
         }
 
@@ -76,10 +75,10 @@ namespace UserInterface.GUIController
             }
             else
             {
-                Game g = (Game)uCScheduleGame.DgvGames.SelectedRows[0].DataBoundItem;
+                var g = (Game)uCScheduleGame.DgvGames.SelectedRows[0].DataBoundItem;
 
-                FrmInsertGameResult frmInsertGameResult = new FrmInsertGameResult(g);
-                frmInsertGameResult?.ShowDialog();
+                var frmInsertGameResult = new FrmInsertGameResult(g);
+                frmInsertGameResult.ShowDialog();
 
                 GetGames();
                 uCScheduleGame.DgvGames.DataSource = games;
@@ -92,16 +91,14 @@ namespace UserInterface.GUIController
             {
                 games = new BindingList<Game>();
 
-                Game game = new Game();
+                var game = new Game();
                 game.Search = uCScheduleGame.TxtSearch.Text.ToLower();
 
-                object lista = Communication.Instance.Search(Operation.SearchGames, game);
+                var listGames = Communication.Instance.Search(Operation.SearchGames, game);
 
-                foreach (Game obj in lista as List<Game>)
+                foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost == -1 && obj.GoalsGuest == -1))
                 {
-                    Game g = obj as Game;
-                    if (g.GoalsHost == -1 && g.GoalsGuest == -1)
-                        games.Add(g);
+                    games.Add(obj);
                 }
 
                 if (games.Count == 0) MessageBox.Show("Can't find any games with that value.");
@@ -137,7 +134,7 @@ namespace UserInterface.GUIController
             }
             else
             {
-                Game game = (Game)uCScheduleGame.DgvGames.SelectedRows[0].DataBoundItem;
+                var game = (Game)uCScheduleGame.DgvGames.SelectedRows[0].DataBoundItem;
 
                 var result = MessageBox.Show("Are you sure you want to delete this fixture?", "Deleting " + game.Host.Name + " vs " + game.Guest.Name, System.Windows.Forms.MessageBoxButtons.YesNo);
                 if (result == DialogResult.No)
@@ -153,6 +150,38 @@ namespace UserInterface.GUIController
 
             GetGames();
             uCScheduleGame.DgvGames.DataSource = games;
+        }
+
+        internal void FilterRounds()
+        {
+            try
+            {
+                if (uCScheduleGame.NumericRound.Value == 0)
+                {
+                    GetGames();
+                }
+                else
+                {
+                    games = new BindingList<Game>();
+
+                    var listGames = Communication.Instance.GetList(Operation.GetGames);
+
+                    foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost == -1 && obj.GoalsGuest == -1 && obj.Round == uCScheduleGame.NumericRound.Value))
+                    {
+                        games.Add(obj);
+                    }
+                }
+
+                uCScheduleGame.DgvGames.DataSource = games;
+            }
+            catch (ServerCommunicationException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

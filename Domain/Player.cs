@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
 
@@ -54,13 +53,9 @@ namespace Domain
         [Browsable(false)]
         public string Search { get; set; }
         [Browsable(false)]
-        public List<Stats> Stats { get; set; }
-        [Browsable(false)]
         public string TableName => "Player";
         [Browsable(false)]
         public string InsertValues => $"'{Name}','{Surname}',{Position.ID},{Team.ID},{Country.ID},{Goals}";
-        [Browsable(false)]
-        public string TableID => "ID";
         [Browsable(false)]
         public string Join => " p join Country c on (p.Country = c.ID) join Team t on (p.Team = t.ID) join Position pos on (p.Position = pos.ID)";
         [Browsable(false)]
@@ -78,32 +73,30 @@ namespace Domain
 
         public IDomainObject ReadObjectRow(SqlDataReader reader)
         {
-            Player p = new Player();
-
-            p.Rank = ++brojac;
-            p.ID = reader.GetInt32(0);
-            p.Name = reader.GetString(1);
-            p.Surname = reader.GetString(2);
-            p.Goals = reader.GetInt32(6);
-
-            p.Country = new Country
+            var p = new Player
             {
-                ID = reader.GetInt32(7),
-                Name = reader.GetString(8)
-            };
-
-            p.Team = new Team
-            {
-                ID = reader.GetInt32(9),
-                Name = reader.GetString(10),
-                City = reader.GetString(11),
-                Color = reader.GetString(12),                
-            };
-
-            p.Position = new Position
-            {
-                ID = reader.GetInt32(19),
-                Name = reader.GetString(20)
+                Rank = ++brojac,
+                ID = reader.GetInt32(0),
+                Name = reader.GetString(1),
+                Surname = reader.GetString(2),
+                Goals = reader.GetInt32(6),
+                Country = new Country
+                {
+                    ID = reader.GetInt32(7),
+                    Name = reader.GetString(8)
+                },
+                Team = new Team
+                {
+                    ID = reader.GetInt32(9),
+                    Name = reader.GetString(10),
+                    City = reader.GetString(11),
+                    Color = reader.GetString(12),                
+                },
+                Position = new Position
+                {
+                    ID = reader.GetInt32(19),
+                    Name = reader.GetString(20)
+                }
             };
 
             return p;

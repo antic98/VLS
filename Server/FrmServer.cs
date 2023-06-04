@@ -1,12 +1,12 @@
-﻿using Server.Controller;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using Server.SController;
 
 namespace Server
 {
     public partial class FrmServer : Form
     {
-        ServerController controller;
+        private readonly ServerController controller;
         public FrmServer()
         {
             InitializeComponent();

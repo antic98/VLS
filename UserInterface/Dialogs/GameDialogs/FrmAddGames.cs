@@ -6,7 +6,7 @@ namespace UserInterface.Dialogs.GameDialogs
 {
     public partial class FrmAddGames : Form
     {
-        AddGamesController controller;
+        private readonly AddGamesController controller;
 
         public FrmAddGames()
         {

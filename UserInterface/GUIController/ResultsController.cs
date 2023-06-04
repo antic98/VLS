@@ -3,6 +3,7 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using UserInterface.Dialogs.GameDialogs;
 using UserInterface.Exceptions;
@@ -40,18 +41,17 @@ namespace UserInterface.GUIController
             }
             else
             {
-                Game deleteGame = (Game)uCResults.DgvGames.SelectedRows[0].DataBoundItem;
+                var deleteGame = (Game)uCResults.DgvGames.SelectedRows[0].DataBoundItem;
 
                 var result = MessageBox.Show("Are you sure you want to delete this result? If you delete this result, all stats about scorers will be deleted.", "Deleting " + deleteGame.Host.Name + " vs " + deleteGame.Guest.Name, System.Windows.Forms.MessageBoxButtons.YesNo);
                 if (result == DialogResult.No)
                 {
                     return;
                 }
-                
-                if(Communication.Instance.SaveDeleteUpdate(Operation.DeleteGame, deleteGame))
-                    MessageBox.Show("The game is deleted.");
-                else
-                    MessageBox.Show("The game is not deleted.");
+
+                MessageBox.Show(Communication.Instance.SaveDeleteUpdate(Operation.DeleteGame, deleteGame)
+                    ? "The game is deleted."
+                    : "The game is not deleted.");
             }
 
             GetGames();
@@ -64,15 +64,16 @@ namespace UserInterface.GUIController
             {
                 games = new BindingList<Game>();
 
-                Game game = new Game();
-                game.Search = uCResults.TxtSearch.Text.ToLower();
-
-                object lista = Communication.Instance.Search(Operation.SearchGames, game);
-
-                foreach (Game obj in (List<Game>)lista)
+                var game = new Game
                 {
-                    if (obj.GoalsHost > -1 && obj.GoalsGuest > -1)
-                        games.Add(obj);
+                    Search = uCResults.TxtSearch.Text.ToLower()
+                };
+
+                var listGames = Communication.Instance.Search(Operation.SearchGames, game);
+
+                foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost > -1 && obj.GoalsGuest > -1))
+                {
+                    games.Add(obj);
                 }
 
                 if (games.Count == 0) MessageBox.Show("Can't find any games with that value.");
@@ -97,9 +98,9 @@ namespace UserInterface.GUIController
             }
             else
             {
-                Game game = (Game)uCResults.DgvGames.SelectedRows[0].DataBoundItem;
+                var game = (Game)uCResults.DgvGames.SelectedRows[0].DataBoundItem;
 
-                FrmGameDetails frmGameDetails = new FrmGameDetails(game);
+                var frmGameDetails = new FrmGameDetails(game);
                 frmGameDetails.ShowDialog();
             }
         }
@@ -110,14 +111,44 @@ namespace UserInterface.GUIController
             {
                 games = new BindingList<Game>();
 
-                object lista = Communication.Instance.GetList(Operation.GetGames);
+                var listGames = Communication.Instance.GetList(Operation.GetGames);
 
-                foreach (Game obj in lista as List<Game>)
+                foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost > -1 && obj.GoalsGuest > -1))
                 {
-                    Game g = obj as Game;
-                    if (g.GoalsHost > -1 && g.GoalsGuest > -1)
-                        games.Add(g);
+                    games.Add(obj);
                 }
+            }
+            catch (ServerCommunicationException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        internal void FilterRounds()
+        {
+            try
+            {
+                if (uCResults.NumericRound.Value == 0)
+                {
+                    GetGames();
+                }
+                else
+                {
+                    games = new BindingList<Game>();
+
+                    var listGames = Communication.Instance.GetList(Operation.GetGames);
+
+                    foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost > -1 && obj.GoalsGuest > -1 && obj.Round == uCResults.NumericRound.Value))
+                    {
+                        games.Add(obj);
+                    }
+                }
+
+                uCResults.DgvGames.DataSource = games;
             }
             catch (ServerCommunicationException)
             {

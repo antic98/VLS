@@ -6,7 +6,7 @@ namespace DatabaseBroker
     public class Broker
     {
         #region BROKER
-        private SqlConnection connection;
+        private readonly SqlConnection connection;
         private SqlTransaction transaction;
         
         public Broker()

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using UserInterface.ServerCommunication;
+using UserInterface.Session;
 using UserInterface.UserControls;
 
 namespace UserInterface.GUIController
@@ -22,7 +23,7 @@ namespace UserInterface.GUIController
 
         internal void Init()
         {
-            frmMain.Text = $"Welcome, " + Session.SessionData.Instance.User.Name + " " + Session.SessionData.Instance.User.Surname + "!";
+            frmMain.Text = "Welcome, " + SessionData.Instance.User.Name + " " + SessionData.Instance.User.Surname + "!";
         }
 
         internal void FormClosed()

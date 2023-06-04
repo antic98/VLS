@@ -7,7 +7,7 @@ namespace UserInterface
 {
     public partial class FrmPlayer : Form
     {
-        ChangePlayerController controller;
+        private readonly ChangePlayerController controller;
         
         public FrmPlayer(Player p)
         {

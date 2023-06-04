@@ -27,20 +27,19 @@ namespace UserInterface.GUIController
             frmGameDetails.LblHostGoals.Text = game.GoalsHost.ToString();
             frmGameDetails.LblGuestGoals.Text = game.GoalsGuest.ToString();
 
-            List<Stats> stats = Communication.Instance.GetList(Operation.GetStats) as List<Stats>;
-
-            foreach(Stats st in stats)
+            if (!(Communication.Instance.GetList(Operation.GetStats) is List<Stats> stats)) return;
+            foreach (var st in stats)
             {
-                if(st.Player.Team.ID == game.Host.ID && st.Game.ID == game.ID)
+                if (st.Player.Team.ID == game.Host.ID && st.Game.ID == game.ID)
                 {
                     frmGameDetails.LblHostStrikers.Text += st + Environment.NewLine;
                 }
-                if(st.Player.Team.ID == game.Guest.ID && st.Game.ID == game.ID)
+
+                if (st.Player.Team.ID == game.Guest.ID && st.Game.ID == game.ID)
                 {
                     frmGameDetails.LblGuestStrikers.Text += st + Environment.NewLine;
                 }
             }
-
         }
     }
 }

@@ -18,7 +18,7 @@ namespace UserInterface.GUIController
 
         private bool Validation()
         {
-            bool succ = true;
+            var succ = true;
 
             if (frmLogin.TxtUsername.Text == "")
             {

@@ -32,9 +32,7 @@ namespace Domain
         public string TableName => "Stats";
 
         public string InsertValues => $"{Player.ID}, {Game.ID}, {Goals}";
-
-        public string TableID => "GameID";
-
+        
         public string Join => " s join Game g on (s.GameID = g.ID) join Player p on (s.PlayerID = p.ID)";
 
         public string UpdateValues => $"Goals = {Goals}";
@@ -51,44 +49,45 @@ namespace Domain
 
         public IDomainObject ReadObjectRow(SqlDataReader reader)
         {
-            Stats stats = new Stats();
-
-            stats.Goals = reader.GetInt32(2);
-            stats.Game = new Game
+            var stats = new Stats
             {
-                ID = reader.GetInt32(3),
-                Date = reader.GetDateTime(4),
-                Host = new Team
+                Goals = reader.GetInt32(2),
+                Game = new Game
                 {
-                    ID = reader.GetInt32(7)
-                },                
-                Guest = new Team
-                {
-                    ID = reader.GetInt32(8)
+                    ID = reader.GetInt32(3),
+                    Date = reader.GetDateTime(4),
+                    Host = new Team
+                    {
+                        ID = reader.GetInt32(7)
+                    },                
+                    Guest = new Team
+                    {
+                        ID = reader.GetInt32(8)
+                    },
+                    GoalsHost = reader.GetInt32(5),
+                    GoalsGuest = reader.GetInt32(6)
                 },
-                GoalsHost = reader.GetInt32(5),
-                GoalsGuest = reader.GetInt32(6)
-            };
-            stats.Player = new Player
-            {
-                ID = reader.GetInt32(9),
-                Name = reader.GetString(10),
-                Surname = reader.GetString(11),
+                Player = new Player
+                {
+                    ID = reader.GetInt32(9),
+                    Name = reader.GetString(10),
+                    Surname = reader.GetString(11),
 
-                Position = new Position
-                {
-                    ID = reader.GetInt32(12),
-                },
+                    Position = new Position
+                    {
+                        ID = reader.GetInt32(12),
+                    },
 
-                Team = new Team
-                {
-                    ID = reader.GetInt32(13)
-                },
-                Country = new Country
-                {
-                    ID = reader.GetInt32(14)
-                },
-                Goals = reader.GetInt32(15)
+                    Team = new Team
+                    {
+                        ID = reader.GetInt32(13)
+                    },
+                    Country = new Country
+                    {
+                        ID = reader.GetInt32(14)
+                    },
+                    Goals = reader.GetInt32(15)
+                }
             };
 
             return stats;

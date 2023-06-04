@@ -6,7 +6,7 @@ namespace UserInterface.UserControls
 {
     public partial class UCAllTeams : UserControl
     {
-        AllTeamsController controller;
+        private readonly AllTeamsController controller;
         public UCAllTeams()
         {
             InitializeComponent();

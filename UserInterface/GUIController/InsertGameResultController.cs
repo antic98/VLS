@@ -3,6 +3,7 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using UserInterface.Dialogs.GameDialogs;
 using UserInterface.Exceptions;
@@ -15,8 +16,8 @@ namespace UserInterface.GUIController
         private readonly FrmInsertGameResult frmInsertGameResult;
         private readonly Game game;
         private readonly List<Stats> stats = new List<Stats>();
-        private BindingList<Player> hostPlayers = new BindingList<Player>();
-        private BindingList<Player> guestPlayers = new BindingList<Player>();
+        private readonly BindingList<Player> hostPlayers = new BindingList<Player>();
+        private readonly BindingList<Player> guestPlayers = new BindingList<Player>();
         private List<Player> players;
         int hostBrojac, guestBrojac;
 
@@ -32,13 +33,14 @@ namespace UserInterface.GUIController
             {
                 players = Communication.Instance.GetList(Operation.GetPlayers) as List<Player>;
 
-                foreach(Player p in players)
-                {
-                    if (p.Team.ID == game.Host.ID)
-                        hostPlayers.Add(p);
-                    if (p.Team.ID == game.Guest.ID)
-                        guestPlayers.Add(p);
-                }
+                if (players != null)
+                    foreach (var p in players)
+                    {
+                        if (p.Team.ID == game.Host.ID)
+                            hostPlayers.Add(p);
+                        if (p.Team.ID == game.Guest.ID)
+                            guestPlayers.Add(p);
+                    }
 
                 frmInsertGameResult.DgvHostPlayers.DataSource = hostPlayers;
                 frmInsertGameResult.DgvGuestPlayers.DataSource = guestPlayers;
@@ -75,8 +77,8 @@ namespace UserInterface.GUIController
             frmInsertGameResult.DgvGuestPlayers.Columns[6].Visible = false;
             frmInsertGameResult.DgvGuestPlayers.Columns[7].Visible = false;
 
-            bool succ1 = true;
-            bool succ2 = true;
+            var succ1 = true;
+            var succ2 = true;
 
             if (hostPlayers.Count == 0)
             {
@@ -140,34 +142,29 @@ namespace UserInterface.GUIController
             else
             {
                 ++hostBrojac;
-                Stats stat = new Stats(game,
+                var stat = new Stats(game,
                     frmInsertGameResult.DgvHostPlayers.SelectedRows[0].DataBoundItem as Player,
                     1);
 
-                foreach(Stats st in stats)
+                foreach (var st in stats.Where(st => stat.Player.ID == st.Player.ID))
                 {
-                    if(stat.Player.ID == st.Player.ID)
+                    st.Goals++;
+                    frmInsertGameResult.LblHostStrikers.Text += Environment.NewLine + hostBrojac + ". " + stat.Player.Name + " " + stat.Player.Surname;
+                    if (hostBrojac == game.GoalsHost)
                     {
-                        st.Goals++;
-                        frmInsertGameResult.LblHostStrikers.Text += Environment.NewLine + hostBrojac + ". " + stat.Player.Name + " " + stat.Player.Surname;
-                        if (hostBrojac == game.GoalsHost)
-                        {
-                            frmInsertGameResult.BtnSaveHostStriker.Enabled = false;
-                            if (guestBrojac == game.GoalsGuest)
-                                frmInsertGameResult.BtnSaveResult.Enabled = true;
-                        }                            
-                        return;
-                    }
+                        frmInsertGameResult.BtnSaveHostStriker.Enabled = false;
+                        if (guestBrojac == game.GoalsGuest)
+                            frmInsertGameResult.BtnSaveResult.Enabled = true;
+                    }                            
+                    return;
                 }
                 stats.Add(stat);
                 frmInsertGameResult.LblHostStrikers.Text += Environment.NewLine + hostBrojac + ". " + stat.Player.Name + " " + stat.Player.Surname;
 
-                if (hostBrojac == game.GoalsHost)
-                {
-                    frmInsertGameResult.BtnSaveHostStriker.Enabled = false;
-                    if (guestBrojac == game.GoalsGuest)
-                        frmInsertGameResult.BtnSaveResult.Enabled = true;
-                }
+                if (hostBrojac != game.GoalsHost) return;
+                frmInsertGameResult.BtnSaveHostStriker.Enabled = false;
+                if (guestBrojac == game.GoalsGuest)
+                    frmInsertGameResult.BtnSaveResult.Enabled = true;
             }
         }
 
@@ -181,24 +178,21 @@ namespace UserInterface.GUIController
             else
             {
                 ++guestBrojac;
-                Stats stat = new Stats(game,
+                var stat = new Stats(game,
                     frmInsertGameResult.DgvGuestPlayers.SelectedRows[0].DataBoundItem as Player,
                     1);
 
-                foreach (Stats st in stats)
+                foreach (var st in stats.Where(st => stat.Player.ID == st.Player.ID))
                 {
-                    if (stat.Player.ID == st.Player.ID)
+                    st.Goals++;
+                    frmInsertGameResult.LblGuestStrikers.Text += Environment.NewLine + guestBrojac + ". " + stat.Player.Name + " " + stat.Player.Surname;
+                    if (guestBrojac == game.GoalsGuest)
                     {
-                        st.Goals++;
-                        frmInsertGameResult.LblGuestStrikers.Text += Environment.NewLine + guestBrojac + ". " + stat.Player.Name + " " + stat.Player.Surname;
-                        if (guestBrojac == game.GoalsGuest)
-                        {
-                            frmInsertGameResult.BtnSaveGuestStriker.Enabled = false;
-                            if (hostBrojac == game.GoalsHost)
-                                frmInsertGameResult.BtnSaveResult.Enabled = true;
-                        }
-                        return;
+                        frmInsertGameResult.BtnSaveGuestStriker.Enabled = false;
+                        if (hostBrojac == game.GoalsHost)
+                            frmInsertGameResult.BtnSaveResult.Enabled = true;
                     }
+                    return;
                 }
                 stats.Add(stat);
                 frmInsertGameResult.LblGuestStrikers.Text += Environment.NewLine + guestBrojac + ". " + stat.Player.Name + " " + stat.Player.Surname;

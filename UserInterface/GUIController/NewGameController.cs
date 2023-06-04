@@ -20,8 +20,8 @@ namespace UserInterface.GUIController
 
         internal void Init()
         {
-            frmScheduleGame.CmbHost.DataSource = Controller.Instance.GetAllTeams();
-            frmScheduleGame.CmbGuest.DataSource = Controller.Instance.GetAllTeams();
+            frmScheduleGame.CmbHost.DataSource = Controller.GetAllTeams();
+            frmScheduleGame.CmbGuest.DataSource = Controller.GetAllTeams();
         }
 
         private bool Validation()
@@ -62,7 +62,7 @@ namespace UserInterface.GUIController
             return succ;
         }
 
-        internal void Dispose()
+        private void Dispose()
         {
             frmScheduleGame.Dispose();
         }
@@ -71,11 +71,11 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            Game newGame = new Game(frmScheduleGame.CmbHost.SelectedItem as Team,
+            var newGame = new Game(frmScheduleGame.CmbHost.SelectedItem as Team,
                 frmScheduleGame.CmbGuest.SelectedItem as Team,
                 frmScheduleGame.DtpDate.Value);
 
-            if(Communication.Instance.SaveDeleteUpdate(Operation.SaveGame, newGame))
+            if(Communication.Instance.SaveDeleteUpdate(Operation.AddGame, newGame))
             {
                 MessageBox.Show("Game " + newGame.Host.Name + " vs " + newGame.Guest.Name + " is scheduled!");
                 Dispose();

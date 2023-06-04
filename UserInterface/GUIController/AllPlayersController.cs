@@ -37,10 +37,9 @@ namespace UserInterface.GUIController
             {
                 players = new BindingList<Player>();
 
-                object lista = Communication.Instance.GetList(Operation.GetPlayers);
+                var listPlayers = Communication.Instance.GetList(Operation.GetPlayers);
 
-                foreach (Player obj in lista as List<Player>) players.Add(obj as Player);
-                                
+                foreach (var obj in (List<Player>)listPlayers) players.Add(obj);
             }
             catch (ServerCommunicationException)
             {
@@ -58,12 +57,14 @@ namespace UserInterface.GUIController
             {
                 players = new BindingList<Player>();
 
-                Player player = new Player();
-                player.Search = uCAllPlayers.TxtSearch.Text.ToLower();
+                var player = new Player
+                {
+                    Search = uCAllPlayers.TxtSearch.Text.ToLower()
+                };
 
-                object lista = Communication.Instance.Search(Operation.SearchPlayers, player);
+                var listPlayers = Communication.Instance.Search(Operation.SearchPlayers, player);
 
-                foreach (Player obj in (List<Player>)lista) players.Add(obj);
+                foreach (var obj in (List<Player>)listPlayers) players.Add(obj);
 
                 if (players.Count == 0) MessageBox.Show("Can't find any players with that value.");
 
@@ -81,14 +82,14 @@ namespace UserInterface.GUIController
 
         internal void AddPlayer()
         {
-            List<Team> tt = Communication.Instance.GetList(Operation.GetTeams) as List<Team>;
-            if(tt.Count == 0)
+            var tt = Communication.Instance.GetList(Operation.GetTeams) as List<Team>;
+            if(tt != null && tt.Count == 0)
             {
                 MessageBox.Show("There are no teams. You have to add team first.");
                 return;
             }
 
-            FrmAddPlayer frmAddPlayer = new FrmAddPlayer();
+            var frmAddPlayer = new FrmAddPlayer();
             frmAddPlayer.ShowDialog();
 
             GetPlayers();
@@ -103,9 +104,9 @@ namespace UserInterface.GUIController
             }
             else
             {
-                Player p = (Player)uCAllPlayers.DgvPlayers.SelectedRows[0].DataBoundItem;
+                var p = (Player)uCAllPlayers.DgvPlayers.SelectedRows[0].DataBoundItem;
 
-                FrmPlayer frmPlayer = new FrmPlayer(p);
+                var frmPlayer = new FrmPlayer(p);
                 frmPlayer.ShowDialog();
 
                 GetPlayers();

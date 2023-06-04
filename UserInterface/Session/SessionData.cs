@@ -4,22 +4,20 @@ namespace UserInterface.Session
 {
     public class SessionData
     {
-        private static SessionData instance;
-        private static object lockObject = new object();
+        private static SessionData _instance;
+        private static readonly object LockObject = new object();
         private SessionData() { }
         public static SessionData Instance
         {
             get
             {
-                if (instance == null)
+                if (_instance != null) return _instance;
+                lock (LockObject)
                 {
-                    lock (lockObject)
-                    {
-                        if (instance == null)
-                            instance = new SessionData();
-                    }
+                    if (_instance == null)
+                        _instance = new SessionData();
                 }
-                return instance;
+                return _instance;
             }
         }
 

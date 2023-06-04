@@ -17,9 +17,9 @@ namespace UserInterface.GUIController
         private BindingList<Team> allTeams;
         private BindingList<Team> selectedTeams;
 
-        public AddGamesController(FrmAddGames frmGetGames)
+        public AddGamesController(FrmAddGames frmAddGames)
         {
-            this.frmAddGames = frmGetGames;
+            this.frmAddGames = frmAddGames;
         }
 
         internal void Init()
@@ -95,7 +95,7 @@ namespace UserInterface.GUIController
             }
             else
             {
-                Team t = (Team)frmAddGames.DgvAllTeams.SelectedRows[0].DataBoundItem;
+                var t = (Team)frmAddGames.DgvAllTeams.SelectedRows[0].DataBoundItem;
 
                 allTeams.Remove(t);
                 selectedTeams.Add(t);
@@ -110,14 +110,14 @@ namespace UserInterface.GUIController
             }
             else
             {
-                Team t = (Team)frmAddGames.DgvSelectedTeams.SelectedRows[0].DataBoundItem;
+                var t = (Team)frmAddGames.DgvSelectedTeams.SelectedRows[0].DataBoundItem;
 
                 selectedTeams.Remove(t);
                 allTeams.Add(t);
             }
         }
 
-        internal void Dispose()
+        private void Dispose()
         {
             frmAddGames.Dispose();
         }
@@ -128,12 +128,9 @@ namespace UserInterface.GUIController
             {
                 allTeams = new BindingList<Team>();
 
-                List<Team> teams = Communication.Instance.GetList(Operation.GetTeams) as List<Team>;
-
-                foreach (Team t in teams)
-                {
-                    allTeams.Add(t);
-                }
+                if (Communication.Instance.GetList(Operation.GetTeams) is List<Team> teams)
+                    foreach (var t in teams)
+                        allTeams.Add(t);
 
                 frmAddGames.DgvAllTeams.DataSource = allTeams;
             }

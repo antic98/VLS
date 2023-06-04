@@ -7,7 +7,7 @@ namespace UserInterface
 {
     public partial class FrmTeam : Form
     {
-        ChangeTeamController controller;
+        private readonly ChangeTeamController controller;
         public FrmTeam(Team t)
         {
             InitializeComponent();

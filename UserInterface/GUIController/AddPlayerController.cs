@@ -1,7 +1,7 @@
 ﻿using Common;
 using Domain;
-using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using UserInterface.Dialogs.PlayerDialogs;
 using UserInterface.ServerCommunication;
@@ -19,7 +19,7 @@ namespace UserInterface.GUIController
 
         private bool Validation()
         {
-            bool succ = true;
+            var succ = true;
 
             frmAddPlayer.TxtName.BackColor = Color.FromArgb(45, 66, 91);
             frmAddPlayer.TxtSurname.BackColor = Color.FromArgb(45, 66, 91);
@@ -57,25 +57,19 @@ namespace UserInterface.GUIController
                 succ = false;
             }
 
-            bool pom = true;
+            var pom = true;
 
-            foreach (Char c in frmAddPlayer.TxtName.Text)
+            if (frmAddPlayer.TxtName.Text.Any(char.IsDigit))
             {
-                if (Char.IsDigit(c))
-                {
-                    frmAddPlayer.TxtName.BackColor = Color.YellowGreen;
-                    succ = false;
-                    pom = false;
-                }
+                frmAddPlayer.TxtName.BackColor = Color.YellowGreen;
+                succ = false;
+                pom = false;
             }
-            foreach (Char c in frmAddPlayer.TxtSurname.Text)
+            if (frmAddPlayer.TxtSurname.Text.Any(char.IsDigit))
             {
-                if (Char.IsDigit(c))
-                {
-                    frmAddPlayer.TxtSurname.BackColor = Color.YellowGreen;
-                    succ = false;
-                    pom = false;
-                }
+                frmAddPlayer.TxtSurname.BackColor = Color.YellowGreen;
+                succ = false;
+                pom = false;
             }
 
             if (!pom)
@@ -97,13 +91,13 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            Player newPlayer = new Player(frmAddPlayer.TxtName.Text,
+            var newPlayer = new Player(frmAddPlayer.TxtName.Text,
                 frmAddPlayer.TxtSurname.Text,
                 (Position)frmAddPlayer.CbPosition.SelectedItem,
                 (Country)frmAddPlayer.CbCountry.SelectedItem,
                 (Team)frmAddPlayer.CbTeam.SelectedItem);
 
-            if(Communication.Instance.SaveDeleteUpdate(Operation.SavePlayer, newPlayer))
+            if(Communication.Instance.SaveDeleteUpdate(Operation.AddPlayer, newPlayer))
             {
                 MessageBox.Show($"Player {newPlayer.Name} {newPlayer.Surname} is added.");
                 Dispose();
@@ -112,7 +106,7 @@ namespace UserInterface.GUIController
                 MessageBox.Show("Player is not added.");
         }
 
-        internal void Dispose()
+        private void Dispose()
         {
             frmAddPlayer.Dispose();
         }

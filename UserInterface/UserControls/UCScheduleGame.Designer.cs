@@ -66,7 +66,7 @@ namespace UserInterface.UserControls
             this.lblSearch.ForeColor = System.Drawing.Color.White;
             this.lblSearch.Location = new System.Drawing.Point(19, 113);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(79, 22);
+            this.lblSearch.Size = new System.Drawing.Size(76, 21);
             this.lblSearch.TabIndex = 1;
             this.lblSearch.Text = "Search:";
             // 
@@ -186,6 +186,7 @@ namespace UserInterface.UserControls
             this.numericRound.Name = "numericRound";
             this.numericRound.Size = new System.Drawing.Size(43, 32);
             this.numericRound.TabIndex = 9;
+            this.numericRound.ValueChanged += new System.EventHandler(this.numericRound_ValueChanged);
             // 
             // lblRound
             // 
@@ -193,9 +194,9 @@ namespace UserInterface.UserControls
             this.lblRound.AutoSize = true;
             this.lblRound.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRound.ForeColor = System.Drawing.Color.White;
-            this.lblRound.Location = new System.Drawing.Point(636, 113);
+            this.lblRound.Location = new System.Drawing.Point(643, 116);
             this.lblRound.Name = "lblRound";
-            this.lblRound.Size = new System.Drawing.Size(76, 22);
+            this.lblRound.Size = new System.Drawing.Size(72, 21);
             this.lblRound.TabIndex = 10;
             this.lblRound.Text = "Round:";
             // 
@@ -221,6 +222,7 @@ namespace UserInterface.UserControls
             ((System.ComponentModel.ISupportInitialize)(this.numericRound)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.NumericUpDown numericRound;
@@ -243,5 +245,6 @@ namespace UserInterface.UserControls
         public Button BtnScheduleGame { get => btnScheduleGame; set => btnScheduleGame = value; }
         public Button BtnDeleteGame { get => btnDeleteGame; set => btnDeleteGame = value; }
         public DataGridView DgvGames1 { get => dgvGames; set => dgvGames = value; }
+        public NumericUpDown NumericRound { get => numericRound; set => numericRound = value; }
     }
 }

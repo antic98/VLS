@@ -12,7 +12,6 @@ namespace Domain
         int IDValue { get; }
         string TableName { get; }
         string InsertValues { get; }
-        string TableID { get; }
         string Join { get; }
         string UpdateValues { get; }
         string Condition { get; }

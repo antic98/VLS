@@ -15,13 +15,9 @@ namespace Domain
         }
 
         [Browsable(false)]
-        public Position Self { get { return this; } }
-        [Browsable(false)]
         public string TableName => "Position";
         [Browsable(false)]
         public string InsertValues => $"'{Name}'";
-        [Browsable(false)]
-        public string TableID => "ID";
         [Browsable(false)]
         public string Join => "";
         [Browsable(false)]
@@ -39,10 +35,11 @@ namespace Domain
 
         public IDomainObject ReadObjectRow(SqlDataReader reader)
         {
-            Position p = new Position();
-
-            p.ID = (int)reader["ID"];
-            p.Name = (string)reader["Name"];
+            var p = new Position
+            {
+                ID = (int)reader["ID"],
+                Name = (string)reader["Name"]
+            };
 
             return p;
         }

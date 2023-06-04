@@ -1,17 +1,18 @@
-﻿using Common;
-using Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Sockets;
+using ApplicationLogic;
+using Common;
+using Domain;
 
 namespace Server
 {
     public class ClientHandler
     {
         private Socket socket;
-        private CommunicationHelper helper;
+        private readonly CommunicationHelper helper;
         public EventHandler OdjavljenKlijent;
 
         public ClientHandler(Socket socket)
@@ -20,7 +21,7 @@ namespace Server
             helper = new CommunicationHelper(socket);
         }
 
-        private bool kraj = false;
+        private bool kraj;
 
         public void HandleRequests()
         {
@@ -28,8 +29,8 @@ namespace Server
             {
                 while (!kraj)
                 {
-                    Request request = helper.Receive<Request>();
-                    Response response = CreateResponse(request);
+                    var request = helper.Receive<Request>();
+                    var response = CreateResponse(request);
                     helper.Send(response);
                 }
             }
@@ -43,87 +44,87 @@ namespace Server
             }
         }
 
-        public Response CreateResponse(Request request)
+        private Response CreateResponse(Request request)
         {
-            Response response = new Response();
-            response.IsSuccesful = true;
+            var response = new Response
+            {
+                IsSuccesful = true
+            };
 
             try
             {
                 switch (request.Operation)
                 {
                     case Operation.Login:
-                        response.Result = ApplicationLogic.Controller.Instance.Login((User)request.RequestObject);
+                        response.Result = Controller.Login((User)request.RequestObject);
                         if (response.Result == null)
                         {
                             response.IsSuccesful = false;
                             response.Message = "User doesn't exist.";
                         }
                         break;
-                    case Operation.Kraj:
+                    case Operation.End:
                         kraj = true;
                         break;
                     case Operation.GetCountries:
-                        response.Result = ApplicationLogic.Controller.Instance.GetAllCountries();
+                        response.Result = Controller.GetAllCountries();
                         break;
                     case Operation.GetPositions:
-                        response.Result = ApplicationLogic.Controller.Instance.GetAllPositions();
+                        response.Result = Controller.GetAllPositions();
                         break;
                     case Operation.GetPlayers:
-                        response.Result = ApplicationLogic.Controller.Instance.GetAllPlayers();
+                        response.Result = Controller.GetAllPlayers();
                         break;
                     case Operation.GetTeams:
-                        response.Result = ApplicationLogic.Controller.Instance.GetAllTeams();
+                        response.Result = Controller.GetAllTeams();
                         break;
                     case Operation.GetGames:
-                        response.Result = ApplicationLogic.Controller.Instance.GetAllGames();
+                        response.Result = Controller.GetAllGames();
                         break;
                     case Operation.GetStats:
-                        response.Result = ApplicationLogic.Controller.Instance.GetAllStats();
+                        response.Result = Controller.GetAllStats();
                         break;
-                    case Operation.SavePlayer:
-                        ApplicationLogic.Controller.Instance.AddPlayer(request.RequestObject as Player);
+                    case Operation.AddPlayer:
+                        Controller.AddPlayer(request.RequestObject as Player);
                         break;
-                    case Operation.SaveTeam:
-                        ApplicationLogic.Controller.Instance.AddTeam(request.RequestObject as Team);
+                    case Operation.AddTeam:
+                        Controller.AddTeam(request.RequestObject as Team);
                         break;
-                    case Operation.SaveGame:
-                        ApplicationLogic.Controller.Instance.AddGame(request.RequestObject as Game);
+                    case Operation.AddGame:
+                        Controller.AddGame(request.RequestObject as Game);
                         break;
                     case Operation.SearchPlayers:
-                        response.Result = ApplicationLogic.Controller.Instance.SearchPlayer(request.RequestObject as Player);
+                        response.Result = Controller.SearchPlayer(request.RequestObject as Player);
                         break;
                     case Operation.SearchTeams:
-                        response.Result = ApplicationLogic.Controller.Instance.SearchTeam(request.RequestObject as Team);
+                        response.Result = Controller.SearchTeam(request.RequestObject as Team);
                         break;
                     case Operation.SearchGames:
-                        response.Result = ApplicationLogic.Controller.Instance.SearchGame(request.RequestObject as Game);
+                        response.Result = Controller.SearchGame(request.RequestObject as Game);
                         break;
                     case Operation.DeletePlayer:
-                        ApplicationLogic.Controller.Instance.DeletePlayer(request.RequestObject as Player);
+                        Controller.DeletePlayer(request.RequestObject as Player);
                         break;
                     case Operation.DeleteTeam:
-                        ApplicationLogic.Controller.Instance.DeleteTeam(request.RequestObject as Team);
+                        Controller.DeleteTeam(request.RequestObject as Team);
                         break;
                     case Operation.DeleteGame:
-                        ApplicationLogic.Controller.Instance.DeleteGame(request.RequestObject as Game);
+                        Controller.DeleteGame(request.RequestObject as Game);
                         break;
                     case Operation.UpdatePlayer:
-                        ApplicationLogic.Controller.Instance.UpdatePlayer(request.RequestObject as Player);
+                        Controller.UpdatePlayer(request.RequestObject as Player);
                         break;
                     case Operation.UpdateTeam:
-                        ApplicationLogic.Controller.Instance.UpdateTeam(request.RequestObject as Team);
+                        Controller.UpdateTeam(request.RequestObject as Team);
                         break;
                     case Operation.UpdateGame:
-                        ApplicationLogic.Controller.Instance.UpdateGame(request.RequestObject as Game);
+                        Controller.UpdateGame(request.RequestObject as Game);
                         break;
                     case Operation.AddGamesSingle:
-                        ApplicationLogic.Controller.Instance.AddGamesSingle(request.RequestObject as List<Team>);
+                        Controller.AddGamesSingle(request.RequestObject as List<Team>);
                         break;
                     case Operation.AddGamesDouble:
-                        ApplicationLogic.Controller.Instance.AddGamesDouble(request.RequestObject as List<Team>);
-                        break;
-                    default:
+                        Controller.AddGamesDouble(request.RequestObject as List<Team>);
                         break;
                 }
             }
@@ -142,14 +143,12 @@ namespace Server
         {
             lock (lockobject)
             {
-                if(socket != null)
-                {                      
-                    kraj = true;                
-                    socket.Shutdown(SocketShutdown.Both);                
-                    socket.Close();                
-                    socket = null; 
-                    OdjavljenKlijent?.Invoke(this, EventArgs.Empty);
-                }
+                if (socket == null) return;
+                kraj = true;                
+                socket.Shutdown(SocketShutdown.Both);                
+                socket.Close();                
+                socket = null; 
+                OdjavljenKlijent?.Invoke(this, EventArgs.Empty);
             }
         }
 

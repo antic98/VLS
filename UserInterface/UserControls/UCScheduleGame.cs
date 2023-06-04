@@ -6,7 +6,7 @@ namespace UserInterface.UserControls
 {
     public partial class UCScheduleGame : UserControl
     {
-        ScheduleGameController controller;
+        private readonly ScheduleGameController controller;
         public UCScheduleGame()
         {
             InitializeComponent();
@@ -35,6 +35,11 @@ namespace UserInterface.UserControls
         private void btnAddFixtures_Click(object sender, EventArgs e)
         {
             controller.AddFixtures();
+        }
+
+        private void numericRound_ValueChanged(object sender, EventArgs e)
+        {
+            controller.FilterRounds();
         }
     }
 }

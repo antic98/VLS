@@ -6,7 +6,7 @@ namespace UserInterface.UserControls
 {
     public partial class UCResults : UserControl
     {
-        ResultsController controller;
+        private readonly ResultsController controller;
         public UCResults()
         {
             InitializeComponent();
@@ -27,6 +27,11 @@ namespace UserInterface.UserControls
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             controller.Search();
+        }
+
+        private void numericRound_ValueChanged(object sender, EventArgs e)
+        {
+            controller.FilterRounds();
         }
     }
 }

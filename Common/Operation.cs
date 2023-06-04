@@ -3,14 +3,18 @@
     public enum Operation
     {
         Login,
-        Kraj,
+        End,
         GetCountries,
         GetPlayers,
         GetTeams,
+        GetStats,
         GetGames,
-        SavePlayer,
-        SaveTeam,
-        SaveGame,
+        GetPositions,
+        AddPlayer,
+        AddTeam,
+        AddGame,
+        AddGamesSingle,
+        AddGamesDouble,
         SearchPlayers,
         SearchTeams,
         SearchGames,
@@ -19,11 +23,6 @@
         DeleteGame,
         UpdatePlayer,
         UpdateTeam,
-        UpdateGame,
-        GetStats,
-        SaveFixtures,
-        AddGamesSingle,
-        AddGamesDouble,
-        GetPositions,
+        UpdateGame
     }
 }

@@ -2,6 +2,7 @@
 using Domain;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using UserInterface.Dialogs.TeamDialogs;
 using UserInterface.ServerCommunication;
@@ -17,14 +18,14 @@ namespace UserInterface.GUIController
             this.frmAddTeam = frmAddTeam;
         }
 
-        internal void Dispose()
+        private void Dispose()
         {
             frmAddTeam.Dispose();
         }
 
         private bool Validation()
         {
-            bool succ = true;
+            var succ = true;
 
             frmAddTeam.TxtName.BackColor = Color.FromArgb(45, 66, 91);
             frmAddTeam.TxtCity.BackColor = Color.FromArgb(45, 66, 91);
@@ -46,7 +47,7 @@ namespace UserInterface.GUIController
                 succ = false;
             }
 
-            bool pom = true;
+            var pom = true;
 
             if (frmAddTeam.TxtName.Text.Length < 3)
             {
@@ -55,26 +56,18 @@ namespace UserInterface.GUIController
                 pom = false;
             }
 
-            foreach(Char c in frmAddTeam.TxtCity.Text)
+            if (frmAddTeam.TxtCity.Text.Any(char.IsDigit))
             {
-                if (Char.IsDigit(c))
-                {
-                    frmAddTeam.TxtCity.BackColor = Color.YellowGreen;
-                    succ = false;
-                    pom = false;
-                    break;
-                }
+                frmAddTeam.TxtCity.BackColor = Color.YellowGreen;
+                succ = false;
+                pom = false;
             }
 
-            foreach (Char c in frmAddTeam.TxtColor.Text)
+            if (frmAddTeam.TxtColor.Text.Any(char.IsDigit))
             {
-                if (Char.IsDigit(c))
-                {
-                    frmAddTeam.TxtColor.BackColor = Color.YellowGreen;
-                    succ = false;
-                    pom = false;
-                    break;
-                }
+                frmAddTeam.TxtColor.BackColor = Color.YellowGreen;
+                succ = false;
+                pom = false;
             }
 
             if (!pom)
@@ -89,9 +82,9 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            Team newTeam = new Team(frmAddTeam.TxtName.Text, frmAddTeam.TxtCity.Text, frmAddTeam.TxtColor.Text);
+            var newTeam = new Team(frmAddTeam.TxtName.Text, frmAddTeam.TxtCity.Text, frmAddTeam.TxtColor.Text);
 
-            if(Communication.Instance.SaveDeleteUpdate(Operation.SaveTeam, newTeam))
+            if(Communication.Instance.SaveDeleteUpdate(Operation.AddTeam, newTeam))
             {
                 MessageBox.Show($"Team {newTeam.Name} is added.");
                 Dispose();

@@ -3,6 +3,7 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using UserInterface.Exceptions;
 using UserInterface.ServerCommunication;
@@ -50,11 +51,9 @@ namespace UserInterface.GUIController
 
                 foreach (var team in (List<Team>)listTeams)
                 {
-                    foreach (var game in (List<Game>)listGames)
+                    if (((List<Game>)listGames).Any(game => game.Host.ID == team.ID || game.Guest.ID == team.ID))
                     {
-                        if (game.Host.ID != team.ID && game.Guest.ID != team.ID) continue;
                         teams.Add(team);
-                        break;
                     }
                 }
             }

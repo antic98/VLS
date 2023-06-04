@@ -6,14 +6,14 @@ namespace Common
     public class CommunicationHelper
     {
         private Socket socket;
-        private NetworkStream stream;
-        private BinaryFormatter formatter;
+        private readonly NetworkStream stream;
+        private readonly BinaryFormatter formatter;
 
         public CommunicationHelper(Socket socket)
         {
             this.socket = socket;
-            this.stream = new NetworkStream(socket);
-            this.formatter = new BinaryFormatter();
+            stream = new NetworkStream(socket);
+            formatter = new BinaryFormatter();
         }
 
         public void Send<T>(T obj) where T : class

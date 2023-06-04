@@ -12,16 +12,16 @@ namespace ApplicationLogic
     public class Controller
     {
         #region SINGLETON
-        private static Controller instance;
+        private static Controller _instance;
         public static Controller Instance
         {
             get
             {                
-                if (instance == null)               
+                if (_instance == null)               
                 {                       
-                    if (instance == null) instance = new Controller();                    
+                    if (_instance == null) _instance = new Controller();                    
                 }
-                return instance;
+                return _instance;
             }
         }
         private Controller()
@@ -33,28 +33,28 @@ namespace ApplicationLogic
         
         //ADD
 
-        public void AddPlayer(Player newPlayer)
+        public static void AddPlayer(Player newPlayer)
         {
             SystemOperationBase so = new AddPlayerSO(newPlayer);
             so.ExecuteTemplate();
         }
-        public void AddTeam(Team newTeam)
+        public static void AddTeam(Team newTeam)
         {
             SystemOperationBase so = new AddTeamSO(newTeam);
             so.ExecuteTemplate();
         }
-        public void AddGame(Game newGame)
+        public static void AddGame(Game newGame)
         {
             SystemOperationBase so = new AddGameSO(newGame);
             so.ExecuteTemplate();
         }
-        public void AddGamesSingle(List<Team> teams)
+        public static void AddGamesSingle(List<Team> teams)
         {
             SystemOperationBase so = new AddGamesSingleSO(teams);
             so.ExecuteTemplate();
         }
 
-        public void AddGamesDouble(List<Team> teams)
+        public static void AddGamesDouble(List<Team> teams)
         {
             SystemOperationBase so = new AddGamesDoubleSO(teams);
             so.ExecuteTemplate();
@@ -62,37 +62,37 @@ namespace ApplicationLogic
 
         //GETALL
 
-        public List<Player> GetAllPlayers()
+        public static List<Player> GetAllPlayers()
         {
             SystemOperationBase so = new GetAllPlayersSO();
             so.ExecuteTemplate();
             return ((GetAllPlayersSO)so).Result;
         }
-        public List<Team> GetAllTeams()
+        public static List<Team> GetAllTeams()
         {
             SystemOperationBase so = new GetAllTeamsSO();
             so.ExecuteTemplate();
             return ((GetAllTeamsSO)so).Result;
         }
-        public List<Country> GetAllCountries()
+        public static List<Country> GetAllCountries()
         {
             SystemOperationBase so = new GetAllCountriesSO();
             so.ExecuteTemplate();
             return ((GetAllCountriesSO)so).Result;
         }
-        public List<Game> GetAllGames()
+        public static List<Game> GetAllGames()
         {
             SystemOperationBase so = new GetAllGamesSO();
             so.ExecuteTemplate();
             return ((GetAllGamesSO)so).Result;
         }
-        public List<Position> GetAllPositions()
+        public static List<Position> GetAllPositions()
         {
             SystemOperationBase so = new GetAllPositionsSO();
             so.ExecuteTemplate();
             return ((GetAllPositionsSO)so).Result;
         }
-        public List<Stats> GetAllStats()
+        public static List<Stats> GetAllStats()
         {
             SystemOperationBase so = new GetAllStatsSO();
             so.ExecuteTemplate();
@@ -101,17 +101,17 @@ namespace ApplicationLogic
 
         //UPDATE
 
-        public void UpdatePlayer(Player updatedPlayer)
+        public static void UpdatePlayer(Player updatedPlayer)
         {
             SystemOperationBase so = new UpdatePlayerSO(updatedPlayer);
             so.ExecuteTemplate();
         }
-        public void UpdateTeam(Team updatedTeam)
+        public static void UpdateTeam(Team updatedTeam)
         {
             SystemOperationBase so = new UpdateTeamSO(updatedTeam);
             so.ExecuteTemplate();
         }
-        public void UpdateGame(Game updatedGame)
+        public static void UpdateGame(Game updatedGame)
         {
             SystemOperationBase so = new UpdateGameSO(updatedGame);
             so.ExecuteTemplate();
@@ -119,17 +119,17 @@ namespace ApplicationLogic
 
         //DELETE
 
-        public void DeletePlayer(Player deletePlayer)
+        public static void DeletePlayer(Player deletePlayer)
         {
             SystemOperationBase so = new DeletePlayerSO(deletePlayer);
             so.ExecuteTemplate();
         }
-        public void DeleteTeam(Team deleteTeam)
+        public static void DeleteTeam(Team deleteTeam)
         {
             SystemOperationBase so = new DeleteTeamSO(deleteTeam);
             so.ExecuteTemplate();
         }
-        public void DeleteGame(Game deleteGame)
+        public static void DeleteGame(Game deleteGame)
         {
             SystemOperationBase so = new DeleteGameSO(deleteGame);
             so.ExecuteTemplate();
@@ -137,19 +137,19 @@ namespace ApplicationLogic
 
         //SEARCH
 
-        public List<Player> SearchPlayer(Player player)
+        public static List<Player> SearchPlayer(Player player)
         {
             SystemOperationBase so = new SearchPlayerSO(player);
             so.ExecuteTemplate();
             return ((SearchPlayerSO)so).Result;
         }
-        public List<Team> SearchTeam(Team team)
+        public static List<Team> SearchTeam(Team team)
         {
             SystemOperationBase so = new SearchTeamSO(team);
             so.ExecuteTemplate();
             return ((SearchTeamSO)so).Result;
         }
-        public List<Game> SearchGame(Game game)
+        public static List<Game> SearchGame(Game game)
         {
             SystemOperationBase so = new SearchGameSO(game);
             so.ExecuteTemplate();
@@ -158,7 +158,7 @@ namespace ApplicationLogic
 
         //LOGIN
 
-        public User Login(User u)
+        public static User Login(User u)
         {
             SystemOperationBase so = new GetAllUsersSO();
             so.ExecuteTemplate();

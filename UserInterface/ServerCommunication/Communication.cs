@@ -11,15 +11,8 @@ namespace UserInterface.ServerCommunication
         private Socket socket;
 
         private CommunicationHelper helper;
-        private static Communication instance;
-        public static Communication Instance
-        {
-            get 
-            { 
-                if (instance == null) instance = new Communication();
-                return instance; 
-            }
-        }
+        private static Communication _instance;
+        public static Communication Instance => _instance ?? (_instance = new Communication());
         private Communication() { }
 
         public void Connect()
@@ -33,7 +26,7 @@ namespace UserInterface.ServerCommunication
         {
             try
             {
-                Request request = new Request
+                var request = new Request
                 {
                     Operation = operation,
                     RequestObject = requestObject
@@ -46,18 +39,16 @@ namespace UserInterface.ServerCommunication
             }
         }
 
-        public object GetResult()
+        private object GetResult()
         {
-            Response response = helper.Receive<Response>();
+            var response = helper.Receive<Response>();
 
             if (response.IsSuccesful)
             {
                 return response.Result;
             }
-            else
-            {
-                throw new SystemOperationException(response.Message);
-            }
+
+            throw new SystemOperationException(response.Message);
         }
                 
         public void Login(User user)
@@ -65,12 +56,13 @@ namespace UserInterface.ServerCommunication
             SendRequest(Operation.Login, user);
             
             Session.SessionData.Instance.User = (User)GetResult();
-        } 
+        }
+        
         public void Close()
         {
             if (socket == null) return;
             
-            SendRequest(Operation.Kraj);
+            SendRequest(Operation.End);
 
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
@@ -96,7 +88,7 @@ namespace UserInterface.ServerCommunication
         public bool SaveDeleteUpdate(Operation operation, object obj)
         {
             SendRequest(operation, obj);
-            Response response = helper.Receive<Response>();
+            var response = helper.Receive<Response>();
 
             return response.IsSuccesful;
         }

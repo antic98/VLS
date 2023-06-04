@@ -17,8 +17,7 @@ namespace Domain
         public string TableName => "[User]";
         [Browsable(false)]
         public string InsertValues => $"{ID},'{Name}','{Surname}','{Username}','{Password}'";
-        [Browsable(false)]
-        public string TableID => "ID";
+
         [Browsable(false)]
         public string Join => "";
         [Browsable(false)]
@@ -36,13 +35,14 @@ namespace Domain
 
         public IDomainObject ReadObjectRow(SqlDataReader reader)
         {
-            User u = new User();
-
-            u.ID = (int)reader["ID"];
-            u.Name = (string)reader["Name"];
-            u.Surname = (string)reader["Surname"];
-            u.Username = (string)reader["Username"];
-            u.Password = (string)reader["Password"];
+            var u = new User
+            {
+                ID = (int)reader["ID"],
+                Name = (string)reader["Name"],
+                Surname = (string)reader["Surname"],
+                Username = (string)reader["Username"],
+                Password = (string)reader["Password"]
+            };
 
             return u;
         }

@@ -7,7 +7,7 @@ namespace UserInterface.Dialogs.GameDialogs
 {
     public partial class FrmInsertGameResult : Form
     {
-        InsertGameResultController controller;
+        private readonly InsertGameResultController controller;
 
         public FrmInsertGameResult(Game game)
         {

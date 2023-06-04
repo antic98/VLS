@@ -7,7 +7,7 @@ namespace Repository.DatabaseRepository
 {
     public class GenericDbRepository : IRepository<IDomainObject>
     {
-        private Broker broker = new Broker();
+        private readonly Broker broker = new Broker();
 
         public void OpenConnection()
         {
@@ -32,7 +32,7 @@ namespace Repository.DatabaseRepository
 
         public void Delete(IDomainObject obj)
         {
-            SqlCommand command = broker.CreateCommand();
+            var command = broker.CreateCommand();
 
             command.CommandText = $"delete from {obj.TableName} where {obj.Condition}";
 
@@ -41,7 +41,7 @@ namespace Repository.DatabaseRepository
 
         public void Add(IDomainObject obj)
         {
-            SqlCommand command = broker.CreateCommand();
+            var command = broker.CreateCommand();
 
             command.CommandText = $"insert into {obj.TableName} values ({obj.InsertValues})";
 
@@ -50,16 +50,16 @@ namespace Repository.DatabaseRepository
 
         public List<IDomainObject> GetAll(IDomainObject obj)
         {
-            List<IDomainObject> result = new List<IDomainObject>();
-            SqlCommand command = broker.CreateCommand();
+            var result = new List<IDomainObject>();
+            var command = broker.CreateCommand();
 
             command.CommandText = $"select * from {obj.TableName} {obj.Join} {obj.OrderBy}";
 
-            using (SqlDataReader reader = command.ExecuteReader())
+            using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    IDomainObject rowObject = obj.ReadObjectRow(reader);
+                    var rowObject = obj.ReadObjectRow(reader);
 
                     result.Add(rowObject);
                 }
@@ -69,16 +69,16 @@ namespace Repository.DatabaseRepository
         
         public List<IDomainObject> Search(IDomainObject obj)
         {
-            List<IDomainObject> result = new List<IDomainObject>();
-            SqlCommand command = broker.CreateCommand();
+            var result = new List<IDomainObject>();
+            var command = broker.CreateCommand();
 
             command.CommandText = $"SELECT * from {obj.TableName} {obj.Join} {obj.ConditionGetList} {obj.OrderBy}";
 
-            using (SqlDataReader reader = command.ExecuteReader())
+            using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    IDomainObject rowObject = obj.ReadObjectRow(reader);
+                    var rowObject = obj.ReadObjectRow(reader);
 
                     result.Add(rowObject);
                 }
@@ -88,7 +88,7 @@ namespace Repository.DatabaseRepository
 
         public void Update(IDomainObject obj)
         {
-            SqlCommand command = broker.CreateCommand();
+            var command = broker.CreateCommand();
 
             command.CommandText = $"UPDATE {obj.TableName} SET {obj.UpdateValues} WHERE {obj.Condition}";
 
@@ -99,15 +99,15 @@ namespace Repository.DatabaseRepository
         {
             IDomainObject result = null;
 
-            SqlCommand command = broker.CreateCommand();
+            var command = broker.CreateCommand();
 
             command.CommandText = $"SELECT * from {obj.TableName} {obj.Join} {obj.ConditionGetObject}";
 
-            using (SqlDataReader reader = command.ExecuteReader())
+            using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    IDomainObject rowObject = obj.ReadObjectRow(reader);
+                    var rowObject = obj.ReadObjectRow(reader);
 
                     if(rowObject.IDValue == obj.IDValue)
                     {

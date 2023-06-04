@@ -10,8 +10,8 @@ namespace Server
 {
     public class Server
     {
-        private Socket socket;
-        private List<ClientHandler> clients = new List<ClientHandler>();
+        private readonly Socket socket;
+        private readonly List<ClientHandler> clients = new List<ClientHandler>();
 
         public Server()
         {
@@ -22,7 +22,7 @@ namespace Server
         {
             try
             {
-                IPEndPoint endpoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999);
+                var endpoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999);
                 socket.Bind(endpoint);
                 socket.Listen(5);
                 return true;
@@ -41,11 +41,11 @@ namespace Server
             {
                 while (true)
                 {
-                    Socket klijentskiSocket = socket.Accept();
-                    ClientHandler client = new ClientHandler(klijentskiSocket);
+                    var klijentskiSocket = socket.Accept();
+                    var client = new ClientHandler(klijentskiSocket);
                     clients.Add(client);
                     client.OdjavljenKlijent += Handler_OdjavljenKlijent;
-                    Thread nitKlijenta = new Thread(client.HandleRequests);
+                    var nitKlijenta = new Thread(client.HandleRequests);
                     nitKlijenta.IsBackground = true;
                     nitKlijenta.Start();
                 }
@@ -57,7 +57,7 @@ namespace Server
             
         }
 
-        public void Handler_OdjavljenKlijent(object sender, EventArgs args)
+        private void Handler_OdjavljenKlijent(object sender, EventArgs args)
         {
             clients.Remove((ClientHandler)sender);
         }

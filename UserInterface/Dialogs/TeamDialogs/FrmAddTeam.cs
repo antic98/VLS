@@ -6,7 +6,7 @@ namespace UserInterface.Dialogs.TeamDialogs
 {
     public partial class FrmAddTeam : Form
     {
-        AddTeamController controller;
+        private readonly AddTeamController controller;
         public FrmAddTeam()
         {
             InitializeComponent();

@@ -25,13 +25,9 @@ namespace Domain
         }
 
         [Browsable(false)]
-        public Country Self { get { return this; } }
-        [Browsable(false)]
         public string TableName => "Country";
         [Browsable(false)]
         public string InsertValues => $"'{Name}'";
-        [Browsable(false)]
-        public string TableID => "ID";
         [Browsable(false)]
         public string Join => "";
         [Browsable(false)]
@@ -49,11 +45,12 @@ namespace Domain
 
         public IDomainObject ReadObjectRow(SqlDataReader reader)
         {
-            Country c = new Country();
+            var c = new Country
+            {
+                ID = (int)reader["ID"],
+                Name = (string)reader["Name"]
+            };
 
-            c.ID = (int)reader["ID"];
-            c.Name = (string)reader["Name"];
-           
             return c;
         }        
     }

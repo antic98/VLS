@@ -6,7 +6,7 @@ namespace UserInterface.Dialogs.PlayerDialogs
 {
     public partial class FrmAddPlayer : Form
     {
-        AddPlayerController controller;
+        private readonly AddPlayerController controller;
         public FrmAddPlayer()
         {
             InitializeComponent();
