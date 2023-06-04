@@ -15,8 +15,8 @@ namespace UserInterface.GUIController
 {
     public class ChangePlayerController
     {
-        private FrmPlayer frmPlayer;
-        private Player player;
+        private readonly FrmPlayer frmPlayer;
+        private readonly Player player;
 
         public ChangePlayerController(FrmPlayer frmPlayer, Player player)
         {

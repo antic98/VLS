@@ -12,12 +12,12 @@ namespace UserInterface.GUIController
 {
     public class InsertGameResultController
     {
-        private FrmInsertGameResult frmInsertGameResult;
-        private Game game;
-        private List<Stats> stats = new List<Stats>();
-        BindingList<Player> hostPlayers = new BindingList<Player>();
-        BindingList<Player> guestPlayers = new BindingList<Player>();
-        List<Player> players;
+        private readonly FrmInsertGameResult frmInsertGameResult;
+        private readonly Game game;
+        private readonly List<Stats> stats = new List<Stats>();
+        private BindingList<Player> hostPlayers = new BindingList<Player>();
+        private BindingList<Player> guestPlayers = new BindingList<Player>();
+        private List<Player> players;
         int hostBrojac, guestBrojac;
 
         public InsertGameResultController(FrmInsertGameResult frmInsertGameResult, Domain.Game game)

@@ -13,8 +13,8 @@ namespace UserInterface.GUIController
 {
     public class ScheduleGameController
     {
-        private UCScheduleGame uCScheduleGame;
-        BindingList<Game> games;
+        private readonly UCScheduleGame uCScheduleGame;
+        private BindingList<Game> games;
 
         public ScheduleGameController(UCScheduleGame uCScheduleGame)
         {

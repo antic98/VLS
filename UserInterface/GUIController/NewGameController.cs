@@ -11,7 +11,7 @@ namespace UserInterface.GUIController
 {
     public class NewGameController
     {
-        private FrmScheduleGame frmScheduleGame;
+        private readonly FrmScheduleGame frmScheduleGame;
 
         public NewGameController(FrmScheduleGame frmScheduleGame)
         {

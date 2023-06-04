@@ -10,7 +10,7 @@ namespace UserInterface.GUIController
 {
     public class AddPlayerController
     {
-        private FrmAddPlayer frmAddPlayer;
+        private readonly FrmAddPlayer frmAddPlayer;
 
         public AddPlayerController(FrmAddPlayer frmAddPlayer)
         {

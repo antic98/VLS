@@ -12,7 +12,7 @@ namespace UserInterface.GUIController
 {
     public class TableTeamsController
     {
-        private UCTableTeams uCTableTeams;
+        private readonly UCTableTeams uCTableTeams;
         private BindingList<Team> teams;
 
         public TableTeamsController(UCTableTeams uCTableTeams)
@@ -45,11 +45,20 @@ namespace UserInterface.GUIController
             {
                 teams = new BindingList<Team>();
 
-                object lista = Communication.Instance.GetList(Operation.GetTeams);
+                var listTeams = Communication.Instance.GetList(Operation.GetTeams);
+                var listGames = Communication.Instance.GetList(Operation.GetGames);
 
-                foreach (Team obj in lista as List<Team>) teams.Add(obj as Team);
+                foreach (var team in (List<Team>)listTeams)
+                {
+                    foreach (var game in (List<Game>)listGames)
+                    {
+                        if (game.Host.ID != team.ID && game.Guest.ID != team.ID) continue;
+                        teams.Add(team);
+                        break;
+                    }
+                }
             }
-            catch (ServerCommunicationException) //SVUDA BACAJ OVAJ EX
+            catch (ServerCommunicationException)
             {
                 throw;
             }

@@ -13,9 +13,9 @@ namespace UserInterface.GUIController
 {
     public class AddGamesController
     {
-        private FrmAddGames frmAddGames;
-        BindingList<Team> allTeams;
-        BindingList<Team> selectedTeams;
+        private readonly FrmAddGames frmAddGames;
+        private BindingList<Team> allTeams;
+        private BindingList<Team> selectedTeams;
 
         public AddGamesController(FrmAddGames frmGetGames)
         {

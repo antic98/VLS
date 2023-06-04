@@ -9,7 +9,7 @@ namespace UserInterface.GUIController
 {
     public class LoginController
     {
-        private FrmLogin frmLogin;
+        private readonly FrmLogin frmLogin;
 
         public LoginController(FrmLogin frmLogin)
         {

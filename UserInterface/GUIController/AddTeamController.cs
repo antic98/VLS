@@ -10,7 +10,7 @@ namespace UserInterface.GUIController
 {
     public class AddTeamController
     {
-        private FrmAddTeam frmAddTeam;
+        private readonly FrmAddTeam frmAddTeam;
 
         public AddTeamController(FrmAddTeam frmAddTeam)
         {

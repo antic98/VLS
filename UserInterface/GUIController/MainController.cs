@@ -8,7 +8,7 @@ namespace UserInterface.GUIController
 {
     public class MainController
     {
-        private FrmMain frmMain;
+        private readonly FrmMain frmMain;
         public MainController(FrmMain frmMain)
         {
             this.frmMain = frmMain;

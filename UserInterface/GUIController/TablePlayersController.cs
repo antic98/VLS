@@ -12,7 +12,7 @@ namespace UserInterface.GUIController
 {
     public class TablePlayersController
     {
-        private UCTablePlayers uCTablePlayers;
+        private readonly UCTablePlayers uCTablePlayers;
         private BindingList<Player> players;
 
         public TablePlayersController(UCTablePlayers uCTablePlayers)
@@ -26,11 +26,22 @@ namespace UserInterface.GUIController
             {
                 players = new BindingList<Player>();
 
-                object lista = Communication.Instance.GetList(Operation.GetPlayers);
+                var listPlayers = Communication.Instance.GetList(Operation.GetPlayers);
+                var listGames = Communication.Instance.GetList(Operation.GetGames);
 
-                foreach (Player obj in lista as List<Player>) players.Add(obj as Player);
+                foreach (var player in (List<Player>)listPlayers)
+                {
+                    foreach (var game in (List<Game>)listGames)
+                    {
+                        if (game.Host.ID == player.Team.ID || game.Guest.ID == player.Team.ID)
+                        {
+                            players.Add(player);
+                            break;
+                        }
+                    }
+                }
             }
-            catch (ServerCommunicationException) //SVUDA BACAJ OVAJ EX
+            catch (ServerCommunicationException)
             {
                 throw;
             }
@@ -38,7 +49,6 @@ namespace UserInterface.GUIController
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         internal void Init()

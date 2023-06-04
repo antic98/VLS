@@ -13,7 +13,7 @@ namespace UserInterface.GUIController
 {
     public class AllPlayersController
     {
-        private UCAllPlayers uCAllPlayers;
+        private readonly UCAllPlayers uCAllPlayers;
         private BindingList<Player> players;
 
         public AllPlayersController(UCAllPlayers uCAllPlayers)

@@ -9,8 +9,8 @@ namespace UserInterface.GUIController
 {
     public class GameDetailsController
     {
-        private FrmGameDetails frmGameDetails;
-        private Game game;
+        private readonly FrmGameDetails frmGameDetails;
+        private readonly Game game;
 
         public GameDetailsController(FrmGameDetails frmGameDetails, Domain.Game game)
         {

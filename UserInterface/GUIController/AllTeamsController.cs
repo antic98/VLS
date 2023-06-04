@@ -13,8 +13,8 @@ namespace UserInterface.GUIController
 {
     public class AllTeamsController
     {
-        private UCAllTeams uCAllTeams;
-        BindingList<Team> teams;
+        private readonly UCAllTeams uCAllTeams;
+        private BindingList<Team> teams;
         public AllTeamsController(UCAllTeams uCAllTeams)
         {
             this.uCAllTeams = uCAllTeams;

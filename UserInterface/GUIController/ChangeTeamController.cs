@@ -11,9 +11,9 @@ namespace UserInterface.GUIController
 {
     public class ChangeTeamController
     {
-        private FrmTeam frmTeam;
-        private Team team;
-        BindingList<Player> players;
+        private readonly FrmTeam frmTeam;
+        private readonly Team team;
+        private BindingList<Player> players;
         public ChangeTeamController(FrmTeam frmTeam, Team team)
         {
             this.frmTeam = frmTeam;

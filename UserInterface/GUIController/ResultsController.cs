@@ -13,8 +13,8 @@ namespace UserInterface.GUIController
 {
     public class ResultsController
     {
-        private UCResults uCResults;
-        BindingList<Game> games;
+        private readonly UCResults uCResults;
+        private BindingList<Game> games;
 
         public ResultsController(UCResults uCResults)
         {
