@@ -42,13 +42,11 @@ namespace UserInterface.GUIController
             {
                 Game deleteGame = (Game)uCResults.DgvGames.SelectedRows[0].DataBoundItem;
 
-                var result = System.Windows.Forms.MessageBox.Show("Are you sure you want to delete this result? If you delete this result, all stats about scorers will be deleted.", "Deleting " + deleteGame.Host.Name + " vs " + deleteGame.Guest.Name, System.Windows.Forms.MessageBoxButtons.YesNo);
-                if (result == System.Windows.Forms.DialogResult.No)
+                var result = MessageBox.Show("Are you sure you want to delete this result? If you delete this result, all stats about scorers will be deleted.", "Deleting " + deleteGame.Host.Name + " vs " + deleteGame.Guest.Name, System.Windows.Forms.MessageBoxButtons.YesNo);
+                if (result == DialogResult.No)
                 {
                     return;
                 }
-
-                deleteGame.Stats = Communication.Instance.GetList(Operation.GetStats) as List<Stats>;
                 
                 if(Communication.Instance.SaveDeleteUpdate(Operation.DeleteGame, deleteGame))
                     MessageBox.Show("The game is deleted.");
@@ -71,11 +69,10 @@ namespace UserInterface.GUIController
 
                 object lista = Communication.Instance.Search(Operation.SearchGames, game);
 
-                foreach (Game obj in lista as List<Game>)
+                foreach (Game obj in (List<Game>)lista)
                 {
-                    Game g = obj as Game;
-                    if (g.GoalsHost > -1 && g.GoalsGuest > -1)
-                        games.Add(g);
+                    if (obj.GoalsHost > -1 && obj.GoalsGuest > -1)
+                        games.Add(obj);
                 }
 
                 if (games.Count == 0) MessageBox.Show("Can't find any games with that value.");

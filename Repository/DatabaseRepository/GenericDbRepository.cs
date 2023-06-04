@@ -39,14 +39,13 @@ namespace Repository.DatabaseRepository
             command.ExecuteNonQuery();
         }
 
-        public bool Add(IDomainObject obj)
+        public void Add(IDomainObject obj)
         {
             SqlCommand command = broker.CreateCommand();
 
             command.CommandText = $"insert into {obj.TableName} values ({obj.InsertValues})";
 
             command.ExecuteNonQuery();
-            return true;
         }
 
         public List<IDomainObject> GetAll(IDomainObject obj)

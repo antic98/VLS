@@ -26,7 +26,7 @@ namespace Domain
             Country = country;
             Team = team;
         }
-        
+
         public Player(int id,
             string name,
             string surname,
@@ -50,6 +50,9 @@ namespace Domain
         public Country Country { get; set; }
         public Team Team { get; set; }
         public int Goals { get; set; }
+        
+        [Browsable(false)]
+        public string Search { get; set; }
         [Browsable(false)]
         public List<Stats> Stats { get; set; }
         [Browsable(false)]
@@ -67,7 +70,7 @@ namespace Domain
         [Browsable(false)]
         public string OrderBy => "ORDER BY Goals DESC";
         [Browsable(false)]
-        public string ConditionGetList => $"where lower(concat(p.Name,p.Surname,t.Name,c.Name,pos.Name)) like '%{Name}%'";
+        public string ConditionGetList => $"where lower(concat(p.Name,p.Surname,t.Name,c.Name,pos.Name)) like '%{Search}%'";
         [Browsable(false)]
         public int IDValue => ID;
         [Browsable(false)]

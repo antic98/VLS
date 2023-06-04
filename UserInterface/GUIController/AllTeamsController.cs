@@ -64,11 +64,11 @@ namespace UserInterface.GUIController
                 teams = new BindingList<Team>();
 
                 Team team = new Team();
-                team.Name = uCAllTeams.TxtSearch.Text.ToLower();
+                team.Search = uCAllTeams.TxtSearch.Text.ToLower();
 
                 object lista = Communication.Instance.Search(Operation.SearchTeams, team);
 
-                foreach (Team obj in lista as List<Team>) teams.Add(obj as Team);
+                foreach (Team obj in (List<Team>)lista) teams.Add(obj);
 
                 if (teams.Count == 0) MessageBox.Show("Can't find any teams with that value.");
 

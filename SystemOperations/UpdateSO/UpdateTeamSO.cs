@@ -4,7 +4,7 @@ namespace SystemOperations.UpdateSO
 {
     public class UpdateTeamSO : SystemOperationBase
     {
-        private Team updatedTeam;
+        private readonly Team updatedTeam;
 
         public UpdateTeamSO(Team updatedTeam)
         {

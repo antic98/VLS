@@ -4,32 +4,29 @@ namespace SystemOperations.DeleteSO
 {
     public class DeletePlayerSO : SystemOperationBase
     {
-        private Player deletePlayer;
+        private readonly Player player;
 
-        public DeletePlayerSO(Player deletePlayer)
+        public DeletePlayerSO(Player player)
         {
-            this.deletePlayer = deletePlayer;
+            this.player = player;
         }
 
         protected override void Execute()
         {
-            if (deletePlayer == null)
+            if (player == null)
             {
                 return;
             }
 
-            if (deletePlayer.Stats != null)
+            foreach(Stats st in repository.GetAll(new Stats()))
             {
-                foreach(Stats st in deletePlayer.Stats)
+                if(st.Player.ID == player.ID)
                 {
-                    if(st.Player.ID == deletePlayer.ID)
-                    {
-                        repository.Delete(st);
-                    }
+                    repository.Delete(st);
                 }
             }
 
-            repository.Delete(deletePlayer);
+            repository.Delete(player);
         }
     }
 }

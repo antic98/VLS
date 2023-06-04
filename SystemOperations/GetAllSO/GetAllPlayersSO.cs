@@ -2,7 +2,7 @@
 using System.Linq;
 using Domain;
 
-namespace SystemOperations.GetSO
+namespace SystemOperations.GetAllSO
 {
     public class GetAllPlayersSO : SystemOperationBase
     {

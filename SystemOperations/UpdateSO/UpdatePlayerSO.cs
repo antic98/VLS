@@ -4,7 +4,7 @@ namespace SystemOperations.UpdateSO
 {
     public class UpdatePlayerSO : SystemOperationBase
     {
-        private Player updatedPlayer;
+        private readonly Player updatedPlayer;
 
         public UpdatePlayerSO(Player updatedPlayer)
         {
@@ -19,7 +19,7 @@ namespace SystemOperations.UpdateSO
             
                 if(updatedPlayer.Team.ID != upd.Team.ID)
                 {
-                    foreach(Stats st in updatedPlayer.Stats)
+                    foreach(Stats st in repository.GetAll(new Stats()))
                     {
                         if(st.Player.ID == updatedPlayer.ID)
                         {

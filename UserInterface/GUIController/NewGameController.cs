@@ -71,16 +71,9 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            Game newGame = new Game();
-
-            newGame.Date = frmScheduleGame.DtpDate.Value;
-
-            newGame.DateString = newGame.Date.ToString("yyyy-MM-dd HH:mm");
-
-            newGame.Host = frmScheduleGame.CmbHost.SelectedItem as Team;
-            newGame.Guest = frmScheduleGame.CmbGuest.SelectedItem as Team;
-            newGame.GoalsHost = -1;
-            newGame.GoalsGuest = -1;
+            Game newGame = new Game(frmScheduleGame.CmbHost.SelectedItem as Team,
+                frmScheduleGame.CmbGuest.SelectedItem as Team,
+                frmScheduleGame.DtpDate.Value);
 
             if(Communication.Instance.SaveDeleteUpdate(Operation.SaveGame, newGame))
             {

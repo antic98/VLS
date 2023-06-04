@@ -4,7 +4,7 @@ namespace SystemOperations.UpdateSO
 {
     public class UpdateGameSO : SystemOperationBase
     {
-        private Game updatedGame;
+        private readonly Game updatedGame;
 
         public UpdateGameSO(Game updatedGame)
         {

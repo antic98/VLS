@@ -18,10 +18,10 @@ namespace UserInterface.GUIController
         private FrmPlayer frmPlayer;
         private Player player;
 
-        public ChangePlayerController(FrmPlayer frmPlayer, Player p)
+        public ChangePlayerController(FrmPlayer frmPlayer, Player player)
         {
             this.frmPlayer = frmPlayer;
-            this.player = p;
+            this.player = player;
         }
 
         private bool Validation()
@@ -174,20 +174,20 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            Player updatedPlayer = new Player();
+            Player updatedPlayer = new Player(frmPlayer.TxtName.Text,
+                frmPlayer.TxtSurname.Text,
+                (Position)frmPlayer.CbPosition.SelectedItem,
+                (Country)frmPlayer.CbCountry.SelectedItem,
+                (Team)frmPlayer.CbTeam.SelectedItem);
 
             updatedPlayer.ID = int.Parse(frmPlayer.TxtID.Text);
-            updatedPlayer.Name = frmPlayer.TxtName.Text;
-            updatedPlayer.Surname = frmPlayer.TxtSurname.Text;
-            GetCountries();
-            updatedPlayer.Team = (Team)frmPlayer.CbTeam.SelectedItem;
-            updatedPlayer.Country = (Country)frmPlayer.CbCountry.SelectedItem;
+            
             updatedPlayer.Stats = Communication.Instance.GetList(Operation.GetStats) as List<Stats>;
 
             if(updatedPlayer.Team.ID != player.Team.ID)
             {
-                var result = System.Windows.Forms.MessageBox.Show("Are you sure you want to change this player's club? If you change it, all stats made by this player will be deleted.", "Update " + frmPlayer.TxtName.Text + " " + frmPlayer.TxtSurname.Text, System.Windows.Forms.MessageBoxButtons.YesNo);
-                if (result == System.Windows.Forms.DialogResult.No)
+                var result = MessageBox.Show("Are you sure you want to change this player's club? If you change it, all stats made by this player will be deleted.", "Update " + updatedPlayer.Name + " " + updatedPlayer.Surname, MessageBoxButtons.YesNo);
+                if (result == DialogResult.No)
                 {
                     return;
                 }
@@ -206,25 +206,22 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            var result = System.Windows.Forms.MessageBox.Show("Are you sure you want to delete this player? If you delete this player, all stats made by this player will be deleted.", "Deleting " + frmPlayer.TxtName.Text + " " + frmPlayer.TxtSurname.Text, System.Windows.Forms.MessageBoxButtons.YesNo);
-            if (result == System.Windows.Forms.DialogResult.No)
+            var result = MessageBox.Show("Are you sure you want to delete this player? If you delete this player, all stats made by this player will be deleted.", "Deleting " + frmPlayer.TxtName.Text + " " + frmPlayer.TxtSurname.Text, System.Windows.Forms.MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
             {
                 return;
             }
 
             Player deletePlayer = new Player();
             deletePlayer.ID = int.Parse(frmPlayer.TxtID.Text);
-            deletePlayer.Name = frmPlayer.TxtName.Text;
-            deletePlayer.Surname = frmPlayer.TxtSurname.Text;
-            deletePlayer.Stats = Communication.Instance.GetList(Operation.GetStats) as List<Stats>;
 
             if (Communication.Instance.SaveDeleteUpdate(Operation.DeletePlayer, deletePlayer))
             {
-                MessageBox.Show($"Player {deletePlayer.Name} {deletePlayer.Surname} is deleted.");
+                MessageBox.Show($"Player {frmPlayer.TxtName.Text} {frmPlayer.TxtSurname.Text} is deleted.");
                 Dispose();
             }
             else
-                MessageBox.Show($"Player {deletePlayer.Name} {deletePlayer.Surname} is not deleted.");
+                MessageBox.Show($"Player {frmPlayer.TxtName.Text} {frmPlayer.TxtSurname.Text} is not deleted.");
         }
     }
 }

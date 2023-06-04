@@ -59,11 +59,11 @@ namespace UserInterface.GUIController
                 players = new BindingList<Player>();
 
                 Player player = new Player();
-                player.Name = uCAllPlayers.TxtSearch.Text.ToLower();
+                player.Search = uCAllPlayers.TxtSearch.Text.ToLower();
 
                 object lista = Communication.Instance.Search(Operation.SearchPlayers, player);
 
-                foreach (Player obj in lista as List<Player>) players.Add(obj as Player);
+                foreach (Player obj in (List<Player>)lista) players.Add(obj);
 
                 if (players.Count == 0) MessageBox.Show("Can't find any players with that value.");
 

@@ -69,9 +69,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddSOTests\AddGamesDoubleTests.cs" />
+    <Compile Include="AddSOTests\AddGamesSingleTests.cs" />
+    <Compile Include="AddSOTests\AddGameTests.cs" />
     <Compile Include="AddSOTests\AddPlayerTests.cs" />
+    <Compile Include="AddSOTests\AddTeamTests.cs" />
+    <Compile Include="DeleteSOTests\DeleteGameTests.cs" />
     <Compile Include="DeleteSOTests\DeletePlayerTests.cs" />
-    <Compile Include="GetSOTests\GetPlayerTests.cs" />
+    <Compile Include="DeleteSOTests\DeleteTeamTests.cs" />
+    <Compile Include="GetAllSOTests\GetAllCountriesTests.cs" />
+    <Compile Include="GetAllSOTests\GetAllGamesTests.cs" />
+    <Compile Include="GetAllSOTests\GetAllPlayersTests.cs" />
+    <Compile Include="GetAllSOTests\GetAllPositionsTests.cs" />
+    <Compile Include="GetAllSOTests\GetAllStatsTests.cs" />
+    <Compile Include="GetAllSOTests\GetAllTeamsTests.cs" />
+    <Compile Include="GetAllSOTests\GetAllUsersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchSOTests\SearchPlayerTests.cs" />
     <Compile Include="UpdateSOTests\UpdatePlayerTests.cs" />

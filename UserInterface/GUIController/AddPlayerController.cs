@@ -97,13 +97,11 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            Player newPlayer = new Player();
-
-            newPlayer.Name = frmAddPlayer.TxtName.Text;
-            newPlayer.Surname = frmAddPlayer.TxtSurname.Text;
-            newPlayer.Position = (Position)frmAddPlayer.CbPosition.SelectedItem;
-            newPlayer.Team = (Team)frmAddPlayer.CbTeam.SelectedItem;
-            newPlayer.Country = (Country)frmAddPlayer.CbCountry.SelectedItem;
+            Player newPlayer = new Player(frmAddPlayer.TxtName.Text,
+                frmAddPlayer.TxtSurname.Text,
+                (Position)frmAddPlayer.CbPosition.SelectedItem,
+                (Country)frmAddPlayer.CbCountry.SelectedItem,
+                (Team)frmAddPlayer.CbTeam.SelectedItem);
 
             if(Communication.Instance.SaveDeleteUpdate(Operation.SavePlayer, newPlayer))
             {

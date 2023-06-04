@@ -6,7 +6,7 @@ namespace SystemOperations.SearchSO
 {
     public class SearchTeamSO : SystemOperationBase
     {
-        private Team team;
+        private readonly Team team;
         public List<Team> Result { get; private set; }
 
         public SearchTeamSO(Team team)

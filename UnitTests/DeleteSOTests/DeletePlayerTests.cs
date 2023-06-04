@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System.Collections.Generic;
+using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Repository.DatabaseRepository;
@@ -10,33 +11,49 @@ namespace UnitTests.DeleteSOTests
     [TestClass]
     public class DeletePlayerTests
     {
-        private readonly Mock<IRepository<IDomainObject>> _repoMock = new Mock<IRepository<IDomainObject>>();
+        private readonly Mock<IRepository<IDomainObject>> repoMock = new Mock<IRepository<IDomainObject>>();
         private SystemOperationBase so;
 
         [TestMethod]
         public void DeletePlayer_Success()
         {
-            //Arrange
-            Player player = new Player("Aleksandar", "Antic", new Position(), new Country(), new Team());
+            // Arrange
+            var player = new Player
+            {
+                ID = 1
+            };
 
-            //Act
+            var stats = new List<IDomainObject>
+            {
+                new Stats(new Game(), player, 5),
+                new Stats(new Game(), player, 7),
+                new Stats(new Game(), new Player(), 10),
+                new Stats(new Game(), player, 3),
+            };
+            
+            repoMock.Setup(e => e.GetAll(It.IsAny<Stats>())).Returns(stats);
             so = new DeletePlayerSO(player);
-            so.ExecuteTemplate(_repoMock.Object);
 
-            //Assert
+            // Act
+            so.ExecuteTemplate(repoMock.Object);
+
+            // Assert
+            repoMock.Verify(e => e.GetAll(It.IsAny<Stats>()), Times.Exactly(1));
+            repoMock.Verify(e => e.Delete(It.IsAny<Stats>()), Times.Exactly(3));
+            repoMock.Verify(e => e.Delete(It.IsAny<Player>()), Times.Exactly(1));
         }
-
+        
         [TestMethod]
         public void DeletePlayer_PlayerNullException()
         {
-            //Arrange
-
-
-            //Act
+            // Arrange
             so = new DeletePlayerSO(null);
-            so.ExecuteTemplate(_repoMock.Object);
 
-            //Assert
+            // Act
+            so.ExecuteTemplate(repoMock.Object);
+
+            // Assert
+            repoMock.Verify(e => e.Delete(It.IsAny<Player>()), Times.Exactly(0));
         }
     }
 }

@@ -89,10 +89,7 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            Team newTeam = new Team();
-            newTeam.Name = frmAddTeam.TxtName.Text;
-            newTeam.City = frmAddTeam.TxtCity.Text;
-            newTeam.Color = frmAddTeam.TxtColor.Text;
+            Team newTeam = new Team(frmAddTeam.TxtName.Text, frmAddTeam.TxtCity.Text, frmAddTeam.TxtColor.Text);
 
             if(Communication.Instance.SaveDeleteUpdate(Operation.SaveTeam, newTeam))
             {

@@ -6,7 +6,7 @@ namespace SystemOperations.SearchSO
 {
     public class SearchGameSO : SystemOperationBase
     {
-        private Game game;
+        private readonly Game game;
         public List<Game> Result { get; private set; }
 
         public SearchGameSO(Game game)

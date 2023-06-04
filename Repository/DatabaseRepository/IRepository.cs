@@ -6,7 +6,7 @@ namespace Repository.DatabaseRepository
     public interface IRepository <T> where T : class
     {
         List<T> GetAll(T obj);
-        bool Add(T obj);
+        void Add(T obj);
         void Update(T obj);
         void Delete(T obj);
         List<T> Search(T obj);

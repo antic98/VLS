@@ -14,10 +14,10 @@ namespace UserInterface.GUIController
         private FrmTeam frmTeam;
         private Team team;
         BindingList<Player> players;
-        public ChangeTeamController(FrmTeam frmTeam, Team t)
+        public ChangeTeamController(FrmTeam frmTeam, Team team)
         {
             this.frmTeam = frmTeam;
-            this.team = t;
+            this.team = team;
         }
 
         private bool Validation()
@@ -105,12 +105,8 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            Team updatedTeam = new Team();
-
+            Team updatedTeam = new Team(frmTeam.TxtName.Text, frmTeam.TxtCity.Text, frmTeam.TxtColor.Text);
             updatedTeam.ID = int.Parse(frmTeam.TxtID.Text);
-            updatedTeam.Name = frmTeam.TxtName.Text;
-            updatedTeam.City = frmTeam.TxtCity.Text;
-            updatedTeam.Color = frmTeam.TxtColor.Text;
 
             if(Communication.Instance.SaveDeleteUpdate(Operation.UpdateTeam, updatedTeam))
             {
@@ -130,24 +126,20 @@ namespace UserInterface.GUIController
         {
             if (!Validation()) return;
 
-            var result = System.Windows.Forms.MessageBox.Show("Are you sure you want to delete this team? If you delete this team, every player and game connected to this team will be deleted.", "Deleting "+ frmTeam.TxtName.Text, System.Windows.Forms.MessageBoxButtons.YesNo);
-            if (result == System.Windows.Forms.DialogResult.No)
+            var result = MessageBox.Show("Are you sure you want to delete this team? If you delete this team, every player and game connected to this team will be deleted.", "Deleting "+ frmTeam.TxtName.Text, System.Windows.Forms.MessageBoxButtons.YesNo);
+            if (result == DialogResult.No)
             {
                 return;
             }
 
             Team deleteTeam = new Team();
             deleteTeam.ID = int.Parse(frmTeam.TxtID.Text);
-            deleteTeam.Name = frmTeam.TxtName.Text;
-            deleteTeam.Players = Communication.Instance.GetList(Operation.GetPlayers) as List<Player>;
-            deleteTeam.Stats = Communication.Instance.GetList(Operation.GetStats) as List<Stats>;
-            deleteTeam.Games = Communication.Instance.GetList(Operation.GetGames) as List<Game>;
 
             if (Communication.Instance.SaveDeleteUpdate(Operation.DeleteTeam, deleteTeam))
-                MessageBox.Show($"Team {deleteTeam.Name} is deleted succesfully.");
+                MessageBox.Show($"Team {frmTeam.TxtName.Text} is deleted succesfully.");
             else
             {
-                MessageBox.Show($"Team {deleteTeam.Name} is not deleted.");
+                MessageBox.Show($"Team {frmTeam.TxtName.Text} is not deleted.");
             }
 
             Dispose();

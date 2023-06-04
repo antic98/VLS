@@ -140,11 +140,9 @@ namespace UserInterface.GUIController
             else
             {
                 ++hostBrojac;
-                Stats stat = new Stats();
-
-                stat.Game = game;
-                stat.Player = frmInsertGameResult.DgvHostPlayers.SelectedRows[0].DataBoundItem as Player;
-                stat.Goals = 1;
+                Stats stat = new Stats(game,
+                    frmInsertGameResult.DgvHostPlayers.SelectedRows[0].DataBoundItem as Player,
+                    1);
 
                 foreach(Stats st in stats)
                 {
@@ -183,11 +181,9 @@ namespace UserInterface.GUIController
             else
             {
                 ++guestBrojac;
-                Stats stat = new Stats();
-
-                stat.Game = game;
-                stat.Player = frmInsertGameResult.DgvGuestPlayers.SelectedRows[0].DataBoundItem as Player;
-                stat.Goals = 1;
+                Stats stat = new Stats(game,
+                    frmInsertGameResult.DgvGuestPlayers.SelectedRows[0].DataBoundItem as Player,
+                    1);
 
                 foreach (Stats st in stats)
                 {

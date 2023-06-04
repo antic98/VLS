@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SystemOperations;
 using SystemOperations.AddSO;
 using SystemOperations.DeleteSO;
-using SystemOperations.GetSO;
+using SystemOperations.GetAllSO;
 using SystemOperations.SearchSO;
 using SystemOperations.UpdateSO;
 

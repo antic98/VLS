@@ -1,0 +1,88 @@
+﻿using System;
+using System.Collections.Generic;
+using Domain;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using Repository.DatabaseRepository;
+using SystemOperations;
+using SystemOperations.DeleteSO;
+
+namespace UnitTests.DeleteSOTests
+{
+    [TestClass]
+    public class DeleteTeamTests
+    {
+        private readonly Mock<IRepository<IDomainObject>> repoMock = new Mock<IRepository<IDomainObject>>();
+        private SystemOperationBase so;
+
+        [TestMethod]
+        public void DeleteTeam_Success()
+        {
+            // Arrange
+            var team1 = new Team { ID = 1 };
+            var team2 = new Team { ID = 2 };
+
+            var player1 = new Player(1, "", "", new Position(), new Country(), team1);
+            var player2 = new Player(2, "", "", new Position(), new Country(), team2);
+            
+            var game1 = new Game(1, team1, team2, DateTime.Now);
+            var game2 = new Game(2, new Team(), new Team(), DateTime.Now);
+                
+            var stats = new List<IDomainObject>
+            {
+                new Stats(game1, player1, 5),
+                new Stats(game1, player2, 7),
+                new Stats(game2, new Player(), 10)
+            };
+            
+            var games = new List<IDomainObject>
+            {
+                game1, game2
+            };
+            
+            var players = new List<IDomainObject>
+            {
+                player1, player2
+            };
+            
+            repoMock.Setup(e => e.GetAll(It.IsAny<Stats>())).Returns(stats);
+            repoMock.Setup(e => e.GetAll(It.IsAny<Game>())).Returns(games);
+            repoMock.Setup(e => e.GetAll(It.IsAny<Player>())).Returns(players);
+            repoMock.Setup(e => e.GetObject(player1)).Returns(player1);
+            repoMock.Setup(e => e.GetObject(team1)).Returns(team1);
+            repoMock.Setup(e => e.GetObject(player2)).Returns(player2);
+            repoMock.Setup(e => e.GetObject(team2)).Returns(team2);
+            
+            so = new DeleteTeamSO(team1);
+
+            // Act
+            so.ExecuteTemplate(repoMock.Object);
+
+            // Assert
+            repoMock.Verify(e => e.GetAll(It.IsAny<Game>()), Times.Exactly(1));
+            repoMock.Verify(e => e.GetAll(It.IsAny<Stats>()), Times.Exactly(1));
+            repoMock.Verify(e => e.GetObject(It.IsAny<Player>()), Times.Exactly(2));
+            repoMock.Verify(e => e.Delete(It.IsAny<Stats>()), Times.Exactly(2));
+            repoMock.Verify(e => e.Update(It.IsAny<Player>()), Times.Exactly(1));
+            repoMock.Verify(e => e.GetObject(It.IsAny<Team>()), Times.Exactly(2));
+            repoMock.Verify(e => e.Delete(It.IsAny<Game>()), Times.Exactly(1));
+            repoMock.Verify(e => e.Update(It.IsAny<Team>()), Times.Exactly(1));
+            repoMock.Verify(e => e.GetAll(It.IsAny<Player>()), Times.Exactly(1));
+            repoMock.Verify(e => e.Delete(It.IsAny<Player>()), Times.Exactly(1));
+            repoMock.Verify(e => e.Delete(It.IsAny<Team>()), Times.Exactly(1));
+        }
+        
+        [TestMethod]
+        public void DeleteTeam_TeamNullException()
+        {
+            // Arrange
+            so = new DeleteTeamSO(null);
+
+            // Act
+            so.ExecuteTemplate(repoMock.Object);
+
+            // Assert
+            repoMock.Verify(e => e.Delete(It.IsAny<Team>()), Times.Exactly(0));
+        }
+    }
+}

@@ -6,7 +6,7 @@ namespace SystemOperations.AddSO
 {
     public class AddGamesSingleSO : SystemOperationBase
     {
-        private List<Team> teams = new List<Team>();
+        private readonly List<Team> teams;
 
         public AddGamesSingleSO(List<Team> teams)
         {
@@ -15,9 +15,8 @@ namespace SystemOperations.AddSO
 
         protected override void Execute()
         {
-            //if (teams?.Count % 2 == 1 || teams?.Count < 2) 
-            
-            MakeFixtures();
+            if (teams.Count % 2 == 0 && teams.Count >= 2)
+                MakeFixtures();
         }
 
         private void MakeFixtures()
@@ -37,23 +36,19 @@ namespace SystemOperations.AddSO
 
                 DateTime date = DateTime.Now.AddDays(round * 7);
 
-                Game game = new Game();
-                game.Round = round + 1;
+                Game game;
+                DateTime roundedDateTime = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
                 if(round % 2 == 0)
                 {
-                    game.Host = teamA;
-                    game.Guest = teamB;
+                    game = new Game(teamA, teamB, roundedDateTime);
                 }
                 else
                 {
-                    game.Host = teamB;
-                    game.Guest = teamA;
+                    game = new Game(teamB, teamA, roundedDateTime);
                 }
-
-                DateTime roundedDateTime = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
-                game.Date = roundedDateTime;
-
-                game.DateString = game.Date.ToString("yyyy-MM-dd HH:mm");
+                
+                game.Round = round + 1;
+                
                 repository.Add(game);
 
                 for (int i = 1; i < matchesPerRound; i++)
@@ -66,23 +61,20 @@ namespace SystemOperations.AddSO
 
                     date = DateTime.Now.AddDays(round * 7);
 
-                    Game game1 = new Game();
-                    game1.Round = round + 1;
+                    Game game1;
+                    DateTime roundedDateTime1 = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
 
                     if( i % 2 == 0)
                     {
-                        game1.Host = teamA;
-                        game1.Guest = teamB;
+                        game1 = new Game(teamA, teamB, roundedDateTime1);
                     }
                     else
                     {
-                        game1.Host = teamB;
-                        game1.Guest = teamA;
+                        game1 = new Game(teamB, teamA, roundedDateTime1);
                     }
 
-                    DateTime roundedDateTime1 = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
-                    game1.Date = roundedDateTime1;
-                    game1.DateString = game1.Date.ToString("yyyy-MM-dd HH:mm");
+                    game1.Round = round + 1;
+                    
                     repository.Add(game1);
                 }
             }

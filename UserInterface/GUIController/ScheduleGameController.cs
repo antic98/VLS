@@ -139,8 +139,8 @@ namespace UserInterface.GUIController
             {
                 Game game = (Game)uCScheduleGame.DgvGames.SelectedRows[0].DataBoundItem;
 
-                var result = System.Windows.Forms.MessageBox.Show("Are you sure you want to delete this fixture?", "Deleting " + game.Host.Name + " vs " + game.Guest.Name, System.Windows.Forms.MessageBoxButtons.YesNo);
-                if (result == System.Windows.Forms.DialogResult.No)
+                var result = MessageBox.Show("Are you sure you want to delete this fixture?", "Deleting " + game.Host.Name + " vs " + game.Guest.Name, System.Windows.Forms.MessageBoxButtons.YesNo);
+                if (result == DialogResult.No)
                 {
                     return;
                 }

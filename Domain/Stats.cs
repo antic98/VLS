@@ -10,6 +10,17 @@ namespace Domain
     [Serializable]
     public class Stats : IDomainObject
     {
+        public Stats()
+        {
+        }
+        
+        public Stats(Game game, Player player, int goals)
+        {
+            Game = game;
+            Player = player;
+            Goals = goals;
+        }
+        
         public Game Game { get; set; }
         public Player Player { get; set; }
         public int Goals { get; set; }

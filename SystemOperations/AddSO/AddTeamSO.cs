@@ -1,17 +1,18 @@
 ﻿using Domain;
 
-namespace SystemOperations
+namespace SystemOperations.AddSO
 {
     public class AddTeamSO : SystemOperationBase
     {
         private readonly Team team;
-        public AddTeamSO(Team t)
+        public AddTeamSO(Team team)
         {
-            this.team = t;
+            this.team = team;
         }
         protected override void Execute()
         {
-            repository.Add(team);
+            if (team.Name != null && team.City != null && team.Color != null)
+                repository.Add(team);
         }
     }
 }

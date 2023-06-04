@@ -4,20 +4,25 @@ namespace SystemOperations.DeleteSO
 {
     public class DeleteTeamSO : SystemOperationBase
     {
-        private Team deleteTeam;
+        private readonly Team team;
 
-        public DeleteTeamSO(Team deleteTeam)
+        public DeleteTeamSO(Team team)
         {
-            this.deleteTeam = deleteTeam;
+            this.team = team;
         }
 
         protected override void Execute()
         {
-            foreach (Game g in deleteTeam.Games)
+            if (team == null)
             {
-                if(g.Host.ID == deleteTeam.ID || g.Guest.ID == deleteTeam.ID)
+                return;
+            }
+            
+            foreach (Game g in repository.GetAll(new Game()))
+            {
+                if(g.Host.ID == team.ID || g.Guest.ID == team.ID)
                 {
-                    foreach (Stats st in deleteTeam.Stats)
+                    foreach (Stats st in repository.GetAll(new Stats()))
                     {
                         if (st.Game.ID == g.ID)
                         {
@@ -26,7 +31,7 @@ namespace SystemOperations.DeleteSO
 
                             repository.Delete(st);
 
-                            if (p.Team.ID != deleteTeam.ID)
+                            if (p.Team.ID != team.ID)
                                 repository.Update(p);
                         }
                     }
@@ -61,24 +66,24 @@ namespace SystemOperations.DeleteSO
 
                     repository.Delete(g);
 
-                    if (g.Host.ID == deleteTeam.ID)
+                    if (g.Host.ID == team.ID)
                     {
                         repository.Update(guest);
                     }
-                    if (g.Guest.ID == deleteTeam.ID)
+                    if (g.Guest.ID == team.ID)
                     {
                         repository.Update(host);
                     }
                 }
             }
 
-            foreach (Player pl in deleteTeam.Players)
+            foreach (Player pl in repository.GetAll(new Player()))
             {
-                if (pl.Team.ID == deleteTeam.ID)
+                if (pl.Team.ID == team.ID)
                     repository.Delete(pl);
             }
 
-            repository.Delete(deleteTeam);
+            repository.Delete(team);
         }
     }
 }

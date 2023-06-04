@@ -4,16 +4,21 @@ namespace SystemOperations.AddSO
 {
     public class AddGameSO : SystemOperationBase
     {
-        private readonly Game g;
+        private readonly Game game;
 
-        public AddGameSO(Game g)
+        public AddGameSO(Game game)
         {
-            this.g = g;
+            this.game = game;
         }
         
         protected override void Execute()
-        {            
-            repository.Add(g);            
+        {
+            if (game.Host != null && game.Guest != null)
+            {
+                game.GoalsHost = -1;
+                game.GoalsGuest = -1;
+                repository.Add(game);
+            }
         }
     }
 }

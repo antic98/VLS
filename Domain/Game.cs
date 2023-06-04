@@ -8,18 +8,26 @@ namespace Domain
     [Serializable]
     public class Game : IDomainObject
     {
+        public Game()
+        {
+        }
+        
+        public Game(Team host, Team guest, DateTime date)
+        {
+            Host = host;
+            Guest = guest;
+            Date = date;
+        }
+        
+        public Game(int id, Team host, Team guest, DateTime date)
+        {
+            ID = id;
+            Host = host;
+            Guest = guest;
+            Date = date;
+        }
+        
         private string dateString;
-        //
-        // public Game(DateTime date, Team host, Team guest, int goalsHost, int goalsGuest, int round)
-        // {
-        //     Date = date;
-        //     Host = host;
-        //     Guest = guest;
-        //     GoalsHost = goalsHost;
-        //     GoalsGuest = goalsGuest;
-        //     Round = round;
-        // }
-
         public int ID { get; set; }
         public DateTime Date { get; set; }
         public Team Host { get; set; }
@@ -35,7 +43,11 @@ namespace Domain
         public string DateString
         {
             get => dateString;
-            set => dateString = Date.ToString("yyyy-MM-dd HH:mm");
+            set
+            {
+                dateString = value;
+                dateString = Date.ToString("yyyy-MM-dd HH:mm");
+            }
         }
 
         [Browsable(false)]

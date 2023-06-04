@@ -11,6 +11,17 @@ namespace Domain
     [Serializable]
     public class Team : IDomainObject
     {
+        public Team(string name, string city, string color)
+        {
+            Name = name;
+            City = city;
+            Color = color;
+        }
+
+        public Team()
+        {
+        }
+
         int brojac;
         public int Rank { get; set; }
         public int ID { get; set; }
@@ -25,9 +36,9 @@ namespace Domain
         public int GoalsConceded { get; set; }
         public int GD { get; set; }
         public int Points { get; set; }
-
+        
         [Browsable(false)]
-        public string Group { get; set; }
+        public string Search { get; set; }
         public override string ToString()
         {
             return Name;
@@ -55,7 +66,7 @@ namespace Domain
         [Browsable(false)]
         public string OrderBy => "ORDER BY Points DESC, (GoalsScored-GoalsConceded) DESC";
         [Browsable(false)]
-        public string ConditionGetList => $"where lower(concat(name,city,color)) like '%{Name}%'";
+        public string ConditionGetList => $"where lower(concat(name,city,color)) like '%{Search}%'";
         [Browsable(false)]
         public int IDValue => ID;
         [Browsable(false)]

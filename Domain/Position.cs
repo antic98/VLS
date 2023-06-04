@@ -14,16 +14,6 @@ namespace Domain
             return Name;
         }
 
-        public Position()
-        {
-        }
-
-        public Position(int iD, string name)
-        {
-            ID = iD;
-            Name = name;
-        }
-
         [Browsable(false)]
         public Position Self { get { return this; } }
         [Browsable(false)]

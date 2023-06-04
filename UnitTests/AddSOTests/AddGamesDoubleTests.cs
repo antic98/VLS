@@ -11,7 +11,7 @@ namespace UnitTests.AddSOTests
     [TestClass]
     public class AddGamesDoubleTests
     {
-        private readonly Mock<IRepository<IDomainObject>> _repoMock = new Mock<IRepository<IDomainObject>>();
+        private readonly Mock<IRepository<IDomainObject>> repoMock = new Mock<IRepository<IDomainObject>>();
         private SystemOperationBase so;
 
         [TestMethod]
@@ -20,18 +20,15 @@ namespace UnitTests.AddSOTests
             // Arrange
             var teams = new List<Team>
             {
-                new Team { ID = 1, Name = "Team 1" },
-                new Team { ID = 2, Name = "Team 2" },
-                new Team { ID = 3, Name = "Team 3" },
-                new Team { ID = 4, Name = "Team 4" }
+                new Team(), new Team(), new Team(), new Team()
             };
+            so = new AddGamesDoubleSO(teams);
             
             // Act
-            so = new AddGamesDoubleSO(teams);
-            so.ExecuteTemplate(_repoMock.Object);
+            so.ExecuteTemplate(repoMock.Object);
             
             // Assert
-            _repoMock.Verify(e => e.Add(It.IsAny<Game>()), Times.Exactly(12));
+            repoMock.Verify(e => e.Add(It.IsAny<Game>()), Times.Exactly(12));
         }
 
         [TestMethod]
@@ -40,17 +37,15 @@ namespace UnitTests.AddSOTests
             // Arrange
             var teams = new List<Team>
             {
-                new Team { ID = 1, Name = "Team 1" },
-                new Team { ID = 2, Name = "Team 2" },
-                new Team { ID = 3, Name = "Team 3" },
+                new Team(), new Team(), new Team()
             };
+            so = new AddGamesDoubleSO(teams);
             
             // Act
-            so = new AddGamesDoubleSO(teams);
-            so.ExecuteTemplate(_repoMock.Object);
+            so.ExecuteTemplate(repoMock.Object);
             
             // Assert
-            _repoMock.Verify(e => e.Add(It.IsAny<Game>()), Times.Exactly(0));
+            repoMock.Verify(e => e.Add(It.IsAny<Game>()), Times.Exactly(0));
         }
         
         [TestMethod]
@@ -58,13 +53,13 @@ namespace UnitTests.AddSOTests
         {
             // Arrange
             var teams = new List<Team>();
+            so = new AddGamesDoubleSO(teams);
             
             // Act
-            so = new AddGamesDoubleSO(teams);
-            so.ExecuteTemplate(_repoMock.Object);
+            so.ExecuteTemplate(repoMock.Object);
             
             // Assert
-            _repoMock.Verify(e => e.Add(It.IsAny<Game>()), Times.Exactly(0));
+            repoMock.Verify(e => e.Add(It.IsAny<Game>()), Times.Exactly(0));
         }
     }
 }
