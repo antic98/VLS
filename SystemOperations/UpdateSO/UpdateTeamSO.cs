@@ -13,6 +13,8 @@ namespace SystemOperations.UpdateSO
 
         protected override void Execute()
         {
+            if (updatedTeam?.Name == null || updatedTeam.City == null || updatedTeam.Color == null) return;
+
             Team upd = Repository.GetObject(updatedTeam) as Team;
             upd.Name = updatedTeam.Name;
             upd.City = updatedTeam.City;

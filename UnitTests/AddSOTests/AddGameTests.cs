@@ -29,6 +29,19 @@ namespace UnitTests.AddSOTests
         }
 
         [TestMethod]
+        public void AddGame_GameNullException()
+        {
+            //Arrange
+            so = new AddGameSO(null);
+
+            //Act
+            so.ExecuteTemplate(repoMock.Object);
+
+            //Assert
+            repoMock.Verify(e => e.Add(It.IsAny<Game>()), Times.Exactly(0));
+        }
+        
+        [TestMethod]
         public void AddGame_HostNullException()
         {
             //Arrange

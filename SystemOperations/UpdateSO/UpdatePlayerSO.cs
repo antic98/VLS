@@ -13,9 +13,12 @@ namespace SystemOperations.UpdateSO
 
         protected override void Execute()
         {
+            if (updatedPlayer == null || updatedPlayer.Name == null || updatedPlayer.Surname == null || updatedPlayer.Position == null
+                || updatedPlayer.Country == null || updatedPlayer.Team == null) return;
+            
             if (Repository.GetObject(updatedPlayer) is Player upd)
             {
-                updatedPlayer.Goals = upd.Goals;
+                //updatedPlayer.Goals = upd.Goals;
             
                 if(updatedPlayer.Team.ID != upd.Team.ID)
                 {

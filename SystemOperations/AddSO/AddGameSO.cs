@@ -13,12 +13,11 @@ namespace SystemOperations.AddSO
         
         protected override void Execute()
         {
-            if (game.Host != null && game.Guest != null)
-            {
-                game.GoalsHost = -1;
-                game.GoalsGuest = -1;
-                Repository.Add(game);
-            }
+            if (game?.Host == null || game.Guest == null) return;
+            
+            game.GoalsHost = -1;
+            game.GoalsGuest = -1;
+            Repository.Add(game);
         }
     }
 }

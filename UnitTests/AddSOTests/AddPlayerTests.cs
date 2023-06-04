@@ -28,6 +28,19 @@ namespace UnitTests.AddSOTests
         }
 
         [TestMethod]
+        public void AddPlayer_PlayerNullException()
+        {
+            //Arrange
+            so = new AddPlayerSO(null);
+
+            //Act
+            so.ExecuteTemplate(repoMock.Object);
+
+            //Assert
+            repoMock.Verify(e => e.Add(It.IsAny<Player>()), Times.Exactly(0));
+        }
+        
+        [TestMethod]
         public void AddPlayer_NameNullException()
         {
             //Arrange

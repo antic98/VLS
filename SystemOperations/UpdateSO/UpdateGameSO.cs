@@ -13,6 +13,8 @@ namespace SystemOperations.UpdateSO
 
         protected override void Execute()
         {
+            if (updatedGame?.Host == null || updatedGame.Guest == null) return;
+
             foreach (Stats st in updatedGame.Stats)
             {
                 Repository.Add(st);

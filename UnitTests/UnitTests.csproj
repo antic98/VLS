@@ -87,7 +87,9 @@
     <Compile Include="SearchSOTests\SearchGameTests.cs" />
     <Compile Include="SearchSOTests\SearchPlayerTests.cs" />
     <Compile Include="SearchSOTests\SearchTeamTests.cs" />
+    <Compile Include="UpdateSOTests\UpdateGameTests.cs" />
     <Compile Include="UpdateSOTests\UpdatePlayerTests.cs" />
+    <Compile Include="UpdateSOTests\UpdateTeamTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

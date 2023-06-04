@@ -123,7 +123,7 @@ namespace UserInterface.GUIController
             {
                 frmInsertGameResult.BtnSaveGuestStriker.Enabled = true;
                 frmInsertGameResult.LblGuestStrikers.Visible = true;
-            }            
+            }
 
             if(game.GoalsHost == 0 && game.GoalsGuest == 0)
             {
