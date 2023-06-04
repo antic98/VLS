@@ -5,53 +5,53 @@ namespace SystemOperations
 {
     public abstract class SystemOperationBase
     {
-        protected IRepository<IDomainObject> repository;
+        protected IRepository<IDomainObject> Repository;
 
         public void ExecuteTemplate(IRepository<IDomainObject> repository)
         {
-            this.repository = repository;
+            Repository = repository;
 
             try
             {
-                repository.OpenConnection();
-                repository.BeginTransaction();
+                Repository.OpenConnection();
+                Repository.BeginTransaction();
 
                 Execute();
 
-                repository.Commit();
+                Repository.Commit();
             }
             catch
             {
-                repository.Rollback();
+                Repository.Rollback();
                 throw;
             }
             finally
             {
-                repository.CloseConnection();
+                Repository.CloseConnection();
             }
         }
 
         public void ExecuteTemplate()
         {
-            this.repository = new GenericDbRepository();
+            Repository = new GenericDbRepository();
 
             try
             {
-                repository.OpenConnection();
-                repository.BeginTransaction();
+                Repository.OpenConnection();
+                Repository.BeginTransaction();
 
                 Execute();
 
-                repository.Commit();
+                Repository.Commit();
             }
             catch
             {
-                repository.Rollback();
+                Repository.Rollback();
                 throw;
             }
             finally
             {
-                repository.CloseConnection();
+                Repository.CloseConnection();
             }
         }
 

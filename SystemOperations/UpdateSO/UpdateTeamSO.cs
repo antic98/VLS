@@ -13,12 +13,12 @@ namespace SystemOperations.UpdateSO
 
         protected override void Execute()
         {
-            Team upd = repository.GetObject(updatedTeam) as Team;
+            Team upd = Repository.GetObject(updatedTeam) as Team;
             upd.Name = updatedTeam.Name;
             upd.City = updatedTeam.City;
             upd.Color = updatedTeam.Color;
 
-            repository.Update(upd);
+            Repository.Update(upd);
         }
     }
 }

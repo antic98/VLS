@@ -9,7 +9,7 @@ namespace SystemOperations.GetAllSO
         public List<Game> Result { get; private set; }
         protected override void Execute()
         {
-            Result = repository.GetAll(new Game()).OfType<Game>().ToList();
+            Result = Repository.GetAll(new Game()).OfType<Game>().ToList();
         }
     }
 }

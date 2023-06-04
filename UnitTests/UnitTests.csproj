@@ -84,7 +84,9 @@
     <Compile Include="GetAllSOTests\GetAllTeamsTests.cs" />
     <Compile Include="GetAllSOTests\GetAllUsersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchSOTests\SearchGameTests.cs" />
     <Compile Include="SearchSOTests\SearchPlayerTests.cs" />
+    <Compile Include="SearchSOTests\SearchTeamTests.cs" />
     <Compile Include="UpdateSOTests\UpdatePlayerTests.cs" />
   </ItemGroup>
   <ItemGroup>

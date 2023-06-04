@@ -18,29 +18,29 @@ namespace SystemOperations.DeleteSO
                 return;
             }
             
-            foreach (Game g in repository.GetAll(new Game()))
+            foreach (Game g in Repository.GetAll(new Game()))
             {
                 if(g.Host.ID == team.ID || g.Guest.ID == team.ID)
                 {
-                    foreach (Stats st in repository.GetAll(new Stats()))
+                    foreach (Stats st in Repository.GetAll(new Stats()))
                     {
                         if (st.Game.ID == g.ID)
                         {
-                            Player p = repository.GetObject(st.Player) as Player;
+                            Player p = Repository.GetObject(st.Player) as Player;
                             p.Goals -= st.Goals;
 
-                            repository.Delete(st);
+                            Repository.Delete(st);
 
                             if (p.Team.ID != team.ID)
-                                repository.Update(p);
+                                Repository.Update(p);
                         }
                     }
 
-                    Team host = repository.GetObject(g.Host) as Team;
+                    Team host = Repository.GetObject(g.Host) as Team;
                     host.GoalsScored -= g.GoalsHost;
                     host.GoalsConceded -= g.GoalsGuest;
 
-                    Team guest = repository.GetObject(g.Guest) as Team;
+                    Team guest = Repository.GetObject(g.Guest) as Team;
                     guest.GoalsScored -= g.GoalsGuest;
                     guest.GoalsConceded -= g.GoalsHost;
 
@@ -64,26 +64,26 @@ namespace SystemOperations.DeleteSO
                         guest.Draws -= 1;
                     }
 
-                    repository.Delete(g);
+                    Repository.Delete(g);
 
                     if (g.Host.ID == team.ID)
                     {
-                        repository.Update(guest);
+                        Repository.Update(guest);
                     }
                     if (g.Guest.ID == team.ID)
                     {
-                        repository.Update(host);
+                        Repository.Update(host);
                     }
                 }
             }
 
-            foreach (Player pl in repository.GetAll(new Player()))
+            foreach (Player pl in Repository.GetAll(new Player()))
             {
                 if (pl.Team.ID == team.ID)
-                    repository.Delete(pl);
+                    Repository.Delete(pl);
             }
 
-            repository.Delete(team);
+            Repository.Delete(team);
         }
     }
 }

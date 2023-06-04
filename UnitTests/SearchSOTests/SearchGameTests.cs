@@ -9,56 +9,56 @@ using SystemOperations.SearchSO;
 namespace UnitTests.SearchSOTests
 {
     [TestClass]
-    public class SearchPlayerTests
+    public class SearchGameTests
     {
         private readonly Mock<IRepository<IDomainObject>> repoMock = new Mock<IRepository<IDomainObject>>();
         private SystemOperationBase so;
 
         [TestMethod]
-        public void SearchPlayer_Success()
+        public void SearchGame_Success()
         {
             // Arrange
-            var player = new Player
+            var game = new Game
             {
-                Search = "Aleksandar"
+                Search = "Partizan"
             };
-            var players = new List<IDomainObject> { player };
-            repoMock.Setup(e => e.Search(player)).Returns(players);
+            var games = new List<IDomainObject> { game };
+            repoMock.Setup(e => e.Search(game)).Returns(games);
 
-            so = new SearchPlayerSO(player);
+            so = new SearchGameSO(game);
 
             // Act
             so.ExecuteTemplate(repoMock.Object);
 
             // Assert
-            repoMock.Verify(e => e.Search(It.IsAny<Player>()), Times.Exactly(1));
+            repoMock.Verify(e => e.Search(It.IsAny<Game>()), Times.Exactly(1));
         }
         
         [TestMethod]
-        public void SearchPlayer_PlayerNullException()
+        public void SearchGame_GameNullException()
         {
             // Arrange
-            so = new SearchPlayerSO(null);
+            so = new SearchGameSO(null);
 
             // Act
             so.ExecuteTemplate(repoMock.Object);
 
             // Assert
-            repoMock.Verify(e => e.Search(It.IsAny<Player>()), Times.Exactly(0));
+            repoMock.Verify(e => e.Search(It.IsAny<Game>()), Times.Exactly(0));
         }
         
         [TestMethod]
-        public void SearchPlayer_SearchNullException()
+        public void SearchGame_SearchNullException()
         {
             // Arrange
-            var player = new Player();
-            so = new SearchPlayerSO(player);
+            var game = new Game();
+            so = new SearchGameSO(game);
 
             // Act
             so.ExecuteTemplate(repoMock.Object);
 
             // Assert
-            repoMock.Verify(e => e.Search(It.IsAny<Player>()), Times.Exactly(0));
+            repoMock.Verify(e => e.Search(It.IsAny<Game>()), Times.Exactly(0));
         }
     }
 }

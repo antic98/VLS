@@ -9,7 +9,7 @@ namespace SystemOperations.GetAllSO
         public List<Country> Result { get; private set; }
         protected override void Execute()
         {
-            Result = repository.GetAll(new Country()).OfType<Country>().ToList();
+            Result = Repository.GetAll(new Country()).OfType<Country>().ToList();
         }
     }
 }

@@ -20,26 +20,26 @@ namespace SystemOperations.DeleteSO
             
             if(game.GoalsHost == -1 && game.GoalsGuest == -1)
             {
-                repository.Delete(game);
+                Repository.Delete(game);
                 return;
             }
 
-            foreach (Stats st in repository.GetAll(new Stats()))
+            foreach (Stats st in Repository.GetAll(new Stats()))
             {
                 if(st.Game.ID == game.ID)
                 {
-                    Player p = repository.GetObject(st.Player) as Player;
+                    Player p = Repository.GetObject(st.Player) as Player;
                     p.Goals -= st.Goals;
-                    repository.Update(p);
-                    repository.Delete(st);
+                    Repository.Update(p);
+                    Repository.Delete(st);
                 }
             }
 
-            Team host = repository.GetObject(game.Host) as Team;
+            Team host = Repository.GetObject(game.Host) as Team;
             host.GoalsScored -= game.GoalsHost;
             host.GoalsConceded -= game.GoalsGuest;
 
-            Team guest = repository.GetObject(game.Guest) as Team;
+            Team guest = Repository.GetObject(game.Guest) as Team;
             guest.GoalsScored -= game.GoalsGuest;
             guest.GoalsConceded -= game.GoalsHost;
 
@@ -63,9 +63,9 @@ namespace SystemOperations.DeleteSO
                 guest.Draws -= 1;
             }
 
-            repository.Update(host);
-            repository.Update(guest);
-            repository.Delete(game);
+            Repository.Update(host);
+            Repository.Update(guest);
+            Repository.Delete(game);
         }
     }
 }

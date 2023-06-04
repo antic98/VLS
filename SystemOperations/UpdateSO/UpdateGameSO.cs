@@ -15,18 +15,18 @@ namespace SystemOperations.UpdateSO
         {
             foreach (Stats st in updatedGame.Stats)
             {
-                repository.Add(st);
+                Repository.Add(st);
 
-                Player p = repository.GetObject(st.Player) as Player;
+                Player p = Repository.GetObject(st.Player) as Player;
                 p.Goals += st.Goals;
-                repository.Update(p);
+                Repository.Update(p);
             }
 
-            Team host = repository.GetObject(updatedGame.Host) as Team;
+            Team host = Repository.GetObject(updatedGame.Host) as Team;
             host.GoalsScored += updatedGame.GoalsHost;
             host.GoalsConceded += updatedGame.GoalsGuest;
 
-            Team guest = repository.GetObject(updatedGame.Guest) as Team;
+            Team guest = Repository.GetObject(updatedGame.Guest) as Team;
             guest.GoalsScored += updatedGame.GoalsGuest;
             guest.GoalsConceded += updatedGame.GoalsHost;
 
@@ -50,9 +50,9 @@ namespace SystemOperations.UpdateSO
                 guest.Draws += 1;
             }
 
-            repository.Update(host);
-            repository.Update(guest);
-            repository.Update(updatedGame);
+            Repository.Update(host);
+            Repository.Update(guest);
+            Repository.Update(updatedGame);
         }
     }
 }

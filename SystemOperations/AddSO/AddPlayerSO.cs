@@ -14,7 +14,7 @@ namespace SystemOperations.AddSO
         protected override void Execute()
         {
             if (player.Name != null && player.Surname != null && player.Position != null && player.Country != null && player.Team != null) 
-                repository.Add(player);
+                Repository.Add(player);
         }
     }
 }

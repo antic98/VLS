@@ -16,7 +16,13 @@ namespace SystemOperations.SearchSO
 
         protected override void Execute()
         {
-            Result = repository.Search(game).OfType<Game>().ToList();
+            if (game?.Search == null)
+            {
+                Result = null;
+                return;
+            }
+            
+            Result = Repository.Search(game).OfType<Game>().ToList();
         }
     }
 }

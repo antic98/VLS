@@ -10,7 +10,7 @@ namespace SystemOperations.GetAllSO
 
         protected override void Execute()
         {
-            Result = repository.GetAll(new User()).OfType<User>().ToList();
+            Result = Repository.GetAll(new User()).OfType<User>().ToList();
         }
     }
 }

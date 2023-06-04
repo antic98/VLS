@@ -49,7 +49,7 @@ namespace SystemOperations.AddSO
                 
                 game.Round = round + 1;
                 
-                repository.Add(game);
+                Repository.Add(game);
 
                 for (int i = 1; i < matchesPerRound; i++)
                 {
@@ -75,7 +75,7 @@ namespace SystemOperations.AddSO
 
                     game1.Round = round + 1;
                     
-                    repository.Add(game1);
+                    Repository.Add(game1);
                 }
             }
         }

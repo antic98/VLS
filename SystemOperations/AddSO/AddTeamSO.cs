@@ -12,7 +12,7 @@ namespace SystemOperations.AddSO
         protected override void Execute()
         {
             if (team.Name != null && team.City != null && team.Color != null)
-                repository.Add(team);
+                Repository.Add(team);
         }
     }
 }

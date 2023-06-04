@@ -18,15 +18,15 @@ namespace SystemOperations.DeleteSO
                 return;
             }
 
-            foreach(Stats st in repository.GetAll(new Stats()))
+            foreach(Stats st in Repository.GetAll(new Stats()))
             {
                 if(st.Player.ID == player.ID)
                 {
-                    repository.Delete(st);
+                    Repository.Delete(st);
                 }
             }
 
-            repository.Delete(player);
+            Repository.Delete(player);
         }
     }
 }
