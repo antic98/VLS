@@ -34,12 +34,12 @@ namespace UserInterface.UserControls
 
         private void btnAddFixtures_Click(object sender, EventArgs e)
         {
-            controller.AddFixtures();
+            ScheduleGameController.AddFixtures();
         }
 
         private void numericRound_ValueChanged(object sender, EventArgs e)
         {
-            controller.FilterRounds();
+            controller.Search();
         }
     }
 }

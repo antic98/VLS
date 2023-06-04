@@ -31,7 +31,7 @@ namespace UserInterface.GUIController
                 return;
             }
 
-            FrmScheduleGame frmScheduleGame = new FrmScheduleGame();
+            var frmScheduleGame = new FrmScheduleGame();
             frmScheduleGame.ShowDialog();
 
             GetGames();
@@ -61,7 +61,7 @@ namespace UserInterface.GUIController
             }
         }
 
-        internal void AddFixtures()
+        internal static void AddFixtures()
         {
             var frmGetFixtures = new FrmAddGames();
             frmGetFixtures.ShowDialog();
@@ -91,14 +91,22 @@ namespace UserInterface.GUIController
             {
                 games = new BindingList<Game>();
 
-                var game = new Game();
-                game.Search = uCScheduleGame.TxtSearch.Text.ToLower();
+                var game = new Game
+                {
+                    Search = uCScheduleGame.TxtSearch.Text.ToLower()
+                };
 
                 var listGames = Communication.Instance.Search(Operation.SearchGames, game);
 
-                foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost == -1 && obj.GoalsGuest == -1))
+                if (uCScheduleGame.NumericRound.Value == 0)
                 {
-                    games.Add(obj);
+                    foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost == -1 && obj.GoalsGuest == -1))
+                        games.Add(obj);
+                }
+                else
+                {
+                    foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost == -1 && obj.GoalsGuest == -1 && obj.Round == uCScheduleGame.NumericRound.Value))
+                        games.Add(obj);
                 }
 
                 if (games.Count == 0) MessageBox.Show("Can't find any games with that value.");
@@ -150,38 +158,6 @@ namespace UserInterface.GUIController
 
             GetGames();
             uCScheduleGame.DgvGames.DataSource = games;
-        }
-
-        internal void FilterRounds()
-        {
-            try
-            {
-                if (uCScheduleGame.NumericRound.Value == 0)
-                {
-                    GetGames();
-                }
-                else
-                {
-                    games = new BindingList<Game>();
-
-                    var listGames = Communication.Instance.GetList(Operation.GetGames);
-
-                    foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost == -1 && obj.GoalsGuest == -1 && obj.Round == uCScheduleGame.NumericRound.Value))
-                    {
-                        games.Add(obj);
-                    }
-                }
-
-                uCScheduleGame.DgvGames.DataSource = games;
-            }
-            catch (ServerCommunicationException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
     }
 }

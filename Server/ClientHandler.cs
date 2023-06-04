@@ -126,6 +126,8 @@ namespace Server
                     case Operation.AddGamesDouble:
                         Controller.AddGamesDouble(request.RequestObject as List<Team>);
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
             catch (Exception ex)

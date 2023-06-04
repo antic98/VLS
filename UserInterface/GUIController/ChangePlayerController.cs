@@ -159,7 +159,7 @@ namespace UserInterface.GUIController
             frmPlayer.TxtID.Enabled = false;
         }
 
-        internal void Dispose()
+        private void Dispose()
         {
             frmPlayer.Dispose();
         }

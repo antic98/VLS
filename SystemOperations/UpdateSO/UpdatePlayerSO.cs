@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System.Linq;
+using Domain;
 
 namespace SystemOperations.UpdateSO
 {
@@ -18,16 +19,13 @@ namespace SystemOperations.UpdateSO
             
             if (Repository.GetObject(updatedPlayer) is Player upd)
             {
-                //updatedPlayer.Goals = upd.Goals;
+                updatedPlayer.Goals = upd.Goals;
             
                 if(updatedPlayer.Team.ID != upd.Team.ID)
                 {
-                    foreach(Stats st in Repository.GetAll(new Stats()))
+                    foreach (var st in Repository.GetAll(new Stats()).Cast<Stats>().Where(st => st.Player.ID == updatedPlayer.ID))
                     {
-                        if(st.Player.ID == updatedPlayer.ID)
-                        {
-                            Repository.Delete(st);
-                        }
+                        Repository.Delete(st);
                     }
                 }
             }

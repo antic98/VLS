@@ -73,9 +73,12 @@ namespace UserInterface.GUIController
 
             var newGame = new Game(frmScheduleGame.CmbHost.SelectedItem as Team,
                 frmScheduleGame.CmbGuest.SelectedItem as Team,
-                frmScheduleGame.DtpDate.Value);
+                frmScheduleGame.DtpDate.Value)
+            {
+                Round = (int)frmScheduleGame.NumericRound.Value
+            };
 
-            if(Communication.Instance.SaveDeleteUpdate(Operation.AddGame, newGame))
+            if (Communication.Instance.SaveDeleteUpdate(Operation.AddGame, newGame))
             {
                 MessageBox.Show("Game " + newGame.Host.Name + " vs " + newGame.Guest.Name + " is scheduled!");
                 Dispose();

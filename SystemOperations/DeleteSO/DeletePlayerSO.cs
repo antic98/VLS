@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System.Linq;
+using Domain;
 
 namespace SystemOperations.DeleteSO
 {
@@ -18,12 +19,9 @@ namespace SystemOperations.DeleteSO
                 return;
             }
 
-            foreach(Stats st in Repository.GetAll(new Stats()))
+            foreach (var st in Repository.GetAll(new Stats()).Cast<Stats>().Where(st => st.Player.ID == player.ID))
             {
-                if(st.Player.ID == player.ID)
-                {
-                    Repository.Delete(st);
-                }
+                Repository.Delete(st);
             }
 
             Repository.Delete(player);

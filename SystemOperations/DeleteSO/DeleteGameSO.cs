@@ -24,22 +24,24 @@ namespace SystemOperations.DeleteSO
                 return;
             }
 
-            foreach (Stats st in Repository.GetAll(new Stats()))
+            foreach (var o in Repository.GetAll(new Stats()))
             {
-                if(st.Game.ID == game.ID)
+                var st = (Stats)o;
+                if (st.Game.ID != game.ID) continue;
+                if (Repository.GetObject(st.Player) is Player p)
                 {
-                    Player p = Repository.GetObject(st.Player) as Player;
                     p.Goals -= st.Goals;
                     Repository.Update(p);
-                    Repository.Delete(st);
                 }
+
+                Repository.Delete(st);
             }
 
-            Team host = Repository.GetObject(game.Host) as Team;
+            var host = Repository.GetObject(game.Host) as Team;
             host.GoalsScored -= game.GoalsHost;
             host.GoalsConceded -= game.GoalsGuest;
 
-            Team guest = Repository.GetObject(game.Guest) as Team;
+            var guest = Repository.GetObject(game.Guest) as Team;
             guest.GoalsScored -= game.GoalsGuest;
             guest.GoalsConceded -= game.GoalsHost;
 

@@ -31,7 +31,7 @@ namespace UserInterface.UserControls
 
         private void numericRound_ValueChanged(object sender, EventArgs e)
         {
-            controller.FilterRounds();
+            controller.Search();
         }
     }
 }

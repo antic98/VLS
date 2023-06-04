@@ -71,9 +71,15 @@ namespace UserInterface.GUIController
 
                 var listGames = Communication.Instance.Search(Operation.SearchGames, game);
 
-                foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost > -1 && obj.GoalsGuest > -1))
+                if (uCResults.NumericRound.Value == 0)
                 {
-                    games.Add(obj);
+                    foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost > -1 && obj.GoalsGuest > -1))
+                        games.Add(obj);
+                }
+                else
+                {
+                    foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost > -1 && obj.GoalsGuest > -1 && obj.Round == uCResults.NumericRound.Value))
+                        games.Add(obj);
                 }
 
                 if (games.Count == 0) MessageBox.Show("Can't find any games with that value.");
@@ -117,38 +123,6 @@ namespace UserInterface.GUIController
                 {
                     games.Add(obj);
                 }
-            }
-            catch (ServerCommunicationException)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        internal void FilterRounds()
-        {
-            try
-            {
-                if (uCResults.NumericRound.Value == 0)
-                {
-                    GetGames();
-                }
-                else
-                {
-                    games = new BindingList<Game>();
-
-                    var listGames = Communication.Instance.GetList(Operation.GetGames);
-
-                    foreach (var obj in ((List<Game>)listGames).Where(obj => obj.GoalsHost > -1 && obj.GoalsGuest > -1 && obj.Round == uCResults.NumericRound.Value))
-                    {
-                        games.Add(obj);
-                    }
-                }
-
-                uCResults.DgvGames.DataSource = games;
             }
             catch (ServerCommunicationException)
             {

@@ -19,6 +19,13 @@ namespace Domain
             Date = date;
         }
         
+        public Game(Team host, Team guest, string date)
+        {
+            Host = host;
+            Guest = guest;
+            DateString = date;
+        }
+        
         public Game(int id, Team host, Team guest, DateTime date)
         {
             ID = id;
@@ -40,15 +47,7 @@ namespace Domain
         public List<Stats> Stats { get; set; }
 
         [Browsable(false)]
-        public string DateString
-        {
-            get => dateString;
-            set
-            {
-                dateString = value;
-                dateString = Date.ToString("yyyy-MM-dd HH:mm");
-            }
-        }
+        public string DateString{ get; set; }
 
         [Browsable(false)]
         public string Search { get; set; }

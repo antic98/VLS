@@ -17,6 +17,8 @@ namespace SystemOperations.AddSO
             
             game.GoalsHost = -1;
             game.GoalsGuest = -1;
+            game.DateString = game.Date.ToString("yyyy-MM-dd HH:mm");
+
             Repository.Add(game);
         }
     }

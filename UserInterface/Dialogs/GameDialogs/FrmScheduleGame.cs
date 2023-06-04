@@ -17,6 +17,7 @@ namespace UserInterface.Dialogs.GameDialogs
         private void btnScheduleGame_Click(object sender, EventArgs e)
         {
             controller.ScheduleGame();
-        }        
+        }
+
     }
 }

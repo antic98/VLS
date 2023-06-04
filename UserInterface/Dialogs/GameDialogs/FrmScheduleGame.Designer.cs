@@ -38,8 +38,9 @@ namespace UserInterface.Dialogs.GameDialogs
             this.cmbHost = new System.Windows.Forms.ComboBox();
             this.lblHost = new System.Windows.Forms.Label();
             this.lblDateError = new System.Windows.Forms.Label();
-            this.cmbRound = new System.Windows.Forms.ComboBox();
             this.lblRound = new System.Windows.Forms.Label();
+            this.numericRound = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericRound)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpDate
@@ -48,7 +49,7 @@ namespace UserInterface.Dialogs.GameDialogs
             this.dtpDate.CustomFormat = "dd.MM.yyyy. HH:mm";
             this.dtpDate.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDate.Location = new System.Drawing.Point(375, 277);
+            this.dtpDate.Location = new System.Drawing.Point(375, 281);
             this.dtpDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(324, 30);
@@ -142,19 +143,6 @@ namespace UserInterface.Dialogs.GameDialogs
             this.lblDateError.Size = new System.Drawing.Size(0, 21);
             this.lblDateError.TabIndex = 35;
             // 
-            // cmbRound
-            // 
-            this.cmbRound.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmbRound.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
-            this.cmbRound.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbRound.ForeColor = System.Drawing.Color.White;
-            this.cmbRound.FormattingEnabled = true;
-            this.cmbRound.Location = new System.Drawing.Point(375, 224);
-            this.cmbRound.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmbRound.Name = "cmbRound";
-            this.cmbRound.Size = new System.Drawing.Size(101, 29);
-            this.cmbRound.TabIndex = 36;
-            // 
             // lblRound
             // 
             this.lblRound.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -167,14 +155,25 @@ namespace UserInterface.Dialogs.GameDialogs
             this.lblRound.TabIndex = 37;
             this.lblRound.Text = "Round:";
             // 
+            // numericRound
+            // 
+            this.numericRound.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.numericRound.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            this.numericRound.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericRound.ForeColor = System.Drawing.Color.White;
+            this.numericRound.Location = new System.Drawing.Point(380, 223);
+            this.numericRound.Name = "numericRound";
+            this.numericRound.Size = new System.Drawing.Size(43, 32);
+            this.numericRound.TabIndex = 38;
+            // 
             // FrmScheduleGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(929, 476);
+            this.Controls.Add(this.numericRound);
             this.Controls.Add(this.lblRound);
-            this.Controls.Add(this.cmbRound);
             this.Controls.Add(this.lblDateError);
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.lblDate);
@@ -188,6 +187,7 @@ namespace UserInterface.Dialogs.GameDialogs
             this.Name = "FrmScheduleGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "New fixture";
+            ((System.ComponentModel.ISupportInitialize)(this.numericRound)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,8 +203,8 @@ namespace UserInterface.Dialogs.GameDialogs
         private System.Windows.Forms.ComboBox cmbHost;
         private System.Windows.Forms.Label lblHost;
         private Label lblDateError;
-        private ComboBox cmbRound;
         private Label lblRound;
+        private NumericUpDown numericRound;
 
         public DateTimePicker DtpDate { get => dtpDate; set => dtpDate = value; }
         public Label LblDate { get => lblDate; set => lblDate = value; }
@@ -214,5 +214,6 @@ namespace UserInterface.Dialogs.GameDialogs
         public ComboBox CmbHost { get => cmbHost; set => cmbHost = value; }
         public Label LblHost { get => lblHost; set => lblHost = value; }
         public Label LblDateError { get => lblDateError; set => lblDateError = value; }
+        public NumericUpDown NumericRound { get => numericRound; set => numericRound = value; }
     }
 }

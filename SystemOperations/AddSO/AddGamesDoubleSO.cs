@@ -21,59 +21,45 @@ namespace SystemOperations.AddSO
 
         private void MakeFixtures()
         {
-            int totalRounds = (teams.Count - 1) * 2;
-            int matchesPerRound = teams.Count / 2;
-            int dateCounter = 0;
+            var totalRounds = (teams.Count - 1) * 2;
+            var matchesPerRound = teams.Count / 2;
+            var dateCounter = 0;
 
-            List<Team> teamsCopy = new List<Team>(teams);
+            var teamsCopy = new List<Team>(teams);
             teamsCopy.RemoveAt(0);
 
-            for (int round = 0; round < totalRounds / 2; round++)
+            for (var round = 0; round < totalRounds / 2; round++)
             {
-                int teamIdx = round % teamsCopy.Count;
+                var teamIdx = round % teamsCopy.Count;
 
-                Team teamA = teams[0];
-                Team teamB = teamsCopy[teamIdx];
+                var teamA = teams[0];
+                var teamB = teamsCopy[teamIdx];
 
-                DateTime date = DateTime.Now.AddDays((dateCounter++) * 7);
+                var date = DateTime.Now.AddDays((dateCounter++) * 7);
 
-                Game game;
-                DateTime roundedDateTime = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
+                var roundedDateTime = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
+                var dateString = roundedDateTime.ToString("yyyy-MM-dd HH:mm");
 
-                if (round % 2 == 0)
-                {
-                    game = new Game(teamA, teamB, roundedDateTime);
-                }
-                else
-                {
-                    game = new Game(teamB, teamA, roundedDateTime);
-                }
+                var game = round % 2 == 0 ? new Game(teamA, teamB, dateString) : new Game(teamB, teamA, dateString);
 
                 game.Round = round + 1;
 
                 Repository.Add(game);
 
-                for (int i = 1; i < matchesPerRound; i++)
+                for (var i = 1; i < matchesPerRound; i++)
                 {
-                    int firstTeam = (round + i) % teamsCopy.Count;
-                    int secondTeam = (round + teamsCopy.Count - i) % teamsCopy.Count;
+                    var firstTeam = (round + i) % teamsCopy.Count;
+                    var secondTeam = (round + teamsCopy.Count - i) % teamsCopy.Count;
 
                     teamA = teamsCopy[firstTeam];
                     teamB = teamsCopy[secondTeam];
 
                     date = DateTime.Now.AddDays(round * 7);
 
-                    Game game1;
-                    DateTime roundedDateTime1 = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
+                    var roundedDateTime1 = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
+                    var dateString1 = roundedDateTime1.ToString("yyyy-MM-dd HH:mm");
 
-                    if (i % 2 == 0)
-                    {
-                        game1 = new Game(teamA, teamB, roundedDateTime1);
-                    }
-                    else
-                    {
-                        game1 = new Game(teamB, teamA, roundedDateTime1);
-                    }
+                    var game1 = i % 2 == 0 ? new Game(teamA, teamB, dateString1) : new Game(teamB, teamA, dateString1);
                     
                     game1.Round = round + 1;
 
@@ -81,52 +67,38 @@ namespace SystemOperations.AddSO
                 }
             }
 
-            for (int round = totalRounds / 2; round < totalRounds; round++)
+            for (var round = totalRounds / 2; round < totalRounds; round++)
             {
-                int teamIdx = round % teamsCopy.Count;
+                var teamIdx = round % teamsCopy.Count;
 
-                Team teamA = teams[0];
-                Team teamB = teamsCopy[teamIdx];
+                var teamA = teams[0];
+                var teamB = teamsCopy[teamIdx];
 
-                DateTime date = DateTime.Now.AddDays((dateCounter++) * 7);
+                var date = DateTime.Now.AddDays((dateCounter++) * 7);
 
-                Game game;
-                DateTime roundedDateTime = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
+                var roundedDateTime = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
+                var dateString = roundedDateTime.ToString("yyyy-MM-dd HH:mm");
 
-                if (round % 2 == 0)
-                {
-                    game = new Game(teamA, teamB, roundedDateTime);
-                }
-                else
-                {
-                    game = new Game(teamB, teamA, roundedDateTime);
-                }
+                var game = round % 2 == 0 ? new Game(teamA, teamB, dateString) : new Game(teamB, teamA, dateString);
 
                 game.Round = round + 1;
 
                 Repository.Add(game);
 
-                for (int i = 1; i < matchesPerRound; i++)
+                for (var i = 1; i < matchesPerRound; i++)
                 {
-                    int firstTeam = (round + i) % teamsCopy.Count;
-                    int secondTeam = (round + teamsCopy.Count - i) % teamsCopy.Count;
+                    var firstTeam = (round + i) % teamsCopy.Count;
+                    var secondTeam = (round + teamsCopy.Count - i) % teamsCopy.Count;
 
                     teamA = teamsCopy[firstTeam];
                     teamB = teamsCopy[secondTeam];
 
                     date = DateTime.Now.AddDays(round * 7);
 
-                    Game game1;
-                    DateTime roundedDateTime1 = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
+                    var roundedDateTime1 = date.AddMinutes(30).AddMinutes(-date.Minute).AddSeconds(-date.Second);
+                    var dateString1 = roundedDateTime1.ToString("yyyy-MM-dd HH:mm");
 
-                    if (i % 2 == 0)
-                    {
-                        game1 = new Game(teamA, teamB, roundedDateTime1);
-                    }
-                    else
-                    {
-                        game1 = new Game(teamB, teamA, roundedDateTime1);
-                    }
+                    var game1 = i % 2 == 0 ? new Game(teamA, teamB, dateString1) : new Game(teamB, teamA, dateString1);
 
                     game1.Round = round + 1;
                     Repository.Add(game1);

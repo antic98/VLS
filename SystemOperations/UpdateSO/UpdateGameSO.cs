@@ -15,20 +15,20 @@ namespace SystemOperations.UpdateSO
         {
             if (updatedGame?.Host == null || updatedGame.Guest == null) return;
 
-            foreach (Stats st in updatedGame.Stats)
+            foreach (var st in updatedGame.Stats)
             {
                 Repository.Add(st);
 
-                Player p = Repository.GetObject(st.Player) as Player;
+                if (!(Repository.GetObject(st.Player) is Player p)) continue;
                 p.Goals += st.Goals;
                 Repository.Update(p);
             }
 
-            Team host = Repository.GetObject(updatedGame.Host) as Team;
+            var host = Repository.GetObject(updatedGame.Host) as Team;
             host.GoalsScored += updatedGame.GoalsHost;
             host.GoalsConceded += updatedGame.GoalsGuest;
 
-            Team guest = Repository.GetObject(updatedGame.Guest) as Team;
+            var guest = Repository.GetObject(updatedGame.Guest) as Team;
             guest.GoalsScored += updatedGame.GoalsGuest;
             guest.GoalsConceded += updatedGame.GoalsHost;
 

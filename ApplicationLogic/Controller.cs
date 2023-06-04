@@ -1,5 +1,6 @@
 ﻿using Domain;
 using System.Collections.Generic;
+using System.Linq;
 using SystemOperations;
 using SystemOperations.AddSO;
 using SystemOperations.DeleteSO;
@@ -162,16 +163,9 @@ namespace ApplicationLogic
         {
             SystemOperationBase so = new GetAllUsersSO();
             so.ExecuteTemplate();
-            List<User> users = ((GetAllUsersSO)so).Result;
+            var users = ((GetAllUsersSO)so).Result;
 
-            foreach (User user in users)
-            {
-                if (user.Username == u.Username && user.Password == u.Password)
-                {
-                    return user;
-                }
-            }
-            return null;
+            return users.FirstOrDefault(user => user.Username == u.Username && user.Password == u.Password);
         }
     }
 }
