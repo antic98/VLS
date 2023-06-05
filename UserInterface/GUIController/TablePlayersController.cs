@@ -26,16 +26,15 @@ namespace UserInterface.GUIController
             try
             {
                 players = new BindingList<Player>();
+                var counter = 1;
 
                 var listPlayers = Communication.Instance.GetList(Operation.GetPlayers);
                 var listGames = Communication.Instance.GetList(Operation.GetGames);
 
-                foreach (var player in (List<Player>)listPlayers)
+                foreach (var player in ((List<Player>)listPlayers).Where(player => ((List<Game>)listGames).Any(game => game.Host.ID == player.Team.ID || game.Guest.ID == player.Team.ID)))
                 {
-                    if (((List<Game>)listGames).Any(game => game.Host.ID == player.Team.ID || game.Guest.ID == player.Team.ID))
-                    {
-                        players.Add(player);
-                    }
+                    player.Rank = counter++;
+                    players.Add(player);
                 }
             }
             catch (ServerCommunicationException)

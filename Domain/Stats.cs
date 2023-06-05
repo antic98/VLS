@@ -65,28 +65,29 @@ namespace Domain
                         ID = reader.GetInt32(8)
                     },
                     GoalsHost = reader.GetInt32(5),
-                    GoalsGuest = reader.GetInt32(6)
+                    GoalsGuest = reader.GetInt32(6),
+                    Round = reader.GetInt32(9)
                 },
                 Player = new Player
                 {
-                    ID = reader.GetInt32(9),
-                    Name = reader.GetString(10),
-                    Surname = reader.GetString(11),
+                    ID = reader.GetInt32(10),
+                    Name = reader.GetString(11),
+                    Surname = reader.GetString(12),
 
                     Position = new Position
                     {
-                        ID = reader.GetInt32(12),
+                        ID = reader.GetInt32(13),
                     },
 
                     Team = new Team
                     {
-                        ID = reader.GetInt32(13)
+                        ID = reader.GetInt32(14)
                     },
                     Country = new Country
                     {
-                        ID = reader.GetInt32(14)
+                        ID = reader.GetInt32(15)
                     },
-                    Goals = reader.GetInt32(15)
+                    Goals = reader.GetInt32(16)
                 }
             };
 

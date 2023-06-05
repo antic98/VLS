@@ -27,7 +27,6 @@ namespace Domain
             Color = color;
         }
 
-        private int brojac;
         public int Rank { get; set; }
         public int ID { get; set; }
         public string Name { get; set; }
@@ -74,7 +73,6 @@ namespace Domain
         {
             var t = new Team
             {
-                Rank = ++brojac,
                 ID = (int)reader["ID"],
                 Name = (string)reader["Name"],
                 City = (string)reader["City"],
@@ -88,6 +86,9 @@ namespace Domain
                 GD = GoalsScored - GoalsConceded,
                 Points = (int)reader["Points"]
             };
+
+            t.MP = t.Wins + t.Draws + t.Loses;
+            t.GD = t.GoalsScored - t.GoalsConceded;
 
             return t;
         }
