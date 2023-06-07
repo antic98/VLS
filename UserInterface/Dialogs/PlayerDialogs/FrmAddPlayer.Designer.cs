@@ -47,9 +47,11 @@ namespace UserInterface.Dialogs.PlayerDialogs
             // 
             this.cbCountry.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cbCountry.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            this.cbCountry.DropDownHeight = 100;
             this.cbCountry.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCountry.ForeColor = System.Drawing.Color.White;
             this.cbCountry.FormattingEnabled = true;
+            this.cbCountry.IntegralHeight = false;
             this.cbCountry.Location = new System.Drawing.Point(386, 286);
             this.cbCountry.Name = "cbCountry";
             this.cbCountry.Size = new System.Drawing.Size(241, 29);
@@ -59,9 +61,11 @@ namespace UserInterface.Dialogs.PlayerDialogs
             // 
             this.cbTeam.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cbTeam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            this.cbTeam.DropDownHeight = 100;
             this.cbTeam.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbTeam.ForeColor = System.Drawing.Color.White;
             this.cbTeam.FormattingEnabled = true;
+            this.cbTeam.IntegralHeight = false;
             this.cbTeam.Location = new System.Drawing.Point(386, 229);
             this.cbTeam.Name = "cbTeam";
             this.cbTeam.Size = new System.Drawing.Size(241, 29);
@@ -71,9 +75,11 @@ namespace UserInterface.Dialogs.PlayerDialogs
             // 
             this.cbPosition.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cbPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            this.cbPosition.DropDownHeight = 100;
             this.cbPosition.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbPosition.ForeColor = System.Drawing.Color.White;
             this.cbPosition.FormattingEnabled = true;
+            this.cbPosition.IntegralHeight = false;
             this.cbPosition.Location = new System.Drawing.Point(386, 170);
             this.cbPosition.Name = "cbPosition";
             this.cbPosition.Size = new System.Drawing.Size(241, 29);

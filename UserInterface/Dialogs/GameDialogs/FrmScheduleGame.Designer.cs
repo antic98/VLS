@@ -86,9 +86,11 @@ namespace UserInterface.Dialogs.GameDialogs
             // 
             this.cmbGuest.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmbGuest.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            this.cmbGuest.DropDownHeight = 100;
             this.cmbGuest.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGuest.ForeColor = System.Drawing.Color.White;
             this.cmbGuest.FormattingEnabled = true;
+            this.cmbGuest.IntegralHeight = false;
             this.cmbGuest.Location = new System.Drawing.Point(493, 145);
             this.cmbGuest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbGuest.Name = "cmbGuest";
@@ -111,9 +113,11 @@ namespace UserInterface.Dialogs.GameDialogs
             // 
             this.cmbHost.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmbHost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            this.cmbHost.DropDownHeight = 100;
             this.cmbHost.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbHost.ForeColor = System.Drawing.Color.White;
             this.cmbHost.FormattingEnabled = true;
+            this.cmbHost.IntegralHeight = false;
             this.cmbHost.Location = new System.Drawing.Point(203, 145);
             this.cmbHost.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbHost.Name = "cmbHost";
