@@ -19,7 +19,7 @@ namespace SystemOperations.DeleteSO
                 return;
             }
 
-            foreach (var st in Repository.GetAll(new Stats()).Cast<Stats>().Where(st => st.Player.ID == player.ID))
+            foreach (var st in Repository.GetList(new Stats()).Cast<Stats>().Where(st => st.Player.ID == player.ID))
             {
                 Repository.Delete(st);
             }

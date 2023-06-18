@@ -48,7 +48,7 @@ namespace Repository.DatabaseRepository
             command.ExecuteNonQuery();
         }
 
-        public List<IDomainObject> GetAll(IDomainObject obj)
+        public List<IDomainObject> GetList(IDomainObject obj)
         {
             var result = new List<IDomainObject>();
             var command = broker.CreateCommand();

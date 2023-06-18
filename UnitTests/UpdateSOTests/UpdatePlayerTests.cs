@@ -32,7 +32,7 @@ namespace UnitTests.UpdateSOTests
                 new Stats(new Game(), player, 3),
             };
             
-            repoMock.Setup(e => e.GetAll(It.IsAny<Stats>())).Returns(stats);
+            repoMock.Setup(e => e.GetList(It.IsAny<Stats>())).Returns(stats);
             repoMock.Setup(e => e.GetObject(updatedPlayer)).Returns(player);
             
             so = new UpdatePlayerSO(updatedPlayer);
@@ -42,7 +42,7 @@ namespace UnitTests.UpdateSOTests
 
             // Assert
             repoMock.Verify(e => e.GetObject(It.IsAny<Player>()), Times.Exactly(1));
-            repoMock.Verify(e => e.GetAll(It.IsAny<Stats>()), Times.Exactly(1));
+            repoMock.Verify(e => e.GetList(It.IsAny<Stats>()), Times.Exactly(1));
             repoMock.Verify(e => e.Delete(It.IsAny<Stats>()), Times.Exactly(3));
             repoMock.Verify(e => e.Update(It.IsAny<Player>()), Times.Exactly(1));
         }

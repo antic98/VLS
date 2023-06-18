@@ -24,7 +24,7 @@ namespace SystemOperations.DeleteSO
                 return;
             }
 
-            foreach (var o in Repository.GetAll(new Stats()))
+            foreach (var o in Repository.GetList(new Stats()))
             {
                 var st = (Stats)o;
                 if (st.Game.ID != game.ID) continue;

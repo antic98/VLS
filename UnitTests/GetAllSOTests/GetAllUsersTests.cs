@@ -20,13 +20,13 @@ namespace UnitTests.GetAllSOTests
             // Arrange
             so = new GetAllUsersSO();
             var users = new List<IDomainObject>();
-            repoMock.Setup(e => e.GetAll(It.IsAny<User>())).Returns(users);
+            repoMock.Setup(e => e.GetList(It.IsAny<User>())).Returns(users);
 
             // Act
             so.ExecuteTemplate(repoMock.Object);
 
             // Assert
-            repoMock.Verify(e => e.GetAll(It.IsAny<User>()), Times.Once);
+            repoMock.Verify(e => e.GetList(It.IsAny<User>()), Times.Once);
         }
     }
 }

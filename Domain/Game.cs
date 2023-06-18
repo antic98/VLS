@@ -33,8 +33,7 @@ namespace Domain
             Guest = guest;
             Date = date;
         }
-        
-        private string dateString;
+
         public int ID { get; set; }
         public DateTime Date { get; set; }
         public Team Host { get; set; }

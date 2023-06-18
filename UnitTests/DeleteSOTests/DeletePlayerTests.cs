@@ -31,14 +31,14 @@ namespace UnitTests.DeleteSOTests
                 new Stats(new Game(), player, 3),
             };
             
-            repoMock.Setup(e => e.GetAll(It.IsAny<Stats>())).Returns(stats);
+            repoMock.Setup(e => e.GetList(It.IsAny<Stats>())).Returns(stats);
             so = new DeletePlayerSO(player);
 
             // Act
             so.ExecuteTemplate(repoMock.Object);
 
             // Assert
-            repoMock.Verify(e => e.GetAll(It.IsAny<Stats>()), Times.Exactly(1));
+            repoMock.Verify(e => e.GetList(It.IsAny<Stats>()), Times.Exactly(1));
             repoMock.Verify(e => e.Delete(It.IsAny<Stats>()), Times.Exactly(3));
             repoMock.Verify(e => e.Delete(It.IsAny<Player>()), Times.Exactly(1));
         }

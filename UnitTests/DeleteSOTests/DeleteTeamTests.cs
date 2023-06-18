@@ -45,9 +45,9 @@ namespace UnitTests.DeleteSOTests
                 player1, player2
             };
             
-            repoMock.Setup(e => e.GetAll(It.IsAny<Stats>())).Returns(stats);
-            repoMock.Setup(e => e.GetAll(It.IsAny<Game>())).Returns(games);
-            repoMock.Setup(e => e.GetAll(It.IsAny<Player>())).Returns(players);
+            repoMock.Setup(e => e.GetList(It.IsAny<Stats>())).Returns(stats);
+            repoMock.Setup(e => e.GetList(It.IsAny<Game>())).Returns(games);
+            repoMock.Setup(e => e.GetList(It.IsAny<Player>())).Returns(players);
             repoMock.Setup(e => e.GetObject(player1)).Returns(player1);
             repoMock.Setup(e => e.GetObject(team1)).Returns(team1);
             repoMock.Setup(e => e.GetObject(player2)).Returns(player2);
@@ -59,15 +59,15 @@ namespace UnitTests.DeleteSOTests
             so.ExecuteTemplate(repoMock.Object);
 
             // Assert
-            repoMock.Verify(e => e.GetAll(It.IsAny<Game>()), Times.Exactly(1));
-            repoMock.Verify(e => e.GetAll(It.IsAny<Stats>()), Times.Exactly(1));
+            repoMock.Verify(e => e.GetList(It.IsAny<Game>()), Times.Exactly(1));
+            repoMock.Verify(e => e.GetList(It.IsAny<Stats>()), Times.Exactly(1));
             repoMock.Verify(e => e.GetObject(It.IsAny<Player>()), Times.Exactly(2));
             repoMock.Verify(e => e.Delete(It.IsAny<Stats>()), Times.Exactly(2));
             repoMock.Verify(e => e.Update(It.IsAny<Player>()), Times.Exactly(1));
             repoMock.Verify(e => e.GetObject(It.IsAny<Team>()), Times.Exactly(2));
             repoMock.Verify(e => e.Delete(It.IsAny<Game>()), Times.Exactly(1));
             repoMock.Verify(e => e.Update(It.IsAny<Team>()), Times.Exactly(1));
-            repoMock.Verify(e => e.GetAll(It.IsAny<Player>()), Times.Exactly(1));
+            repoMock.Verify(e => e.GetList(It.IsAny<Player>()), Times.Exactly(1));
             repoMock.Verify(e => e.Delete(It.IsAny<Player>()), Times.Exactly(1));
             repoMock.Verify(e => e.Delete(It.IsAny<Team>()), Times.Exactly(1));
         }

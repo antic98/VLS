@@ -21,13 +21,13 @@ namespace Server
             helper = new CommunicationHelper(socket);
         }
 
-        private bool kraj;
+        private bool end;
 
         public void HandleRequests()
         {
             try
             {
-                while (!kraj)
+                while (!end)
                 {
                     var request = helper.Receive<Request>();
                     var response = CreateResponse(request);
@@ -64,7 +64,7 @@ namespace Server
                         }
                         break;
                     case Operation.End:
-                        kraj = true;
+                        end = true;
                         break;
                     case Operation.GetCountries:
                         response.Result = Controller.GetAllCountries();
@@ -146,7 +146,7 @@ namespace Server
             lock (lockobject)
             {
                 if (socket == null) return;
-                kraj = true;                
+                end = true;                
                 socket.Shutdown(SocketShutdown.Both);                
                 socket.Close();                
                 socket = null; 

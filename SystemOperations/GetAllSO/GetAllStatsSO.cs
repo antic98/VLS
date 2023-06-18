@@ -9,7 +9,7 @@ namespace SystemOperations.GetAllSO
         public List<Stats> Result { get; private set; }
         protected override void Execute()
         {
-            Result = Repository.GetAll(new Stats()).OfType<Stats>().ToList();
+            Result = Repository.GetList(new Stats()).OfType<Stats>().ToList();
         }
     }
 }

@@ -20,13 +20,13 @@ namespace UnitTests.GetAllSOTests
             // Arrange
             so = new GetAllCountriesSO();
             var countries = new List<IDomainObject>();
-            repoMock.Setup(e => e.GetAll(It.IsAny<Country>())).Returns(countries);
+            repoMock.Setup(e => e.GetList(It.IsAny<Country>())).Returns(countries);
 
             // Act
             so.ExecuteTemplate(repoMock.Object);
 
             // Assert
-            repoMock.Verify(e => e.GetAll(It.IsAny<Country>()), Times.Once);
+            repoMock.Verify(e => e.GetList(It.IsAny<Country>()), Times.Once);
         }
     }
 }

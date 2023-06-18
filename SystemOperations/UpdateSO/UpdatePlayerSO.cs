@@ -23,7 +23,7 @@ namespace SystemOperations.UpdateSO
             
                 if(updatedPlayer.Team.ID != upd.Team.ID)
                 {
-                    foreach (var st in Repository.GetAll(new Stats()).Cast<Stats>().Where(st => st.Player.ID == updatedPlayer.ID))
+                    foreach (var st in Repository.GetList(new Stats()).Cast<Stats>().Where(st => st.Player.ID == updatedPlayer.ID))
                     {
                         Repository.Delete(st);
                     }

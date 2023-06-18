@@ -18,10 +18,12 @@ namespace SystemOperations.DeleteSO
             {
                 return;
             }
+
+            var allStats = Repository.GetList(new Stats());
             
-            foreach (var g in Repository.GetAll(new Game()).Cast<Game>().Where(g => g.Host.ID == team.ID || g.Guest.ID == team.ID))
+            foreach (var g in Repository.GetList(new Game()).Cast<Game>().Where(g => g.Host.ID == team.ID || g.Guest.ID == team.ID))
             {
-                foreach (var o in Repository.GetAll(new Stats()))
+                foreach (var o in allStats)
                 {
                     var st = (Stats)o;
                     if (st.Game.ID != g.ID) continue;
@@ -75,7 +77,7 @@ namespace SystemOperations.DeleteSO
                 }
             }
 
-            foreach (var pl in Repository.GetAll(new Player()).Cast<Player>().Where(pl => pl.Team.ID == team.ID))
+            foreach (var pl in Repository.GetList(new Player()).Cast<Player>().Where(pl => pl.Team.ID == team.ID))
             {
                 Repository.Delete(pl);
             }

@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System.Linq;
+using Domain;
 
 namespace SystemOperations.UpdateSO
 {
