@@ -84,6 +84,7 @@ namespace Server
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Name = "FrmServer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Server";
             this.ResumeLayout(false);
             this.PerformLayout();

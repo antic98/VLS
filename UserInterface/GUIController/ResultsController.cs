@@ -82,7 +82,7 @@ namespace UserInterface.GUIController
                         games.Add(obj);
                 }
 
-                if (games.Count == 0) MessageBox.Show("Can't find any games with that value.");
+                //if (games.Count == 0) MessageBox.Show("Can't find any games with that value.");
 
                 uCResults.DgvGames.DataSource = games;
             }

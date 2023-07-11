@@ -48,7 +48,7 @@ namespace Server
         {
             var response = new Response
             {
-                IsSuccesful = true
+                IsSuccessful = true
             };
 
             try
@@ -59,7 +59,7 @@ namespace Server
                         response.Result = Controller.Login((User)request.RequestObject);
                         if (response.Result == null)
                         {
-                            response.IsSuccesful = false;
+                            response.IsSuccessful = false;
                             response.Message = "User doesn't exist.";
                         }
                         break;
@@ -133,7 +133,7 @@ namespace Server
             catch (Exception ex)
             {
                 Debug.WriteLine(">>>>>" + ex.Message);
-                response.IsSuccesful = false;
+                response.IsSuccessful = false;
                 response.Message = ex.Message;
             }
             return response;

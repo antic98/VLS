@@ -66,7 +66,7 @@ namespace UserInterface
             this.standingsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(98, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(691, 35);
+            this.menuStrip.Size = new System.Drawing.Size(689, 35);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -128,6 +128,7 @@ namespace UserInterface
             this.Controls.Add(this.pnlMain);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FrmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmMain";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
             this.menuStrip.ResumeLayout(false);

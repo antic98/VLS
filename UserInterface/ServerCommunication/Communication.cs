@@ -43,7 +43,7 @@ namespace UserInterface.ServerCommunication
         {
             var response = helper.Receive<Response>();
 
-            if (response.IsSuccesful)
+            if (response.IsSuccessful)
             {
                 return response.Result;
             }
@@ -90,7 +90,7 @@ namespace UserInterface.ServerCommunication
             SendRequest(operation, obj);
             var response = helper.Receive<Response>();
 
-            return response.IsSuccesful;
+            return response.IsSuccessful;
         }
     }
 }

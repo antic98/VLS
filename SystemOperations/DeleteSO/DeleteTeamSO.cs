@@ -68,13 +68,9 @@ namespace SystemOperations.DeleteSO
                 Repository.Delete(g);
 
                 if (g.Host.ID == team.ID)
-                {
                     Repository.Update(guest);
-                }
-                if (g.Guest.ID == team.ID)
-                {
+                if (g.Guest.ID == team.ID) 
                     Repository.Update(host);
-                }
             }
 
             foreach (var pl in Repository.GetList(new Player()).Cast<Player>().Where(pl => pl.Team.ID == team.ID))
